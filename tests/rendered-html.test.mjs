@@ -79,6 +79,13 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /data-mask-complete/);
   assert.match(hero, /transformOrigin: "16\.4% 97\.3%"/);
   assert.match(hero, /transformOrigin: "80% 95\.3%"/);
+  assert.match(hero, /data-writing-phase/);
+  assert.match(hero, /const strokeRotations = strokes\.map/);
+  assert.match(hero, /maximumRotation: 2\.1/);
+  assert.match(hero, /maximumRotation: 2,/);
+  assert.match(hero, /strokeBlend: 0\.35/);
+  assert.match(hero, /liftRotation: -0\.45/);
+  assert.match(hero, /liftRotation: 0\.35/);
   assert.doesNotMatch(hero, /--reveal/);
   assert.doesNotMatch(css, /\.draw-reveal/);
   assert.match(css, /\.stroke-drawing \[data-draw-stroke\],[\s\S]*opacity: 0/);

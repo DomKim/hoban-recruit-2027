@@ -200,8 +200,8 @@ const taglineCharacters = [
   { name: "tagline-blue-char-3", file: "tagline-blue-char-3.png", x: 374, y: 231, width: 38, height: 33 },
 ] as const;
 
-const houseActorCadence = [-1.1, 1.25, -2.5, 2.75, 2.45, 1.2, 2.25, 2.1, 1.2, 1.75, -1.1, 1.2, 1.6];
-const goldActorCadence = [1.15, -2.55, -2.35, 2.7, 2.05, 1.35, -1.7];
+const houseActorCadence = [-0.85, 0.7, -1.9, 2.05, 1.45, -1.25, 1.3, -0.95, 0.65, 0.45, -1.15, 0.9, -0.7];
+const goldActorCadence = [0.7, -1.55, -0.95, 1.75, 1.05, -0.55, -1.15];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -588,6 +588,14 @@ export default function HobanHero() {
         characterTarget,
         delay,
         actorCadence,
+        bodyLean,
+        bodyPress,
+        detailLimit,
+        detailStrength,
+        liftRotation,
+        maximumRotation,
+        pressureRotation,
+        strokeBlend,
         transformOrigin,
       }: {
         wrapper: string;
@@ -595,6 +603,14 @@ export default function HobanHero() {
         characterTarget: string;
         delay: number;
         actorCadence: readonly number[];
+        bodyLean: number;
+        bodyPress: number;
+        detailLimit: number;
+        detailStrength: number;
+        liftRotation: number;
+        maximumRotation: number;
+        pressureRotation: number;
+        strokeBlend: number;
         transformOrigin: string;
       }) => {
         const drawing = stage.querySelector<SVGSVGElement>(wrapper);
@@ -614,7 +630,14 @@ export default function HobanHero() {
         gsap.set(completion, { opacity: 0 });
         gsap.set(drawing, { autoAlpha: 1 });
         gsap.set(actor, { rotation: 0, transformOrigin });
-        gsap.set(character, { yPercent: 0, scaleX: 1, scaleY: 1, transformOrigin: "50% 100%" });
+        gsap.set(character, {
+          rotation: 0,
+          xPercent: 0,
+          yPercent: 0,
+          scaleX: 1,
+          scaleY: 1,
+          transformOrigin: "50% 100%",
+        });
         const timeline = gsap.timeline({ repeat: -1, delay });
 
         timeline.set(drawing, {
@@ -622,15 +645,44 @@ export default function HobanHero() {
         });
         timeline.to({}, { duration: 0.15 });
 
-        let gestureGroupStartAt = timeline.duration();
+        const clampRotation = (rotation: number) =>
+          Math.max(-maximumRotation, Math.min(maximumRotation, rotation));
+        const clampDetail = (detail: number) =>
+          Math.max(-detailLimit, Math.min(detailLimit, detail));
         let gestureGroupIndex = 0;
+        let previousRotation = 0;
+
+        const strokeRotations = strokes.map((stroke, index) => {
+          const cadence = actorCadence[gestureGroupIndex % actorCadence.length];
+          const authoredGesture = Number(stroke.dataset.strokeGesture ?? 0);
+          const requestedRotation = clampRotation(
+            cadence + clampDetail(authoredGesture * detailStrength),
+          );
+          const blend = index === 0 ? 1 : strokeBlend;
+          const filteredRotation = clampRotation(
+            previousRotation * (1 - blend) + requestedRotation * blend,
+          );
+
+          previousRotation = filteredRotation;
+          const lift = Number(stroke.dataset.strokeLift ?? 0);
+          if (lift > 0 || index === strokes.length - 1) gestureGroupIndex += 1;
+          return filteredRotation;
+        });
+
+        previousRotation = 0;
 
         strokes.forEach((stroke, index) => {
           const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
           const lift = Number(stroke.dataset.strokeLift ?? 0.045);
+          const targetRotation = strokeRotations[index];
+          const rotationDelta = targetRotation - previousRotation;
+          const direction = Math.sign(rotationDelta) || Math.sign(targetRotation) || 1;
 
           timeline.set(drawing, {
             attr: { "data-active-stroke": String(index + 1), "data-draw-phase": "drawing" },
+          });
+          timeline.set(actor, {
+            attr: { "data-writing-phase": "contact", "data-writing-stroke": String(index + 1) },
           });
           const strokeStartAt = timeline.duration();
           timeline.to(stroke, {
@@ -643,47 +695,142 @@ export default function HobanHero() {
             duration: Math.min(0.08, duration * 0.7),
             ease: "none",
           }, strokeStartAt);
-          const groupDrawEndAt = timeline.duration();
+
+          if (duration >= 0.36) {
+            const approachDuration = duration * 0.18;
+            const sweepDuration = duration * 0.64;
+            const overshootDuration = duration * 0.09;
+            const approachRotation = clampRotation(
+              targetRotation - direction * pressureRotation,
+            );
+            const overshootRotation = clampRotation(
+              targetRotation + direction * Math.min(0.12, pressureRotation * 0.7),
+            );
+
+            timeline.to(actor, {
+              rotation: approachRotation,
+              duration: approachDuration,
+              ease: "sine.out",
+              transformOrigin,
+            }, strokeStartAt);
+            timeline.to(actor, {
+              rotation: targetRotation,
+              duration: sweepDuration,
+              ease: "sine.inOut",
+              transformOrigin,
+            }, strokeStartAt + approachDuration);
+            timeline.to(actor, {
+              rotation: overshootRotation,
+              duration: overshootDuration,
+              ease: "sine.out",
+              transformOrigin,
+            }, strokeStartAt + approachDuration + sweepDuration);
+            timeline.to(actor, {
+              rotation: targetRotation,
+              duration: duration - approachDuration - sweepDuration - overshootDuration,
+              ease: "sine.in",
+              transformOrigin,
+            }, strokeStartAt + approachDuration + sweepDuration + overshootDuration);
+          } else if (duration > 0.12) {
+            const contactDuration = Math.min(0.03, duration * 0.2);
+            const contactRotation = clampRotation(
+              previousRotation + direction * Math.min(
+                pressureRotation,
+                Math.abs(rotationDelta) * 0.42,
+              ),
+            );
+
+            timeline.to(actor, {
+              rotation: contactRotation,
+              duration: contactDuration,
+              ease: "sine.out",
+              transformOrigin,
+            }, strokeStartAt);
+            timeline.to(actor, {
+              rotation: targetRotation,
+              duration: duration - contactDuration,
+              ease: "sine.inOut",
+              transformOrigin,
+            }, strokeStartAt + contactDuration);
+          } else {
+            timeline.to(actor, {
+              rotation: targetRotation,
+              duration,
+              ease: "sine.inOut",
+              transformOrigin,
+            }, strokeStartAt);
+          }
+
+          if (bodyPress > 0) {
+            timeline.to(character, {
+              rotation: Math.max(-0.08, Math.min(0.08, -targetRotation * bodyLean)),
+              yPercent: bodyPress,
+              duration: Math.min(0.11, duration * 0.45),
+              ease: "sine.out",
+            }, strokeStartAt);
+          }
+
+          const strokeEndAt = strokeStartAt + duration;
 
           if (lift > 0) {
             timeline.to({}, { duration: lift });
-          }
-
-          const groupEndsHere = lift > 0 || index === strokes.length - 1;
-          if (groupEndsHere) {
-            const targetRotation = actorCadence[gestureGroupIndex % actorCadence.length];
-            const groupDrawDuration = groupDrawEndAt - gestureGroupStartAt;
-
+            timeline.set(actor, {
+              attr: { "data-writing-phase": "lift" },
+            }, strokeEndAt);
+            const liftPeakDuration = Math.min(
+              lift * 0.45,
+              bodyPress > 0 ? 0.018 : 0.014,
+            );
+            const liftPeakRotation = clampRotation(targetRotation + liftRotation);
+            const nextRotation = strokeRotations[index + 1] ?? 0;
+            const readyRotation = clampRotation(
+              liftPeakRotation + (nextRotation - liftPeakRotation) * 0.25,
+            );
             timeline.to(actor, {
-              rotation: targetRotation,
-              duration: groupDrawDuration,
+              rotation: liftPeakRotation,
+              duration: liftPeakDuration,
+              ease: "power2.out",
+              transformOrigin,
+            }, strokeEndAt);
+            timeline.to(actor, {
+              rotation: readyRotation,
+              duration: lift - liftPeakDuration,
               ease: "sine.inOut",
               transformOrigin,
-            }, gestureGroupStartAt);
-
-            if (lift > 0) {
-              timeline.to(actor, {
-                rotation: targetRotation * 0.78,
+            }, strokeEndAt + liftPeakDuration);
+            if (bodyPress > 0) {
+              timeline.to(character, {
+                rotation: 0,
+                yPercent: 0,
                 duration: lift,
-                ease: "sine.inOut",
-                transformOrigin,
-              }, groupDrawEndAt);
+                ease: "power1.out",
+              }, strokeEndAt);
             }
-
-            gestureGroupStartAt = timeline.duration();
-            gestureGroupIndex += 1;
           }
+
+          previousRotation = targetRotation;
         });
 
         timeline.to(completion, { opacity: 1, duration: 0.08, ease: "none" });
         timeline.set(drawing, {
           attr: { "data-active-stroke": String(strokes.length), "data-draw-phase": "complete" },
         });
+        const settleStartAt = timeline.duration();
+        timeline.set(actor, {
+          attr: { "data-writing-phase": "complete" },
+        });
         timeline.to(actor, {
           rotation: 0,
           duration: 0.16,
-          ease: "back.out(1.9)",
-        });
+          ease: "back.out(1.25)",
+        }, settleStartAt);
+        timeline.to(character, {
+          rotation: 0,
+          xPercent: 0,
+          yPercent: 0,
+          duration: 0.16,
+          ease: "back.out(1.25)",
+        }, settleStartAt);
         timeline.to(character, {
           keyframes: [
             { yPercent: -2.8, scaleX: 0.985, scaleY: 1.018, duration: 0.13, ease: "power2.out" },
@@ -705,6 +852,9 @@ export default function HobanHero() {
           autoAlpha: 1,
           attr: { "data-active-stroke": "0", "data-draw-phase": "reset" },
         });
+        timeline.set(actor, {
+          attr: { "data-writing-phase": "reset", "data-writing-stroke": "0" },
+        }, "<");
       };
 
       createStrokeDrawingLoop({
@@ -713,6 +863,14 @@ export default function HobanHero() {
         characterTarget: '[data-motion="tiger-character"]',
         delay: 0.25,
         actorCadence: houseActorCadence,
+        bodyLean: 0.04,
+        bodyPress: 0.12,
+        detailLimit: 0,
+        detailStrength: 0,
+        liftRotation: -0.45,
+        maximumRotation: 2.1,
+        pressureRotation: 0.18,
+        strokeBlend: 1,
         transformOrigin: "16.4% 97.3%",
       });
 
@@ -722,6 +880,14 @@ export default function HobanHero() {
         characterTarget: '[data-motion="rabbit-character"]',
         delay: 2.1,
         actorCadence: goldActorCadence,
+        bodyLean: 0,
+        bodyPress: 0,
+        detailLimit: 0.22,
+        detailStrength: 0.055,
+        liftRotation: 0.35,
+        maximumRotation: 2,
+        pressureRotation: 0.14,
+        strokeBlend: 0.35,
         transformOrigin: "80% 95.3%",
       });
 
