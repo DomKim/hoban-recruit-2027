@@ -62,31 +62,44 @@
     "finalization": "After the final stroke completes, disable the mask for the hold frame so the original PNG alpha and texture are reproduced pixel-for-pixel."
   },
   "timeline": {
-    "loopMs": 6000,
+    "loopMs": 6255,
     "prepositionMs": 150,
-    "drawMs": 3810,
-    "liftCount": 11,
+    "drawMs": 3815,
+    "liftCount": 12,
     "defaultLiftMs": 65,
-    "doubleHopMs": 520,
+    "completionCrossfadeMs": 80,
+    "armSettleMs": 160,
+    "doubleHopMs": 580,
     "holdMs": 500,
-    "fadeAndResetMs": 305,
+    "fadeAndResetMs": 220,
     "repeat": -1,
     "independent": true
   },
   "strokes": [
     {
       "order": 1,
-      "id": "left-wall",
+      "id": "left-wall-upper",
       "asset": "body",
-      "d": "M 5 114.55 C 5 106 4 98 5 90 C 4 98 5 106 5 114.55 C 4 123 4 131 5 135",
+      "d": "M 5 114.55 C 5 106 4 98 5 90",
       "strokeWidth": 13,
-      "drawMs": 260,
+      "drawMs": 200,
+      "liftAfterMs": 35,
+      "start": [5, 114.55],
+      "end": [5, 90]
+    },
+    {
+      "order": 2,
+      "id": "left-wall-lower",
+      "asset": "body",
+      "d": "M 5 114.55 C 4 123 4 131 5 135",
+      "strokeWidth": 13,
+      "drawMs": 120,
       "liftAfterMs": 65,
       "start": [5, 114.55],
       "end": [5, 135]
     },
     {
-      "order": 2,
+      "order": 3,
       "id": "roof-left",
       "asset": "body",
       "d": "M 5 90 C 12 79 20 68 28 55",
@@ -97,7 +110,7 @@
       "end": [28, 55]
     },
     {
-      "order": 3,
+      "order": 4,
       "id": "roof-right",
       "asset": "body",
       "d": "M 28 55 C 38 68 48 79 57 90",
@@ -108,7 +121,7 @@
       "end": [57, 90]
     },
     {
-      "order": 4,
+      "order": 5,
       "id": "right-wall",
       "asset": "body",
       "d": "M 55.5 90 C 55.5 106 55.5 121 55.5 135",
@@ -119,7 +132,7 @@
       "end": [55.5, 135]
     },
     {
-      "order": 5,
+      "order": 6,
       "id": "base",
       "asset": "body",
       "d": "M 56 135 C 41 135 21 135 5 135",
@@ -130,7 +143,7 @@
       "end": [5, 135]
     },
     {
-      "order": 6,
+      "order": 7,
       "id": "roof-base",
       "asset": "body",
       "d": "M 5 90 C 21 90 42 90 57 90",
@@ -141,7 +154,7 @@
       "end": [57, 90]
     },
     {
-      "order": 7,
+      "order": 8,
       "id": "chimney",
       "asset": "body",
       "d": "M 39 69 L 41 48 C 43 47 46 47 49 48 L 52 77",
@@ -152,7 +165,7 @@
       "end": [52, 77]
     },
     {
-      "order": 8,
+      "order": 9,
       "id": "window-frame",
       "asset": "body",
       "d": "M 19 101 C 25 100 32 100 39 101 L 38 114 C 31 114 25 114 19 115 Z",
@@ -163,29 +176,29 @@
       "end": [19, 101]
     },
     {
-      "order": 9,
+      "order": 10,
       "id": "window-mullion",
       "asset": "body",
       "d": "M 28.5 101 L 28.5 114",
       "strokeWidth": 8,
-      "drawMs": 170,
+      "drawMs": 95,
       "liftAfterMs": 65,
       "start": [28.5, 101],
       "end": [28.5, 114]
     },
     {
-      "order": 10,
+      "order": 11,
       "id": "smoke-lower-curl",
       "asset": "smoke",
       "d": "M 63 34 C 58 29 57 25 51 24 C 43 21 36 26 36 32 C 36 38 45 41 51 40 C 56 39 57 36 55 34",
       "strokeWidth": 16,
-      "drawMs": 450,
+      "drawMs": 600,
       "liftAfterMs": 65,
       "start": [63, 34],
       "end": [55, 34]
     },
     {
-      "order": 11,
+      "order": 12,
       "id": "smoke-middle-curl",
       "asset": "smoke",
       "d": "M 56 27 C 55 20 56 13 62 11 C 67 9 72 12 72 18 C 72 21 73 23 76 24",
@@ -196,14 +209,14 @@
       "end": [76, 24]
     },
     {
-      "order": 12,
+      "order": 13,
       "id": "smoke-upper-curl",
       "asset": "smoke",
-      "d": "M 75 24 C 71 20 70 15 73 11 C 77 5 83 3 88 6 C 92 9 89 14 93 14",
+      "d": "M 73 11 C 77 5 83 3 88 6 C 92 9 89 14 93 14",
       "strokeWidth": 14,
-      "drawMs": 390,
+      "drawMs": 260,
       "liftAfterMs": 0,
-      "start": [75, 24],
+      "start": [73, 11],
       "end": [93, 14]
     }
   ],

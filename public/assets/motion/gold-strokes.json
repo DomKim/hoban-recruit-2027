@@ -30,15 +30,17 @@
     "pencilFollowsSamePath": false,
     "hideOriginalUntilRevealed": true,
     "penLiftBetweenStrokesMs": 30,
+    "minimumVisibleStrokeMs": 70,
     "maxStructuralMaskWidth": 11.75,
     "maxPathLength": 35.01,
-    "recommendedCycleMs": 5988,
-    "recommendedDrawAndLiftMs": 4298,
+    "recommendedCycleMs": 6291,
+    "recommendedDrawAndLiftMs": 4601,
     "notes": [
       "Every entry is one continuous path containing exactly one M command and no Z command.",
       "Outlines are split at 35 artboard units so no single animation reveals a large gold-bar region at once.",
       "Redundant crop and overlap strokes are omitted so every animated stroke makes a visible contribution.",
       "Only genuine spatial jumps use a 25–35 ms pen lift; continuations use liftAfterMs 0.",
+      "Every visible micro-stroke stays on screen for at least 70 ms so its direction remains readable at 60 fps.",
       "All paths are alpha masks over the untouched source artwork."
     ]
   },
@@ -96,7 +98,7 @@
       "phase": "bottom-bar",
       "d": "M 1619.69 768.03 L 1625 763 L 1625 762 L 1626 762 L 1626 761 L 1627 761 L 1629 759 L 1630 759 L 1630 758 L 1631 758 L 1631 757 L 1632 757 L 1632 756 L 1633 756 L 1635 754 L 1636 754 L 1636 753 L 1637 753 L 1641 749 L 1642 749 L 1642 748 L 1642.37 748",
       "maskWidth": 11.75,
-      "suggestedDurationMs": 133,
+      "suggestedDurationMs": 150,
       "liftAfterMs": 0,
       "gesture": 0.6,
       "start": {

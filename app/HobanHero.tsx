@@ -200,12 +200,13 @@ const taglineCharacters = [
   { name: "tagline-blue-char-3", file: "tagline-blue-char-3.png", x: 374, y: 231, width: 38, height: 33 },
 ] as const;
 
-const houseGestures = [0.5, 5.1, -5.4, 4.6, -4.8, 4.2, -3.8, 3.2, -2.8, 5, -4.6, 4.2];
+const houseActorCadence = [-1.1, 1.25, -2.5, 2.75, 2.45, 1.2, 2.25, 2.1, 1.2, 1.75, -1.1, 1.2, 1.6];
+const goldActorCadence = [-1.15, 2.55, -2.35, 2.7, -2.05, 1.35, -1.7];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
   duration: stroke.drawMs / 1000,
-  gesture: houseGestures[index],
+  gesture: houseActorCadence[index],
   id: stroke.id,
   lift: stroke.liftAfterMs / 1000,
   width: stroke.strokeWidth,
@@ -221,7 +222,10 @@ const goldStrokes: readonly DrawingStroke[] = goldStrokePlan.motionOrder
 
     return {
       d: stroke.d,
-      duration: stroke.suggestedDurationMs / 1000,
+      duration: Math.max(
+        goldStrokePlan.rendering.minimumVisibleStrokeMs,
+        stroke.suggestedDurationMs,
+      ) / 1000,
       gesture: stroke.gesture,
       id: stroke.id,
       lift: index === orderedStrokes.length - 1 ? 0 : configuredLiftMs / 1000,
@@ -555,12 +559,14 @@ export default function HobanHero() {
         actorTarget,
         characterTarget,
         delay,
+        actorCadence,
         transformOrigin,
       }: {
         wrapper: string;
         actorTarget: string;
         characterTarget: string;
         delay: number;
+        actorCadence: readonly number[];
         transformOrigin: string;
       }) => {
         const drawing = stage.querySelector<SVGSVGElement>(wrapper);
@@ -588,36 +594,56 @@ export default function HobanHero() {
         });
         timeline.to({}, { duration: 0.15 });
 
+        let gestureGroupStartAt = timeline.duration();
+        let gestureGroupIndex = 0;
+
         strokes.forEach((stroke, index) => {
           const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
-          const gesture = Number(stroke.dataset.strokeGesture ?? 0);
           const lift = Number(stroke.dataset.strokeLift ?? 0.045);
-          const drawAt = timeline.duration();
 
           timeline.set(drawing, {
             attr: { "data-active-stroke": String(index + 1), "data-draw-phase": "drawing" },
           });
-          timeline.set(stroke, { opacity: 1 });
+          const strokeStartAt = timeline.duration();
           timeline.to(stroke, {
             strokeDashoffset: 0,
             duration,
             ease: "none",
-          });
-          timeline.to(actor, {
-            keyframes: [
-              { rotation: gesture * 0.72, duration: duration * 0.28, ease: "power1.out" },
-              { rotation: gesture * 1.08, duration: duration * 0.44, ease: "sine.inOut" },
-              { rotation: gesture * 0.9, duration: duration * 0.28, ease: "sine.out" },
-            ],
-            transformOrigin,
-          }, drawAt);
+          }, strokeStartAt);
+          timeline.to(stroke, {
+            opacity: 1,
+            duration: Math.min(0.08, duration * 0.7),
+            ease: "none",
+          }, strokeStartAt);
+          const groupDrawEndAt = timeline.duration();
 
           if (lift > 0) {
+            timeline.to({}, { duration: lift });
+          }
+
+          const groupEndsHere = lift > 0 || index === strokes.length - 1;
+          if (groupEndsHere) {
+            const targetRotation = actorCadence[gestureGroupIndex % actorCadence.length];
+            const groupDrawDuration = groupDrawEndAt - gestureGroupStartAt;
+
             timeline.to(actor, {
-              rotation: gesture * 0.45,
-              duration: lift,
-              ease: "power2.out",
-            });
+              rotation: targetRotation,
+              duration: groupDrawDuration,
+              ease: "sine.inOut",
+              transformOrigin,
+            }, gestureGroupStartAt);
+
+            if (lift > 0) {
+              timeline.to(actor, {
+                rotation: targetRotation * 0.78,
+                duration: lift,
+                ease: "sine.inOut",
+                transformOrigin,
+              }, groupDrawEndAt);
+            }
+
+            gestureGroupStartAt = timeline.duration();
+            gestureGroupIndex += 1;
           }
         });
 
@@ -658,6 +684,7 @@ export default function HobanHero() {
         actorTarget: '[data-motion="tiger-drawing-tool"]',
         characterTarget: '[data-motion="tiger-character"]',
         delay: 0.25,
+        actorCadence: houseActorCadence,
         transformOrigin: "16.4% 97.3%",
       });
 
@@ -666,6 +693,7 @@ export default function HobanHero() {
         actorTarget: '[data-motion="rabbit-drawing-tool"]',
         characterTarget: '[data-motion="rabbit-character"]',
         delay: 2.1,
+        actorCadence: goldActorCadence,
         transformOrigin: "80% 95.3%",
       });
 

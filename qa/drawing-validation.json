@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T15:51:21.037Z",
+  "generatedAt": "2026-08-17T16:40:34.265Z",
   "sourceSha256": {
     "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
     "/assets/isolated/sketch-house-smoke.png": "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
@@ -7,7 +7,7 @@
   },
   "cases": {
     "house": {
-      "strokeCount": 12,
+      "strokeCount": 13,
       "tracedMask": {
         "differentChannels": 41,
         "exact": false,
@@ -19,6 +19,147 @@
         "exact": true,
         "alphaWeightedCoverage": 1,
         "meaningfulPixelCoverage": 1
+      },
+      "frameProgression": {
+        "framesPerSecond": 60,
+        "frameDurationMs": 16.666666666666668,
+        "stalledFrameThreshold": 0.00001,
+        "thresholds": {
+          "maximumFrameAlphaDelta": 0.016,
+          "maximumConsecutiveStalledFrames": 3,
+          "maximumRegressionMagnitude": 0.0001,
+          "maximumFinalTraceMismatch": 0.00002
+        },
+        "contactFade": {
+          "maximumDurationMs": 80,
+          "durationRatio": 0.7,
+          "easing": "none"
+        },
+        "totalFrameCount": 233,
+        "maximumFrameDelta": 0.015387086187513555,
+        "minimumFrameDelta": -0.00008379244611100845,
+        "maximumConsecutiveStalledFrames": 3,
+        "regressionFrameCount": 0,
+        "finalCoverage": 0.9993492120018713,
+        "strokes": [
+          {
+            "strokeId": "left-wall-upper",
+            "durationMs": 200,
+            "frameCount": 12,
+            "coverageDelta": 0.09222615581205354,
+            "maximumFrameDelta": 0.013762909273728974,
+            "minimumFrameDelta": 0.0048236518144555915,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "left-wall-lower",
+            "durationMs": 120,
+            "frameCount": 8,
+            "coverageDelta": 0.04551047056441196,
+            "maximumFrameDelta": 0.01047684884540992,
+            "minimumFrameDelta": 0.001242921283979584,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "roof-left",
+            "durationMs": 290,
+            "frameCount": 18,
+            "coverageDelta": 0.09131700777174936,
+            "maximumFrameDelta": 0.009127790463023089,
+            "minimumFrameDelta": 0.0007932351565173024,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "roof-right",
+            "durationMs": 300,
+            "frameCount": 18,
+            "coverageDelta": 0.12194873298838779,
+            "maximumFrameDelta": 0.012412454350573643,
+            "minimumFrameDelta": 0.0008002178603598864,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "right-wall",
+            "durationMs": 260,
+            "frameCount": 16,
+            "coverageDelta": 0.12729748413180547,
+            "maximumFrameDelta": 0.015387086187513555,
+            "minimumFrameDelta": 0.0010697502286835525,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "base",
+            "durationMs": 280,
+            "frameCount": 17,
+            "coverageDelta": 0.07034655159170733,
+            "maximumFrameDelta": 0.009442012135939315,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 3
+          },
+          {
+            "strokeId": "roof-base",
+            "durationMs": 240,
+            "frameCount": 15,
+            "coverageDelta": 0.05660738351104322,
+            "maximumFrameDelta": 0.009095670025347169,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 3
+          },
+          {
+            "strokeId": "chimney",
+            "durationMs": 360,
+            "frameCount": 22,
+            "coverageDelta": 0.06060847281284254,
+            "maximumFrameDelta": 0.007285753189349986,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 2
+          },
+          {
+            "strokeId": "window-frame",
+            "durationMs": 430,
+            "frameCount": 26,
+            "coverageDelta": 0.08054967844648808,
+            "maximumFrameDelta": 0.008105522620469152,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 3
+          },
+          {
+            "strokeId": "window-mullion",
+            "durationMs": 95,
+            "frameCount": 6,
+            "coverageDelta": 0.007417028021590499,
+            "maximumFrameDelta": 0.0023084818903575943,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "smoke-lower-curl",
+            "durationMs": 600,
+            "frameCount": 36,
+            "coverageDelta": 0.1411469789331825,
+            "maximumFrameDelta": 0.012976656821054311,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 3
+          },
+          {
+            "strokeId": "smoke-middle-curl",
+            "durationMs": 380,
+            "frameCount": 23,
+            "coverageDelta": 0.05709477623925541,
+            "maximumFrameDelta": 0.00501637444051084,
+            "minimumFrameDelta": -0.00008379244611100845,
+            "stalledFrameCount": 3
+          },
+          {
+            "strokeId": "smoke-upper-curl",
+            "durationMs": 260,
+            "frameCount": 16,
+            "coverageDelta": 0.04727849117735361,
+            "maximumFrameDelta": 0.007553889016905124,
+            "minimumFrameDelta": 0.000009775785379528834,
+            "stalledFrameCount": 1
+          }
+        ]
       }
     },
     "gold": {
@@ -34,6 +175,435 @@
         "exact": true,
         "alphaWeightedCoverage": 1,
         "meaningfulPixelCoverage": 1
+      },
+      "frameProgression": {
+        "framesPerSecond": 60,
+        "frameDurationMs": 16.666666666666668,
+        "stalledFrameThreshold": 0.00001,
+        "thresholds": {
+          "maximumFrameAlphaDelta": 0.01,
+          "maximumConsecutiveStalledFrames": 3,
+          "maximumRegressionMagnitude": 0.0001,
+          "maximumFinalTraceMismatch": 0.00002
+        },
+        "contactFade": {
+          "maximumDurationMs": 80,
+          "durationRatio": 0.7,
+          "easing": "none"
+        },
+        "totalFrameCount": 286,
+        "maximumFrameDelta": 0.009199130047052861,
+        "minimumFrameDelta": 0,
+        "maximumConsecutiveStalledFrames": 2,
+        "regressionFrameCount": 0,
+        "finalCoverage": 0.9958846894590246,
+        "strokes": [
+          {
+            "strokeId": "contact-right-edge-1",
+            "durationMs": 150,
+            "frameCount": 9,
+            "coverageDelta": 0.04494700056354263,
+            "maximumFrameDelta": 0.008044762847450461,
+            "minimumFrameDelta": 0.0032994099427334916,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "contact-right-edge-2",
+            "durationMs": 117,
+            "frameCount": 8,
+            "coverageDelta": 0.03288070885307566,
+            "maximumFrameDelta": 0.006894658451391672,
+            "minimumFrameDelta": 0.0007016574632738165,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "contact-lower-edge-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03607781151076314,
+            "maximumFrameDelta": 0.008620241325834208,
+            "minimumFrameDelta": 0.0006760806420123139,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "contact-lower-edge-2",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.003295999699898633,
+            "maximumFrameDelta": 0.001023925411168719,
+            "minimumFrameDelta": 0.0003035116123031312,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-03-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03586211365145783,
+            "maximumFrameDelta": 0.00770118088183766,
+            "minimumFrameDelta": 0.0011407262282629033,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-03-2",
+            "durationMs": 75,
+            "frameCount": 5,
+            "coverageDelta": 0.023423252911281695,
+            "maximumFrameDelta": 0.00752043801158972,
+            "minimumFrameDelta": 0.0011091814820403945,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-04",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.0120884582888936,
+            "maximumFrameDelta": 0.0037921900323717173,
+            "minimumFrameDelta": 0.0006846062490994675,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03602580530753144,
+            "maximumFrameDelta": 0.007280868452440331,
+            "minimumFrameDelta": 0.001067406007313254,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-2",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03887591575677127,
+            "maximumFrameDelta": 0.009199130047052861,
+            "minimumFrameDelta": 0.0009454898259667888,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-3",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.01565301461203794,
+            "maximumFrameDelta": 0.004405181181939,
+            "minimumFrameDelta": 0.0009156502011616885,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-06",
+            "durationMs": 89,
+            "frameCount": 6,
+            "coverageDelta": 0.02064305244015663,
+            "maximumFrameDelta": 0.005771835998011787,
+            "minimumFrameDelta": 0.0006044655424801149,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.0317553287175697,
+            "maximumFrameDelta": 0.0062774044982808475,
+            "minimumFrameDelta": 0.0007792404877670633,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-2",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03161124595779652,
+            "maximumFrameDelta": 0.006523794543099926,
+            "minimumFrameDelta": 0.000940374461714466,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-3",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.023168337259375393,
+            "maximumFrameDelta": 0.007747219160108398,
+            "minimumFrameDelta": 0.0010171049254990017,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-12",
+            "durationMs": 88,
+            "frameCount": 6,
+            "coverageDelta": 0.01295721765107588,
+            "maximumFrameDelta": 0.004366815950046787,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-14",
+            "durationMs": 74,
+            "frameCount": 5,
+            "coverageDelta": 0.02385464862989234,
+            "maximumFrameDelta": 0.007605694082461367,
+            "minimumFrameDelta": 0.0005763310390924925,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-15",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.004302021336184292,
+            "maximumFrameDelta": 0.001269462895279072,
+            "minimumFrameDelta": 0.00032397306931231107,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-16",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.022366077632473003,
+            "maximumFrameDelta": 0.0070182797541555875,
+            "minimumFrameDelta": 0.0011535146388936268,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-17",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.02104034573041863,
+            "maximumFrameDelta": 0.008569940244019914,
+            "minimumFrameDelta": 0.0008883682584827635,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-19",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.00505056963843753,
+            "maximumFrameDelta": 0.001988171572727293,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-20",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.01416614873603611,
+            "maximumFrameDelta": 0.004757288754638989,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-21-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.031247202535174545,
+            "maximumFrameDelta": 0.007060907789591453,
+            "minimumFrameDelta": 0.0007093305096522728,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-21-2",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.039640662712490116,
+            "maximumFrameDelta": 0.008769439449859529,
+            "minimumFrameDelta": 0.0007988493840674904,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-21-3",
+            "durationMs": 93,
+            "frameCount": 6,
+            "coverageDelta": 0.03284234362118332,
+            "maximumFrameDelta": 0.008112967704147711,
+            "minimumFrameDelta": 0.0009241758082487728,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-22",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.003347153342421638,
+            "maximumFrameDelta": 0.0011296429390496021,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-23",
+            "durationMs": 127,
+            "frameCount": 8,
+            "coverageDelta": 0.025746480842534614,
+            "maximumFrameDelta": 0.00819907633572814,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 2
+          },
+          {
+            "strokeId": "micro-stroke-24",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.028989621778492847,
+            "maximumFrameDelta": 0.009112168854763736,
+            "minimumFrameDelta": 0.0014749300260797904,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.029364748490328108,
+            "maximumFrameDelta": 0.006367775933404762,
+            "minimumFrameDelta": 0.0008696119228909227,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-2",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.022816229686675404,
+            "maximumFrameDelta": 0.004711250476368334,
+            "minimumFrameDelta": 0.000476581436172574,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-3",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03274088889684612,
+            "maximumFrameDelta": 0.006086430899528317,
+            "minimumFrameDelta": 0.0010060216362856034,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-4",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.028244483719074398,
+            "maximumFrameDelta": 0.006027604210626869,
+            "minimumFrameDelta": 0.0010409766253430819,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-5",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.0073396951413418066,
+            "maximumFrameDelta": 0.0025730282189069253,
+            "minimumFrameDelta": 0.0005797412819273928,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.041747340223728946,
+            "maximumFrameDelta": 0.009054194726570985,
+            "minimumFrameDelta": 0.0008764324085607234,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-2",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.03131455483116319,
+            "maximumFrameDelta": 0.006511006132469244,
+            "minimumFrameDelta": 0.001139873667554192,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-3",
+            "durationMs": 90,
+            "frameCount": 6,
+            "coverageDelta": 0.013078281271713621,
+            "maximumFrameDelta": 0.00449384749564552,
+            "minimumFrameDelta": 0.0005217671537346424,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-27-1",
+            "durationMs": 133,
+            "frameCount": 8,
+            "coverageDelta": 0.0332183228937275,
+            "maximumFrameDelta": 0.00709245253581392,
+            "minimumFrameDelta": 0.0015209683043505562,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-28",
+            "durationMs": 115,
+            "frameCount": 7,
+            "coverageDelta": 0.015534508673526348,
+            "maximumFrameDelta": 0.005626048116821325,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 2
+          },
+          {
+            "strokeId": "micro-stroke-29",
+            "durationMs": 73,
+            "frameCount": 5,
+            "coverageDelta": 0.011527473342557992,
+            "maximumFrameDelta": 0.0033804032100615,
+            "minimumFrameDelta": 0.00021740298072270292,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-30",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.018338580844495467,
+            "maximumFrameDelta": 0.005339587718692473,
+            "minimumFrameDelta": 0.000266851501828258,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-31",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.0005567221427920099,
+            "maximumFrameDelta": 0.00017989030953924345,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-32",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.015446694920528525,
+            "maximumFrameDelta": 0.005647362134539202,
+            "minimumFrameDelta": 0.0007118881917784758,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-33",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.021942354960240884,
+            "maximumFrameDelta": 0.00620834708087481,
+            "minimumFrameDelta": 0.0023709713309411073,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-34",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.0016462947285318386,
+            "maximumFrameDelta": 0.00043992132569781184,
+            "minimumFrameDelta": 0.00009037143512391488,
+            "stalledFrameCount": 0
+          },
+          {
+            "strokeId": "micro-stroke-35",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.011283640979865117,
+            "maximumFrameDelta": 0.004305431579019192,
+            "minimumFrameDelta": 0.000006820485669800647,
+            "stalledFrameCount": 1
+          },
+          {
+            "strokeId": "micro-stroke-36",
+            "durationMs": 70,
+            "frameCount": 5,
+            "coverageDelta": 0.007885333994920418,
+            "maximumFrameDelta": 0.0026608419719047482,
+            "minimumFrameDelta": 0.00006138437102753969,
+            "stalledFrameCount": 0
+          }
+        ]
       },
       "temporalProgression": {
         "thresholds": {

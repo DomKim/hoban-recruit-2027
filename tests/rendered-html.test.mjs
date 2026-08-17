@@ -101,11 +101,11 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
     readFile(drawingValidationPath, "utf8").then(JSON.parse),
   ]);
 
-  assert.equal(housePlan.strokes.length, 12);
+  assert.equal(housePlan.strokes.length, 13);
   assert.equal(goldPlan.strokes.length, 45);
   assert.deepEqual(
     housePlan.strokes.map((stroke) => stroke.order),
-    Array.from({ length: 12 }, (_, index) => index + 1),
+    Array.from({ length: housePlan.strokes.length }, (_, index) => index + 1),
   );
   assert.deepEqual(
     goldPlan.strokes.map((stroke) => stroke.order),
@@ -131,6 +131,15 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
   assert.ok(validation.cases.gold.temporalProgression.minSingleStrokeDelta >= 0.0005);
   assert.ok(validation.cases.gold.temporalProgression.precompletionCoverage >= 0.995);
   assert.ok(validation.cases.gold.temporalProgression.finalCompletionPop < 0.005);
+  for (const drawing of [validation.cases.house, validation.cases.gold]) {
+    const frames = drawing.frameProgression;
+    assert.ok(frames.maximumFrameDelta <= frames.thresholds.maximumFrameAlphaDelta);
+    assert.ok(
+      frames.maximumConsecutiveStalledFrames <=
+        frames.thresholds.maximumConsecutiveStalledFrames,
+    );
+    assert.equal(frames.regressionFrameCount, 0);
+  }
   assert.equal(validation.cases.house.completedFrame.exact, true);
   assert.equal(validation.cases.gold.completedFrame.exact, true);
   assert.equal(

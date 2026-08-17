@@ -21,6 +21,79 @@ const [housePlan, goldPlan] = await Promise.all([
 
 const xmlEscape = (value) => value.replaceAll("&", "&amp;").replaceAll('"', "&quot;");
 
+const pathLengthCache = new Map();
+
+function approximatePathLength(d) {
+  if (pathLengthCache.has(d)) return pathLengthCache.get(d);
+  const tokens = d.match(/[MLCZ]|-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi) ?? [];
+  let cursor = 0;
+  let command = null;
+  let x = 0;
+  let y = 0;
+  let startX = 0;
+  let startY = 0;
+  let length = 0;
+  const number = () => Number(tokens[cursor++]);
+  const distance = (x1, y1, x2, y2) => Math.hypot(x2 - x1, y2 - y1);
+
+  while (cursor < tokens.length) {
+    if (/^[MLCZ]$/i.test(tokens[cursor])) command = tokens[cursor++].toUpperCase();
+    if (command === "M") {
+      x = number();
+      y = number();
+      startX = x;
+      startY = y;
+      command = "L";
+    } else if (command === "L") {
+      const nextX = number();
+      const nextY = number();
+      length += distance(x, y, nextX, nextY);
+      x = nextX;
+      y = nextY;
+    } else if (command === "C") {
+      const x1 = number();
+      const y1 = number();
+      const x2 = number();
+      const y2 = number();
+      const nextX = number();
+      const nextY = number();
+      const originX = x;
+      const originY = y;
+      let previousX = x;
+      let previousY = y;
+      for (let step = 1; step <= 64; step += 1) {
+        const t = step / 64;
+        const inverse = 1 - t;
+        const sampleX =
+          inverse ** 3 * originX +
+          3 * inverse ** 2 * t * x1 +
+          3 * inverse * t ** 2 * x2 +
+          t ** 3 * nextX;
+        const sampleY =
+          inverse ** 3 * originY +
+          3 * inverse ** 2 * t * y1 +
+          3 * inverse * t ** 2 * y2 +
+          t ** 3 * nextY;
+        length += distance(previousX, previousY, sampleX, sampleY);
+        previousX = sampleX;
+        previousY = sampleY;
+      }
+      x = nextX;
+      y = nextY;
+    } else if (command === "Z") {
+      length += distance(x, y, startX, startY);
+      x = startX;
+      y = startY;
+      command = null;
+    } else {
+      throw new Error(`Unsupported SVG path command in: ${d}`);
+    }
+  }
+
+  pathLengthCache.set(d, length);
+  return length;
+}
+
 async function dataUri(file) {
   const absolute = join(assetsRoot, file.replace(/^\/assets\//, ""));
   const bytes = await readFile(absolute);
@@ -44,8 +117,17 @@ async function renderDrawing({ viewBox, textures, strokes, completed }) {
   );
   const paths = strokes
     .map(
-      (stroke) =>
-        `<path d="${xmlEscape(stroke.d)}" fill="none" stroke="white" stroke-width="${stroke.width}" stroke-linecap="round" stroke-linejoin="round"/>`,
+      (stroke) => {
+        const progress = stroke.progress;
+        const pathLength = approximatePathLength(stroke.d);
+        const progressAttributes = Number.isFinite(progress)
+          ? ` stroke-dasharray="${pathLength} ${pathLength}" stroke-dashoffset="${pathLength * (1 - progress)}"`
+          : "";
+        const opacityAttribute = Number.isFinite(stroke.opacity)
+          ? ` stroke-opacity="${stroke.opacity}"`
+          : "";
+        return `<path d="${xmlEscape(stroke.d)}" fill="none" stroke="white" stroke-width="${stroke.width}" stroke-linecap="round" stroke-linejoin="round"${progressAttributes}${opacityAttribute}/>`;
+      },
     )
     .join("");
   const completion = completed
@@ -243,6 +325,101 @@ async function buildTemporalProgression(drawing, source, completedComparison) {
   };
 }
 
+async function buildFrameProgression(drawing, source) {
+  const framesPerSecond = 60;
+  const frameDurationMs = 1000 / framesPerSecond;
+  const stalledFrameThreshold = 0.00001;
+  const thresholds = {
+    maximumFrameAlphaDelta: drawing.name === "gold" ? 0.01 : 0.016,
+    maximumConsecutiveStalledFrames: 3,
+    maximumRegressionMagnitude: 0.0001,
+    maximumFinalTraceMismatch: 0.00002,
+  };
+  const completedStrokes = [];
+  const strokeSummaries = [];
+  let previousCoverage = 0;
+  let maximumFrameDelta = 0;
+  let maximumConsecutiveStalledFrames = 0;
+  let regressionFrameCount = 0;
+  let minimumFrameDelta = Number.POSITIVE_INFINITY;
+  let totalFrameCount = 0;
+
+  for (const stroke of drawing.strokes) {
+    const frameCount = Math.max(2, Math.ceil(stroke.durationMs / frameDurationMs));
+    let consecutiveStalledFrames = 0;
+    let strokeMaximumFrameDelta = 0;
+    let strokeMinimumFrameDelta = Number.POSITIVE_INFINITY;
+    let strokeStalledFrameCount = 0;
+    const strokeStartCoverage = previousCoverage;
+
+    for (let frame = 1; frame <= frameCount; frame += 1) {
+      const progress = frame / frameCount;
+      const elapsedMs = progress * stroke.durationMs;
+      const contactFadeMs = Math.min(80, stroke.durationMs * 0.7);
+      const contactFadeProgress = Math.min(1, elapsedMs / contactFadeMs);
+      const [, frameRaster] = await renderDrawing({
+        ...drawing,
+        strokes: [
+          ...completedStrokes,
+          { ...stroke, progress, opacity: contactFadeProgress },
+        ],
+        completed: false,
+      });
+      const coverage = compare(source, frameRaster).alphaWeightedCoverage;
+      const delta = coverage - previousCoverage;
+
+      if (delta < -thresholds.maximumRegressionMagnitude) regressionFrameCount += 1;
+      if (delta <= stalledFrameThreshold) {
+        consecutiveStalledFrames += 1;
+        strokeStalledFrameCount += 1;
+      } else {
+        consecutiveStalledFrames = 0;
+      }
+
+      maximumConsecutiveStalledFrames = Math.max(
+        maximumConsecutiveStalledFrames,
+        consecutiveStalledFrames,
+      );
+      maximumFrameDelta = Math.max(maximumFrameDelta, delta);
+      minimumFrameDelta = Math.min(minimumFrameDelta, delta);
+      strokeMaximumFrameDelta = Math.max(strokeMaximumFrameDelta, delta);
+      strokeMinimumFrameDelta = Math.min(strokeMinimumFrameDelta, delta);
+      previousCoverage = coverage;
+      totalFrameCount += 1;
+    }
+
+    strokeSummaries.push({
+      strokeId: stroke.id,
+      durationMs: stroke.durationMs,
+      frameCount,
+      coverageDelta: previousCoverage - strokeStartCoverage,
+      maximumFrameDelta: strokeMaximumFrameDelta,
+      minimumFrameDelta: strokeMinimumFrameDelta,
+      stalledFrameCount: strokeStalledFrameCount,
+    });
+    completedStrokes.push(stroke);
+  }
+
+  return {
+    framesPerSecond,
+    frameDurationMs,
+    stalledFrameThreshold,
+    thresholds,
+    contactFade: {
+      maximumDurationMs: 80,
+      durationRatio: 0.7,
+      easing: "none",
+    },
+    totalFrameCount,
+    maximumFrameDelta,
+    minimumFrameDelta,
+    maximumConsecutiveStalledFrames,
+    regressionFrameCount,
+    finalCoverage: previousCoverage,
+    strokes: strokeSummaries,
+  };
+}
+
 const houseTextures = housePlan.sourceAssets.map((asset) => ({
   file: asset.file,
   x: asset.x,
@@ -251,7 +428,9 @@ const houseTextures = housePlan.sourceAssets.map((asset) => ({
   height: asset.height,
 }));
 const houseStrokes = housePlan.strokes.map((stroke) => ({
+  id: stroke.id,
   d: stroke.d,
+  durationMs: stroke.drawMs,
   width: stroke.strokeWidth,
 }));
 const goldMotionOrder =
@@ -272,6 +451,10 @@ const goldStrokes = goldMotionOrder.map((sourceIndex) => {
     id: stroke.id ?? `stroke-${sourceIndex}`,
     sourceIndex,
     d: stroke.d,
+    durationMs: Math.max(
+      goldPlan.rendering.minimumVisibleStrokeMs,
+      stroke.suggestedDurationMs,
+    ),
     width: stroke.maskWidth,
   };
 });
@@ -317,6 +500,7 @@ for (const drawing of cases) {
     strokeCount: drawing.strokeCount,
     tracedMask,
     completedFrame,
+    frameProgression: await buildFrameProgression(drawing, source),
   };
   if (drawing.name === "gold") {
     report.cases.gold.temporalProgression = await buildTemporalProgression(
@@ -333,6 +517,31 @@ for (const [name, result] of Object.entries(report.cases)) {
   }
   if (result.tracedMask.alphaWeightedCoverage < 0.995) {
     throw new Error(`${name} stroke mask coverage is below 99.5%`);
+  }
+  const frames = result.frameProgression;
+  if (frames.maximumFrameDelta > frames.thresholds.maximumFrameAlphaDelta) {
+    throw new Error(
+      `${name} frame alpha jump ${(frames.maximumFrameDelta * 100).toFixed(3)}% exceeds ${(frames.thresholds.maximumFrameAlphaDelta * 100).toFixed(1)}%`,
+    );
+  }
+  if (
+    frames.maximumConsecutiveStalledFrames >
+    frames.thresholds.maximumConsecutiveStalledFrames
+  ) {
+    throw new Error(
+      `${name} has ${frames.maximumConsecutiveStalledFrames} consecutive stalled frames`,
+    );
+  }
+  if (frames.regressionFrameCount > 0) {
+    throw new Error(
+      `${name} has ${frames.regressionFrameCount} material frame regressions`,
+    );
+  }
+  if (
+    Math.abs(frames.finalCoverage - result.tracedMask.alphaWeightedCoverage) >
+    frames.thresholds.maximumFinalTraceMismatch
+  ) {
+    throw new Error(`${name} 60 fps progression does not reach its traced mask coverage`);
   }
 }
 
