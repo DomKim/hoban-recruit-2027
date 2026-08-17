@@ -200,8 +200,8 @@ const taglineCharacters = [
   { name: "tagline-blue-char-3", file: "tagline-blue-char-3.png", x: 374, y: 231, width: 38, height: 33 },
 ] as const;
 
-const houseActorCadence = [-0.85, 0.7, -1.9, 2.05, 1.45, -1.25, 1.3, -0.95, 0.65, 0.45, -1.15, 0.9, -0.7];
-const goldActorCadence = [0.7, -1.55, -0.95, 1.75, 1.05, -0.55, -1.15];
+const houseActorCadence = [-0.95, 0.8, -2.1, 2.25, 1.6, -1.35, 1.45, -1.05, 0.75, 0.52, -1.25, 1, -0.8];
+const goldActorCadence = [0.82, -1.7, -1.1, 2, 1.25, -0.68, -1.32];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -589,12 +589,18 @@ export default function HobanHero() {
         delay,
         actorCadence,
         bodyLean,
+        bodyLeanLimit,
         bodyPress,
         detailLimit,
         detailStrength,
+        liftPeakLimit,
         liftRotation,
+        liftSpeedLimit,
         maximumRotation,
+        overshootLimit,
         pressureRotation,
+        preparationBlend,
+        preparationSpeedLimit,
         strokeBlend,
         transformOrigin,
       }: {
@@ -604,12 +610,18 @@ export default function HobanHero() {
         delay: number;
         actorCadence: readonly number[];
         bodyLean: number;
+        bodyLeanLimit: number;
         bodyPress: number;
         detailLimit: number;
         detailStrength: number;
+        liftPeakLimit: number;
         liftRotation: number;
+        liftSpeedLimit: number;
         maximumRotation: number;
+        overshootLimit: number;
         pressureRotation: number;
+        preparationBlend: number;
+        preparationSpeedLimit: number;
         strokeBlend: number;
         transformOrigin: string;
       }) => {
@@ -672,13 +684,13 @@ export default function HobanHero() {
           return filteredRotation;
         });
 
-        previousRotation = 0;
+        let actorRotation = 0;
 
         strokes.forEach((stroke, index) => {
           const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
           const lift = Number(stroke.dataset.strokeLift ?? 0.045);
           const targetRotation = strokeRotations[index];
-          const rotationDelta = targetRotation - previousRotation;
+          const rotationDelta = targetRotation - actorRotation;
           const direction = Math.sign(rotationDelta) || Math.sign(targetRotation) || 1;
 
           timeline.set(drawing, {
@@ -700,14 +712,17 @@ export default function HobanHero() {
           }, strokeStartAt);
 
           if (duration >= 0.36) {
-            const approachDuration = duration * 0.18;
-            const sweepDuration = duration * 0.64;
-            const overshootDuration = duration * 0.09;
+            const approachDuration = duration * 0.14;
+            const sweepDuration = duration * 0.72;
+            const overshootDuration = duration * 0.06;
             const approachRotation = clampRotation(
-              targetRotation - direction * pressureRotation,
+              actorRotation + direction * Math.min(
+                pressureRotation,
+                Math.abs(rotationDelta) * 0.22,
+              ),
             );
             const overshootRotation = clampRotation(
-              targetRotation + direction * Math.min(0.12, pressureRotation * 0.7),
+              targetRotation + direction * Math.min(overshootLimit, pressureRotation * 0.75),
             );
 
             timeline.to(actor, {
@@ -735,11 +750,11 @@ export default function HobanHero() {
               transformOrigin,
             }, strokeStartAt + approachDuration + sweepDuration + overshootDuration);
           } else if (duration > 0.12) {
-            const contactDuration = Math.min(0.03, duration * 0.2);
+            const contactDuration = Math.min(0.04, duration * 0.3);
             const contactRotation = clampRotation(
-              previousRotation + direction * Math.min(
+              actorRotation + direction * Math.min(
                 pressureRotation,
-                Math.abs(rotationDelta) * 0.42,
+                Math.abs(rotationDelta) * 0.22,
               ),
             );
 
@@ -766,7 +781,7 @@ export default function HobanHero() {
 
           if (bodyPress > 0) {
             timeline.to(character, {
-              rotation: Math.max(-0.08, Math.min(0.08, -targetRotation * bodyLean)),
+              rotation: Math.max(-bodyLeanLimit, Math.min(bodyLeanLimit, -targetRotation * bodyLean)),
               yPercent: bodyPress,
               duration: Math.min(0.11, duration * 0.45),
               ease: "sine.out",
@@ -781,18 +796,31 @@ export default function HobanHero() {
               attr: { "data-writing-phase": "lift" },
             }, strokeEndAt);
             const liftPeakDuration = Math.min(
-              lift * 0.45,
-              bodyPress > 0 ? 0.018 : 0.014,
+              lift * 0.55,
+              liftPeakLimit,
             );
-            const liftPeakRotation = clampRotation(targetRotation + liftRotation);
+            const liftTravel = Math.sign(liftRotation || 1) * Math.min(
+              Math.abs(liftRotation),
+              liftPeakDuration * liftSpeedLimit,
+            );
+            const liftPeakRotation = clampRotation(targetRotation + liftTravel);
             const nextRotation = strokeRotations[index + 1] ?? 0;
-            const readyRotation = clampRotation(
-              liftPeakRotation + (nextRotation - liftPeakRotation) * 0.25,
+            const requestedReadyRotation = clampRotation(
+              liftPeakRotation + (nextRotation - liftPeakRotation) * preparationBlend,
             );
+            const preparationDuration = lift - liftPeakDuration;
+            const preparationTravel = Math.max(
+              -preparationDuration * preparationSpeedLimit,
+              Math.min(
+                preparationDuration * preparationSpeedLimit,
+                requestedReadyRotation - liftPeakRotation,
+              ),
+            );
+            const readyRotation = clampRotation(liftPeakRotation + preparationTravel);
             timeline.to(actor, {
               rotation: liftPeakRotation,
               duration: liftPeakDuration,
-              ease: "power2.out",
+              ease: "sine.inOut",
               transformOrigin,
             }, strokeEndAt);
             timeline.to(actor, {
@@ -809,9 +837,10 @@ export default function HobanHero() {
                 ease: "power1.out",
               }, strokeEndAt);
             }
+            actorRotation = readyRotation;
+          } else {
+            actorRotation = targetRotation;
           }
-
-          previousRotation = targetRotation;
         });
 
         timeline.to(completion, { opacity: 1, duration: 0.08, ease: "none" });
@@ -866,13 +895,19 @@ export default function HobanHero() {
         characterTarget: '[data-motion="tiger-character"]',
         delay: 0.25,
         actorCadence: houseActorCadence,
-        bodyLean: 0.04,
-        bodyPress: 0.12,
+        bodyLean: 0.05,
+        bodyLeanLimit: 0.12,
+        bodyPress: 0.16,
         detailLimit: 0,
         detailStrength: 0,
-        liftRotation: -0.45,
-        maximumRotation: 2.1,
+        liftPeakLimit: 0.024,
+        liftRotation: -0.46,
+        liftSpeedLimit: 18,
+        maximumRotation: 2.3,
+        overshootLimit: 0.14,
         pressureRotation: 0.18,
+        preparationBlend: 0.28,
+        preparationSpeedLimit: 22,
         strokeBlend: 1,
         transformOrigin: "16.4% 97.3%",
       });
@@ -884,13 +919,19 @@ export default function HobanHero() {
         delay: 2.1,
         actorCadence: goldActorCadence,
         bodyLean: 0,
+        bodyLeanLimit: 0,
         bodyPress: 0,
-        detailLimit: 0.22,
-        detailStrength: 0.055,
-        liftRotation: 0.35,
-        maximumRotation: 2,
-        pressureRotation: 0.14,
-        strokeBlend: 0.35,
+        detailLimit: 0.3,
+        detailStrength: 0.075,
+        liftPeakLimit: 0.018,
+        liftRotation: 0.38,
+        liftSpeedLimit: 18,
+        maximumRotation: 2.2,
+        overshootLimit: 0.12,
+        pressureRotation: 0.16,
+        preparationBlend: 0.28,
+        preparationSpeedLimit: 22,
+        strokeBlend: 0.45,
         transformOrigin: "80% 95.3%",
       });
 
