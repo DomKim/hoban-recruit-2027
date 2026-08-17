@@ -130,6 +130,11 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /data-wrist-segment/);
   assert.match(hero, /wristMaximumRotation: 0\.65/);
   assert.match(hero, /wristMaximumRotation: 0\.55/);
+  assert.match(hero, /wristContactPress: 0\.22/);
+  assert.match(hero, /wristContactPress: 0\.18/);
+  assert.match(hero, /wristLiftHeight: 0\.65/);
+  assert.match(hero, /wristLiftHeight: 0\.55/);
+  assert.match(hero, /yPercent: -wristLiftHeight/);
   assert.match(hero, /tiger-drawing-hand\.svg/);
   assert.match(hero, /tiger-drawing-sleeve\.svg/);
   assert.match(hero, /rabbit-drawing-hand\.svg/);

@@ -604,6 +604,8 @@ export default function HobanHero() {
         preparationSpeedLimit,
         strokeBlend,
         transformOrigin,
+        wristContactPress,
+        wristLiftHeight,
         wristMaximumRotation,
         wristPreparationBlend,
         wristTangent,
@@ -630,6 +632,8 @@ export default function HobanHero() {
         preparationSpeedLimit: number;
         strokeBlend: number;
         transformOrigin: string;
+        wristContactPress: number;
+        wristLiftHeight: number;
         wristMaximumRotation: number;
         wristPreparationBlend: number;
         wristTangent: readonly [number, number];
@@ -653,7 +657,12 @@ export default function HobanHero() {
         gsap.set(completion, { opacity: 0 });
         gsap.set(drawing, { autoAlpha: 1 });
         gsap.set(actor, { rotation: 0, transformOrigin });
-        gsap.set(wrist, { rotation: 0, transformOrigin: wristTransformOrigin });
+        gsap.set(wrist, {
+          rotation: 0,
+          xPercent: 0,
+          yPercent: 0,
+          transformOrigin: wristTransformOrigin,
+        });
         gsap.set(character, {
           rotation: 0,
           xPercent: 0,
@@ -749,6 +758,11 @@ export default function HobanHero() {
             strokeDashoffset: 0,
             duration,
             ease: "none",
+          }, strokeStartAt);
+          timeline.to(wrist, {
+            yPercent: wristContactPress,
+            duration: Math.min(0.05, duration * 0.28),
+            ease: "sine.out",
           }, strokeStartAt);
 
           const wristSegmentDuration = duration / wristDirections.length;
@@ -909,12 +923,14 @@ export default function HobanHero() {
             }, strokeEndAt + liftPeakDuration);
             timeline.to(wrist, {
               rotation: wristLiftRotation,
+              yPercent: -wristLiftHeight,
               duration: liftPeakDuration,
               ease: "sine.inOut",
               transformOrigin: wristTransformOrigin,
             }, strokeEndAt);
             timeline.to(wrist, {
               rotation: readyWristRotation,
+              yPercent: 0,
               duration: lift - liftPeakDuration,
               ease: "sine.inOut",
               transformOrigin: wristTransformOrigin,
@@ -957,6 +973,7 @@ export default function HobanHero() {
         }, settleStartAt);
         timeline.to(wrist, {
           rotation: 0,
+          yPercent: 0,
           duration: 0.14,
           ease: "back.out(1.15)",
           transformOrigin: wristTransformOrigin,
@@ -1024,6 +1041,8 @@ export default function HobanHero() {
         preparationSpeedLimit: 22,
         strokeBlend: 1,
         transformOrigin: "16.4% 97.3%",
+        wristContactPress: 0.22,
+        wristLiftHeight: 0.65,
         wristMaximumRotation: 0.65,
         wristPreparationBlend: 0.22,
         wristTangent: [0.892, 0.452],
@@ -1052,6 +1071,8 @@ export default function HobanHero() {
         preparationSpeedLimit: 22,
         strokeBlend: 0.45,
         transformOrigin: "80% 95.3%",
+        wristContactPress: 0.18,
+        wristLiftHeight: 0.55,
         wristMaximumRotation: 0.55,
         wristPreparationBlend: 0.22,
         wristTangent: [0.817, -0.577],
