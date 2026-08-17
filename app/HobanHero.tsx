@@ -585,6 +585,7 @@ export default function HobanHero() {
       const createStrokeDrawingLoop = ({
         wrapper,
         actorTarget,
+        wristTarget,
         characterTarget,
         delay,
         actorCadence,
@@ -603,9 +604,14 @@ export default function HobanHero() {
         preparationSpeedLimit,
         strokeBlend,
         transformOrigin,
+        wristMaximumRotation,
+        wristPreparationBlend,
+        wristTangent,
+        wristTransformOrigin,
       }: {
         wrapper: string;
         actorTarget: string;
+        wristTarget: string;
         characterTarget: string;
         delay: number;
         actorCadence: readonly number[];
@@ -624,11 +630,16 @@ export default function HobanHero() {
         preparationSpeedLimit: number;
         strokeBlend: number;
         transformOrigin: string;
+        wristMaximumRotation: number;
+        wristPreparationBlend: number;
+        wristTangent: readonly [number, number];
+        wristTransformOrigin: string;
       }) => {
         const drawing = stage.querySelector<SVGSVGElement>(wrapper);
         const actor = stage.querySelector<HTMLElement>(actorTarget);
+        const wrist = stage.querySelector<HTMLElement>(wristTarget);
         const character = stage.querySelector<HTMLElement>(characterTarget);
-        if (!drawing || !actor || !character) return;
+        if (!drawing || !actor || !wrist || !character) return;
 
         const strokes = Array.from(drawing.querySelectorAll<SVGPathElement>("[data-draw-stroke]"));
         const completion = drawing.querySelector<SVGRectElement>("[data-mask-complete]");
@@ -642,6 +653,7 @@ export default function HobanHero() {
         gsap.set(completion, { opacity: 0 });
         gsap.set(drawing, { autoAlpha: 1 });
         gsap.set(actor, { rotation: 0, transformOrigin });
+        gsap.set(wrist, { rotation: 0, transformOrigin: wristTransformOrigin });
         gsap.set(character, {
           rotation: 0,
           xPercent: 0,
@@ -658,12 +670,22 @@ export default function HobanHero() {
         timeline.set(actor, {
           attr: { "data-writing-phase": "preposition", "data-writing-stroke": "0" },
         });
+        timeline.set(wrist, {
+          attr: {
+            "data-wrist-direction": "0",
+            "data-wrist-phase": "preposition",
+            "data-wrist-segment": "0",
+            "data-wrist-stroke": "0",
+          },
+        });
         timeline.to({}, { duration: 0.15 });
 
         const clampRotation = (rotation: number) =>
           Math.max(-maximumRotation, Math.min(maximumRotation, rotation));
         const clampDetail = (detail: number) =>
           Math.max(-detailLimit, Math.min(detailLimit, detail));
+        const clampWristRotation = (rotation: number) =>
+          Math.max(-wristMaximumRotation, Math.min(wristMaximumRotation, rotation));
         let gestureGroupIndex = 0;
         let previousRotation = 0;
 
@@ -684,12 +706,32 @@ export default function HobanHero() {
           return filteredRotation;
         });
 
+        const wristStrokeDirections = strokes.map((stroke) => {
+          const length = Number(stroke.dataset.strokeLength ?? 0);
+          const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
+          const segmentCount = Math.max(1, Math.min(5, Math.round(duration / 0.09)));
+
+          return Array.from({ length: segmentCount }, (_unused, segmentIndex) => {
+            const start = stroke.getPointAtLength((length * segmentIndex) / segmentCount);
+            const end = stroke.getPointAtLength((length * (segmentIndex + 1)) / segmentCount);
+            const deltaX = end.x - start.x;
+            const deltaY = end.y - start.y;
+            const distance = Math.hypot(deltaX, deltaY);
+            if (distance < 0.001) return 0;
+
+            return (deltaX / distance) * wristTangent[0] +
+              (deltaY / distance) * wristTangent[1];
+          });
+        });
+
         let actorRotation = 0;
+        let wristRotation = 0;
 
         strokes.forEach((stroke, index) => {
           const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
           const lift = Number(stroke.dataset.strokeLift ?? 0.045);
           const targetRotation = strokeRotations[index];
+          const wristDirections = wristStrokeDirections[index];
           const rotationDelta = targetRotation - actorRotation;
           const direction = Math.sign(rotationDelta) || Math.sign(targetRotation) || 1;
 
@@ -699,12 +741,39 @@ export default function HobanHero() {
           timeline.set(actor, {
             attr: { "data-writing-phase": "contact", "data-writing-stroke": String(index + 1) },
           });
+          timeline.set(wrist, {
+            attr: { "data-wrist-phase": "contact", "data-wrist-stroke": String(index + 1) },
+          });
           const strokeStartAt = timeline.duration();
           timeline.to(stroke, {
             strokeDashoffset: 0,
             duration,
             ease: "none",
           }, strokeStartAt);
+
+          const wristSegmentDuration = duration / wristDirections.length;
+          const wristRotationPerSegment =
+            (wristMaximumRotation * 1.18) / wristDirections.length;
+          let strokeWristRotation = wristRotation;
+          wristDirections.forEach((strokeDirection, segmentIndex) => {
+            strokeWristRotation = clampWristRotation(
+              strokeWristRotation + strokeDirection * wristRotationPerSegment,
+            );
+            const wristSegmentStartAt =
+              strokeStartAt + wristSegmentDuration * segmentIndex;
+            timeline.set(wrist, {
+              attr: {
+                "data-wrist-direction": strokeDirection.toFixed(4),
+                "data-wrist-segment": String(segmentIndex + 1),
+              },
+            }, wristSegmentStartAt);
+            timeline.to(wrist, {
+              rotation: strokeWristRotation,
+              duration: wristSegmentDuration,
+              ease: "sine.inOut",
+              transformOrigin: wristTransformOrigin,
+            }, wristSegmentStartAt);
+          });
           timeline.to(stroke, {
             opacity: 1,
             duration: Math.min(0.08, duration * 0.7),
@@ -795,6 +864,9 @@ export default function HobanHero() {
             timeline.set(actor, {
               attr: { "data-writing-phase": "lift" },
             }, strokeEndAt);
+            timeline.set(wrist, {
+              attr: { "data-wrist-phase": "lift" },
+            }, strokeEndAt);
             const liftPeakDuration = Math.min(
               lift * 0.55,
               liftPeakLimit,
@@ -817,6 +889,12 @@ export default function HobanHero() {
               ),
             );
             const readyRotation = clampRotation(liftPeakRotation + preparationTravel);
+            const nextWristDirection = wristStrokeDirections[index + 1]?.[0] ?? 0;
+            const wristLiftRotation = clampWristRotation(strokeWristRotation * 0.55);
+            const readyWristRotation = clampWristRotation(
+              wristLiftRotation +
+                nextWristDirection * wristMaximumRotation * wristPreparationBlend,
+            );
             timeline.to(actor, {
               rotation: liftPeakRotation,
               duration: liftPeakDuration,
@@ -829,6 +907,18 @@ export default function HobanHero() {
               ease: "sine.inOut",
               transformOrigin,
             }, strokeEndAt + liftPeakDuration);
+            timeline.to(wrist, {
+              rotation: wristLiftRotation,
+              duration: liftPeakDuration,
+              ease: "sine.inOut",
+              transformOrigin: wristTransformOrigin,
+            }, strokeEndAt);
+            timeline.to(wrist, {
+              rotation: readyWristRotation,
+              duration: lift - liftPeakDuration,
+              ease: "sine.inOut",
+              transformOrigin: wristTransformOrigin,
+            }, strokeEndAt + liftPeakDuration);
             if (bodyPress > 0) {
               timeline.to(character, {
                 rotation: 0,
@@ -838,8 +928,10 @@ export default function HobanHero() {
               }, strokeEndAt);
             }
             actorRotation = readyRotation;
+            wristRotation = readyWristRotation;
           } else {
             actorRotation = targetRotation;
+            wristRotation = strokeWristRotation;
           }
         });
 
@@ -851,10 +943,23 @@ export default function HobanHero() {
         timeline.set(actor, {
           attr: { "data-writing-phase": "complete" },
         });
+        timeline.set(wrist, {
+          attr: {
+            "data-wrist-direction": "0",
+            "data-wrist-phase": "complete",
+            "data-wrist-segment": "0",
+          },
+        });
         timeline.to(actor, {
           rotation: 0,
           duration: 0.16,
           ease: "back.out(1.25)",
+        }, settleStartAt);
+        timeline.to(wrist, {
+          rotation: 0,
+          duration: 0.14,
+          ease: "back.out(1.15)",
+          transformOrigin: wristTransformOrigin,
         }, settleStartAt);
         timeline.to(character, {
           rotation: 0,
@@ -887,11 +992,20 @@ export default function HobanHero() {
         timeline.set(actor, {
           attr: { "data-writing-phase": "reset", "data-writing-stroke": "0" },
         }, "<");
+        timeline.set(wrist, {
+          attr: {
+            "data-wrist-direction": "0",
+            "data-wrist-phase": "reset",
+            "data-wrist-segment": "0",
+            "data-wrist-stroke": "0",
+          },
+        }, "<");
       };
 
       createStrokeDrawingLoop({
         wrapper: '[data-motion="house-drawing"]',
         actorTarget: '[data-motion="tiger-drawing-tool"]',
+        wristTarget: '[data-motion="tiger-drawing-wrist"]',
         characterTarget: '[data-motion="tiger-character"]',
         delay: 0.25,
         actorCadence: houseActorCadence,
@@ -910,11 +1024,16 @@ export default function HobanHero() {
         preparationSpeedLimit: 22,
         strokeBlend: 1,
         transformOrigin: "16.4% 97.3%",
+        wristMaximumRotation: 0.65,
+        wristPreparationBlend: 0.22,
+        wristTangent: [0.892, 0.452],
+        wristTransformOrigin: "48.1% 78.4%",
       });
 
       createStrokeDrawingLoop({
         wrapper: '[data-motion="gold-drawing"]',
         actorTarget: '[data-motion="rabbit-drawing-tool"]',
+        wristTarget: '[data-motion="rabbit-drawing-wrist"]',
         characterTarget: '[data-motion="rabbit-character"]',
         delay: 2.1,
         actorCadence: goldActorCadence,
@@ -933,6 +1052,10 @@ export default function HobanHero() {
         preparationSpeedLimit: 22,
         strokeBlend: 0.45,
         transformOrigin: "80% 95.3%",
+        wristMaximumRotation: 0.55,
+        wristPreparationBlend: 0.22,
+        wristTangent: [0.817, -0.577],
+        wristTransformOrigin: "73.3% 72.1%",
       });
 
       artboard.dataset.motionReady = "true";
@@ -1112,16 +1235,25 @@ export default function HobanHero() {
                 data-motion="tiger-drawing-tool"
                 style={nestedStyle(tigerToolBounds, tigerCharacterBounds)}
               >
+                <span
+                  className="drawing-wrist"
+                  data-motion="tiger-drawing-wrist"
+                >
+                  {renderGroupedImage(
+                    { name: "tiger-pencil-shaft", label: "호랑이 연필 몸통", file: "tiger-pencil-shaft.png", x: 1057, y: 786, width: 44, height: 59, role: "drawing" },
+                    tigerToolBounds,
+                  )}
+                  {renderGroupedImage(
+                    { name: "tiger-pencil-tip", label: "호랑이 연필 촉과 측면", file: "tiger-pencil-tip.svg", x: 1065, y: 775, width: 40, height: 70, role: "drawing" },
+                    tigerToolBounds,
+                  )}
+                  {renderGroupedImage(
+                    { name: "tiger-drawing-hand", label: "호랑이 그림 그리는 손", file: "tiger-drawing-hand.svg", x: 1024, y: 814, width: 52, height: 63, role: "character" },
+                    tigerToolBounds,
+                  )}
+                </span>
                 {renderGroupedImage(
-                  { name: "tiger-pencil-shaft", label: "호랑이 연필 몸통", file: "tiger-pencil-shaft.png", x: 1057, y: 786, width: 44, height: 59, role: "drawing" },
-                  tigerToolBounds,
-                )}
-                {renderGroupedImage(
-                  { name: "tiger-pencil-tip", label: "호랑이 연필 촉과 측면", file: "tiger-pencil-tip.svg", x: 1065, y: 775, width: 40, height: 70, role: "drawing" },
-                  tigerToolBounds,
-                )}
-                {renderGroupedImage(
-                  { name: "tiger-drawing-arm", label: "호랑이 그림 그리는 팔", file: "tiger-drawing-arm.svg", x: 1024, y: 814, width: 52, height: 63, role: "character" },
+                  { name: "tiger-drawing-sleeve", label: "호랑이 그림 그리는 소매", file: "tiger-drawing-sleeve.svg", x: 1024, y: 814, width: 52, height: 63, role: "character" },
                   tigerToolBounds,
                 )}
               </span>
@@ -1141,16 +1273,25 @@ export default function HobanHero() {
                 data-motion="rabbit-drawing-tool"
                 style={nestedStyle(rabbitToolBounds, rabbitCharacterBounds)}
               >
+                <span
+                  className="drawing-wrist"
+                  data-motion="rabbit-drawing-wrist"
+                >
+                  {renderGroupedImage(
+                    { name: "rabbit-pencil-shaft", label: "토끼 연필 몸통과 측면", file: "rabbit-pencil-shaft.svg", x: 1621, y: 781, width: 42, height: 65, role: "drawing" },
+                    rabbitToolBounds,
+                  )}
+                  {renderGroupedImage(
+                    { name: "rabbit-pencil-tip", label: "토끼 연필 촉", file: "rabbit-pencil-tip.svg", x: 1619, y: 769, width: 18, height: 21, role: "drawing" },
+                    rabbitToolBounds,
+                  )}
+                  {renderGroupedImage(
+                    { name: "rabbit-drawing-hand", label: "토끼 그림 그리는 손", file: "rabbit-drawing-hand.svg", x: 1644, y: 814, width: 55, height: 64, role: "character" },
+                    rabbitToolBounds,
+                  )}
+                </span>
                 {renderGroupedImage(
-                  { name: "rabbit-pencil-shaft", label: "토끼 연필 몸통과 측면", file: "rabbit-pencil-shaft.svg", x: 1621, y: 781, width: 42, height: 65, role: "drawing" },
-                  rabbitToolBounds,
-                )}
-                {renderGroupedImage(
-                  { name: "rabbit-pencil-tip", label: "토끼 연필 촉", file: "rabbit-pencil-tip.svg", x: 1619, y: 769, width: 18, height: 21, role: "drawing" },
-                  rabbitToolBounds,
-                )}
-                {renderGroupedImage(
-                  { name: "rabbit-hand-extra", label: "토끼 그림 그리는 손", file: "rabbit-hand-extra.svg", x: 1644, y: 814, width: 55, height: 64, role: "character" },
+                  { name: "rabbit-drawing-sleeve", label: "토끼 그림 그리는 소매", file: "rabbit-drawing-sleeve.svg", x: 1644, y: 814, width: 55, height: 64, role: "character" },
                   rabbitToolBounds,
                 )}
               </span>

@@ -107,11 +107,18 @@ main {
 }
 
 .drawing-tool,
+.drawing-wrist,
 .character-motion-group {
   position: absolute;
   display: block;
   pointer-events: none;
   will-change: transform;
+}
+
+.drawing-wrist {
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .tagline-static {

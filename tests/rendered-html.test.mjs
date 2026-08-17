@@ -29,6 +29,44 @@ const rabbitCharacterPath = new URL(
   "../public/assets/isolated/rabbit-pencil-shaft.svg",
   import.meta.url,
 );
+const tigerArmPath = new URL(
+  "../public/assets/isolated/tiger-drawing-arm.svg",
+  import.meta.url,
+);
+const tigerHandPath = new URL(
+  "../public/assets/isolated/tiger-drawing-hand.svg",
+  import.meta.url,
+);
+const tigerSleevePath = new URL(
+  "../public/assets/isolated/tiger-drawing-sleeve.svg",
+  import.meta.url,
+);
+const rabbitArmPath = new URL(
+  "../public/assets/isolated/rabbit-hand-extra.svg",
+  import.meta.url,
+);
+const rabbitHandPath = new URL(
+  "../public/assets/isolated/rabbit-drawing-hand.svg",
+  import.meta.url,
+);
+const rabbitSleevePath = new URL(
+  "../public/assets/isolated/rabbit-drawing-sleeve.svg",
+  import.meta.url,
+);
+
+const svgPathSignatures = (svg) =>
+  [...svg.matchAll(/<(?:[a-z0-9]+:)?path\b([^>]*)\/?\s*>/gi)].map((match) => {
+    const attributes = match[1];
+    const read = (name) =>
+      attributes.match(new RegExp(`(?:^|\\s)${name}="([^"]*)"`, "i"))?.[1] ?? "";
+
+    return {
+      d: read("d").replace(/\s+/g, " ").trim(),
+      fill: read("fill"),
+      fillOpacity: read("fill-opacity") || "1",
+      fillRule: read("fill-rule") || "nonzero",
+    };
+  });
 
 const protectedStaticLayers = [
   "title-year",
@@ -82,6 +120,20 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /data-writing-phase/);
   assert.match(hero, /data-writing-phase": "preposition"/);
   assert.match(hero, /const strokeRotations = strokes\.map/);
+  assert.match(hero, /const wristStrokeDirections = strokes\.map/);
+  assert.match(hero, /getPointAtLength\(\(length \* segmentIndex\) \/ segmentCount\)/);
+  assert.match(hero, /strokeWristRotation \+ strokeDirection \* wristRotationPerSegment/);
+  assert.match(hero, /data-motion="tiger-drawing-wrist"/);
+  assert.match(hero, /data-motion="rabbit-drawing-wrist"/);
+  assert.match(hero, /data-wrist-phase/);
+  assert.match(hero, /data-wrist-direction/);
+  assert.match(hero, /data-wrist-segment/);
+  assert.match(hero, /wristMaximumRotation: 0\.65/);
+  assert.match(hero, /wristMaximumRotation: 0\.55/);
+  assert.match(hero, /tiger-drawing-hand\.svg/);
+  assert.match(hero, /tiger-drawing-sleeve\.svg/);
+  assert.match(hero, /rabbit-drawing-hand\.svg/);
+  assert.match(hero, /rabbit-drawing-sleeve\.svg/);
   assert.match(hero, /maximumRotation: 2\.3/);
   assert.match(hero, /maximumRotation: 2\.2/);
   assert.match(hero, /strokeBlend: 0\.45/);
@@ -254,4 +306,25 @@ test("preserves the original faceted shading on both pencils", async () => {
   assert.match(tigerPencil, /fill-opacity="0\.190002"/);
   assert.match(rabbitPencil, /fill-opacity="0\.190002"/);
   assert.match(rabbitCharacter, /fill-opacity="0\.190002"/);
+});
+
+test("keeps the exact original arm artwork while adding a direction-synced wrist joint", async () => {
+  const [tigerArm, tigerHand, tigerSleeve, rabbitArm, rabbitHand, rabbitSleeve] =
+    await Promise.all([
+      readFile(tigerArmPath, "utf8"),
+      readFile(tigerHandPath, "utf8"),
+      readFile(tigerSleevePath, "utf8"),
+      readFile(rabbitArmPath, "utf8"),
+      readFile(rabbitHandPath, "utf8"),
+      readFile(rabbitSleevePath, "utf8"),
+    ]);
+
+  assert.deepEqual(
+    [...svgPathSignatures(tigerHand), ...svgPathSignatures(tigerSleeve)],
+    svgPathSignatures(tigerArm),
+  );
+  assert.deepEqual(
+    [...svgPathSignatures(rabbitHand), ...svgPathSignatures(rabbitSleeve)],
+    svgPathSignatures(rabbitArm),
+  );
 });
