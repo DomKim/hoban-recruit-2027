@@ -91,6 +91,158 @@ function compare(source, candidate) {
   };
 }
 
+function inspectOpenPath(stroke, motionIndex) {
+  const commands = stroke.d.match(/[AaCcHhLlMmQqSsTtVvZz]/g) ?? [];
+  const uppercaseMoveCommandCount = commands.filter((command) => command === "M").length;
+  const lowercaseMoveCommandCount = commands.filter((command) => command === "m").length;
+  const closeCommandCount = commands.filter((command) => command === "Z" || command === "z").length;
+  return {
+    motionIndex,
+    strokeId: stroke.id,
+    sourceIndex: stroke.sourceIndex,
+    uppercaseMoveCommandCount,
+    lowercaseMoveCommandCount,
+    moveCommandCount: uppercaseMoveCommandCount + lowercaseMoveCommandCount,
+    closeCommandCount,
+    valid:
+      uppercaseMoveCommandCount === 1 &&
+      lowercaseMoveCommandCount === 0 &&
+      closeCommandCount === 0,
+  };
+}
+
+function measureNewAlphaComponents(source, previous, current) {
+  const { width, height } = source.info;
+  const pixelCount = width * height;
+  const deltaAlpha = new Uint8Array(pixelCount);
+  let newlyRevealedPixelCount = 0;
+  let newlyRevealedAlpha = 0;
+
+  for (let pixel = 0; pixel < pixelCount; pixel += 1) {
+    const alphaOffset = pixel * 4 + 3;
+    const sourceAlpha = source.data[alphaOffset];
+    const previousAlpha = previous
+      ? Math.min(sourceAlpha, previous.data[alphaOffset])
+      : 0;
+    const currentAlpha = Math.min(sourceAlpha, current.data[alphaOffset]);
+    const alphaDelta = Math.max(0, currentAlpha - previousAlpha);
+    deltaAlpha[pixel] = alphaDelta;
+    if (alphaDelta > 0) {
+      newlyRevealedPixelCount += 1;
+      newlyRevealedAlpha += alphaDelta;
+    }
+  }
+
+  const visited = new Uint8Array(pixelCount);
+  const stack = new Int32Array(pixelCount);
+  let connectedComponentCount = 0;
+  let materialConnectedComponentCount = 0;
+  let largestComponentPixelCount = 0;
+
+  for (let start = 0; start < pixelCount; start += 1) {
+    if (deltaAlpha[start] === 0 || visited[start]) continue;
+    connectedComponentCount += 1;
+    let stackSize = 1;
+    let componentPixelCount = 0;
+    let componentAlpha = 0;
+    stack[0] = start;
+    visited[start] = 1;
+
+    while (stackSize > 0) {
+      const pixel = stack[(stackSize -= 1)];
+      componentPixelCount += 1;
+      componentAlpha += deltaAlpha[pixel];
+      const x = pixel % width;
+      const y = Math.floor(pixel / width);
+      const minX = Math.max(0, x - 1);
+      const maxX = Math.min(width - 1, x + 1);
+      const minY = Math.max(0, y - 1);
+      const maxY = Math.min(height - 1, y + 1);
+
+      for (let neighborY = minY; neighborY <= maxY; neighborY += 1) {
+        for (let neighborX = minX; neighborX <= maxX; neighborX += 1) {
+          const neighbor = neighborY * width + neighborX;
+          if (visited[neighbor] || deltaAlpha[neighbor] === 0) continue;
+          visited[neighbor] = 1;
+          stack[stackSize] = neighbor;
+          stackSize += 1;
+        }
+      }
+    }
+
+    largestComponentPixelCount = Math.max(largestComponentPixelCount, componentPixelCount);
+    // Suppress one-pixel antialiasing specks while retaining small text strokes.
+    if (componentPixelCount >= 2 && componentAlpha >= 64) {
+      materialConnectedComponentCount += 1;
+    }
+  }
+
+  return {
+    newlyRevealedPixelCount,
+    newlyRevealedAlpha,
+    connectedComponentCount,
+    materialConnectedComponentCount,
+    largestComponentPixelCount,
+  };
+}
+
+async function buildTemporalProgression(drawing, source, completedComparison) {
+  const thresholds = {
+    maximumSingleStrokeDelta: 0.05,
+    minimumNontrivialStrokeDelta: 0.0005,
+    minimumPrecompletionCoverage: 0.995,
+    maximumFinalCompletionPop: 0.005,
+  };
+  const pathChecks = drawing.strokes.map((stroke, index) => inspectOpenPath(stroke, index + 1));
+  const prefixes = [];
+  let previousRaster = null;
+  let previousCoverage = 0;
+
+  for (let index = 0; index < drawing.strokes.length; index += 1) {
+    const [, prefixRaster] = await renderDrawing({
+      ...drawing,
+      strokes: drawing.strokes.slice(0, index + 1),
+      completed: false,
+    });
+    const comparison = compare(source, prefixRaster);
+    const coverageDelta = comparison.alphaWeightedCoverage - previousCoverage;
+    prefixes.push({
+      prefixStrokeCount: index + 1,
+      strokeId: drawing.strokes[index].id,
+      sourceIndex: drawing.strokes[index].sourceIndex,
+      alphaWeightedCoverage: comparison.alphaWeightedCoverage,
+      alphaWeightedCoverageDelta: coverageDelta,
+      meaningfulPixelCoverage: comparison.meaningfulPixelCoverage,
+      newlyRevealed: measureNewAlphaComponents(source, previousRaster, prefixRaster),
+    });
+    previousRaster = prefixRaster;
+    previousCoverage = comparison.alphaWeightedCoverage;
+  }
+
+  const deltas = prefixes.map((prefix) => prefix.alphaWeightedCoverageDelta);
+  const precompletionCoverage = prefixes.at(-1)?.alphaWeightedCoverage ?? 0;
+  const finalCompletionPop = completedComparison.alphaWeightedCoverage - precompletionCoverage;
+  return {
+    thresholds,
+    pathGrammar: {
+      requirement: "exactly one uppercase M and no m/Z/z per path",
+      allValid: pathChecks.every((check) => check.valid),
+      paths: pathChecks,
+    },
+    prefixes,
+    maxSingleStrokeDelta: deltas.length ? Math.max(...deltas) : 0,
+    minSingleStrokeDelta: deltas.length ? Math.min(...deltas) : 0,
+    zeroContributionStrokeCount: deltas.filter((delta) => delta <= 0).length,
+    nontrivialContributionStrokeCount: deltas.filter(
+      (delta) => delta >= thresholds.minimumNontrivialStrokeDelta,
+    ).length,
+    precompletionCoverage,
+    completionCoverage: completedComparison.alphaWeightedCoverage,
+    completionExact: completedComparison.exact,
+    finalCompletionPop,
+  };
+}
+
 const houseTextures = housePlan.sourceAssets.map((asset) => ({
   file: asset.file,
   x: asset.x,
@@ -102,10 +254,27 @@ const houseStrokes = housePlan.strokes.map((stroke) => ({
   d: stroke.d,
   width: stroke.strokeWidth,
 }));
-const goldStrokes = goldPlan.motionOrder.map((order) => goldPlan.strokes[order - 1]).map((stroke) => ({
-  d: stroke.d,
-  width: stroke.maskWidth,
-}));
+const goldMotionOrder =
+  goldPlan.motionOrder ?? goldPlan.strokes.map((_, index) => index + 1);
+if (
+  goldMotionOrder.length !== goldPlan.strokes.length ||
+  new Set(goldMotionOrder).size !== goldPlan.strokes.length ||
+  goldMotionOrder.some(
+    (sourceIndex) =>
+      !Number.isInteger(sourceIndex) || sourceIndex < 1 || sourceIndex > goldPlan.strokes.length,
+  )
+) {
+  throw new Error("gold motionOrder must be a complete 1-based permutation of its strokes");
+}
+const goldStrokes = goldMotionOrder.map((sourceIndex) => {
+  const stroke = goldPlan.strokes[sourceIndex - 1];
+  return {
+    id: stroke.id ?? `stroke-${sourceIndex}`,
+    sourceIndex,
+    d: stroke.d,
+    width: stroke.maskWidth,
+  };
+});
 
 const cases = [
   {
@@ -142,11 +311,20 @@ const report = { generatedAt: new Date().toISOString(), sourceSha256, cases: {} 
 for (const drawing of cases) {
   const [source, traced] = await renderDrawing({ ...drawing, completed: false });
   const [, completed] = await renderDrawing({ ...drawing, completed: true });
+  const tracedMask = compare(source, traced);
+  const completedFrame = compare(source, completed);
   report.cases[drawing.name] = {
     strokeCount: drawing.strokeCount,
-    tracedMask: compare(source, traced),
-    completedFrame: compare(source, completed),
+    tracedMask,
+    completedFrame,
   };
+  if (drawing.name === "gold") {
+    report.cases.gold.temporalProgression = await buildTemporalProgression(
+      drawing,
+      source,
+      completedFrame,
+    );
+  }
 }
 
 for (const [name, result] of Object.entries(report.cases)) {
@@ -156,6 +334,62 @@ for (const [name, result] of Object.entries(report.cases)) {
   if (result.tracedMask.alphaWeightedCoverage < 0.995) {
     throw new Error(`${name} stroke mask coverage is below 99.5%`);
   }
+}
+
+const goldTemporal = report.cases.gold.temporalProgression;
+const temporalFailures = [];
+if (!goldTemporal.pathGrammar.allValid) {
+  const invalidPaths = goldTemporal.pathGrammar.paths
+    .filter((pathCheck) => !pathCheck.valid)
+    .map((pathCheck) => pathCheck.strokeId)
+    .join(", ");
+  temporalFailures.push(`invalid open-path grammar: ${invalidPaths}`);
+}
+const largestDeltaPrefix = goldTemporal.prefixes.reduce(
+  (largest, prefix) =>
+    !largest || prefix.alphaWeightedCoverageDelta > largest.alphaWeightedCoverageDelta
+      ? prefix
+      : largest,
+  null,
+);
+if (goldTemporal.maxSingleStrokeDelta > goldTemporal.thresholds.maximumSingleStrokeDelta) {
+  temporalFailures.push(
+    `single-stroke delta ${(goldTemporal.maxSingleStrokeDelta * 100).toFixed(3)}% (${largestDeltaPrefix?.strokeId}) exceeds 5%`,
+  );
+}
+const trivialPrefixes = goldTemporal.prefixes.filter(
+  (prefix) =>
+    prefix.alphaWeightedCoverageDelta <
+    goldTemporal.thresholds.minimumNontrivialStrokeDelta,
+);
+if (trivialPrefixes.length > 0) {
+  temporalFailures.push(
+    `stroke contribution below 0.05%: ${trivialPrefixes
+      .map(
+        (prefix) =>
+          `${prefix.strokeId}=${(prefix.alphaWeightedCoverageDelta * 100).toFixed(3)}%`,
+      )
+      .join(", ")}`,
+  );
+}
+if (
+  goldTemporal.precompletionCoverage <
+  goldTemporal.thresholds.minimumPrecompletionCoverage
+) {
+  temporalFailures.push(
+    `precompletion coverage ${(goldTemporal.precompletionCoverage * 100).toFixed(3)}% is below 99.5%`,
+  );
+}
+if (!goldTemporal.completionExact) {
+  temporalFailures.push("completed frame is not pixel-exact");
+}
+if (goldTemporal.finalCompletionPop > goldTemporal.thresholds.maximumFinalCompletionPop) {
+  temporalFailures.push(
+    `final completion pop ${(goldTemporal.finalCompletionPop * 100).toFixed(3)}% exceeds 0.5%`,
+  );
+}
+if (temporalFailures.length > 0) {
+  throw new Error(`gold temporal progression failed: ${temporalFailures.join("; ")}`);
 }
 
 const reportPath = join(projectRoot, "qa", "drawing-validation.json");

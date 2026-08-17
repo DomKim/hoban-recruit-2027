@@ -201,7 +201,6 @@ const taglineCharacters = [
 ] as const;
 
 const houseGestures = [0.5, 5.1, -5.4, 4.6, -4.8, 4.2, -3.8, 3.2, -2.8, 5, -4.6, 4.2];
-const goldGestures = [0.6, -4.2, 4.4, -4.6, 4.6, -3.8, 4.2, -4.6, 4.4, -3.6, 4.6, -4.4, 3.8, -4.6, 3.6, -3.8, 3.2, -3.5, 4, -4, 3.8, -3.8, 3.4];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -212,14 +211,23 @@ const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stro
   width: stroke.strokeWidth,
 }));
 
-const goldStrokes: readonly DrawingStroke[] = goldStrokePlan.motionOrder.map((order) => goldStrokePlan.strokes[order - 1]).map((stroke, index) => ({
-  d: stroke.d,
-  duration: stroke.suggestedDurationMs / 1000,
-  gesture: goldGestures[index],
-  id: stroke.id,
-  lift: index === goldStrokePlan.strokes.length - 1 ? 0 : 0.045,
-  width: stroke.maskWidth,
-}));
+const goldStrokes: readonly DrawingStroke[] = goldStrokePlan.motionOrder
+  .map((order) => goldStrokePlan.strokes[order - 1])
+  .map((stroke, index, orderedStrokes) => {
+    const defaultLiftMs = goldStrokePlan.rendering.penLiftBetweenStrokesMs;
+    const configuredLiftMs = "liftAfterMs" in stroke
+      ? Number(stroke.liftAfterMs)
+      : defaultLiftMs;
+
+    return {
+      d: stroke.d,
+      duration: stroke.suggestedDurationMs / 1000,
+      gesture: stroke.gesture,
+      id: stroke.id,
+      lift: index === orderedStrokes.length - 1 ? 0 : configuredLiftMs / 1000,
+      width: stroke.maskWidth,
+    };
+  });
 
 type LayerBounds = Pick<Layer, "x" | "y" | "width" | "height">;
 

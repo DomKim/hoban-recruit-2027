@@ -102,18 +102,18 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
   ]);
 
   assert.equal(housePlan.strokes.length, 12);
-  assert.equal(goldPlan.strokes.length, 23);
+  assert.equal(goldPlan.strokes.length, 45);
   assert.deepEqual(
     housePlan.strokes.map((stroke) => stroke.order),
     Array.from({ length: 12 }, (_, index) => index + 1),
   );
   assert.deepEqual(
     goldPlan.strokes.map((stroke) => stroke.order),
-    Array.from({ length: 23 }, (_, index) => index + 1),
+    Array.from({ length: goldPlan.strokes.length }, (_, index) => index + 1),
   );
   assert.deepEqual(
     [...goldPlan.motionOrder].sort((a, b) => a - b),
-    Array.from({ length: 23 }, (_, index) => index + 1),
+    Array.from({ length: goldPlan.strokes.length }, (_, index) => index + 1),
   );
   for (const stroke of [...housePlan.strokes, ...goldPlan.strokes]) {
     assert.equal(
@@ -123,8 +123,14 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
     );
   }
   assert.equal(goldPlan.rendering.pencilFollowsSamePath, false);
+  assert.ok(goldPlan.rendering.maxPathLength <= 35.01);
+  assert.ok(Math.max(...goldPlan.strokes.map((stroke) => stroke.maskWidth)) <= 11.75);
   assert.ok(validation.cases.house.tracedMask.alphaWeightedCoverage > 0.995);
   assert.ok(validation.cases.gold.tracedMask.alphaWeightedCoverage > 0.995);
+  assert.ok(validation.cases.gold.temporalProgression.maxSingleStrokeDelta < 0.05);
+  assert.ok(validation.cases.gold.temporalProgression.minSingleStrokeDelta >= 0.0005);
+  assert.ok(validation.cases.gold.temporalProgression.precompletionCoverage >= 0.995);
+  assert.ok(validation.cases.gold.temporalProgression.finalCompletionPop < 0.005);
   assert.equal(validation.cases.house.completedFrame.exact, true);
   assert.equal(validation.cases.gold.completedFrame.exact, true);
   assert.equal(

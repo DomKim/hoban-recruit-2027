@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T15:15:30.780Z",
+  "generatedAt": "2026-08-17T15:51:21.037Z",
   "sourceSha256": {
     "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
     "/assets/isolated/sketch-house-smoke.png": "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
@@ -22,18 +22,1167 @@
       }
     },
     "gold": {
-      "strokeCount": 23,
+      "strokeCount": 45,
       "tracedMask": {
-        "differentChannels": 2,
+        "differentChannels": 166,
         "exact": false,
-        "alphaWeightedCoverage": 0.9999965897571651,
-        "meaningfulPixelCoverage": 1
+        "alphaWeightedCoverage": 0.9958846894590246,
+        "meaningfulPixelCoverage": 0.9912559618441972
       },
       "completedFrame": {
         "differentChannels": 0,
         "exact": true,
         "alphaWeightedCoverage": 1,
         "meaningfulPixelCoverage": 1
+      },
+      "temporalProgression": {
+        "thresholds": {
+          "maximumSingleStrokeDelta": 0.05,
+          "minimumNontrivialStrokeDelta": 0.0005,
+          "minimumPrecompletionCoverage": 0.995,
+          "maximumFinalCompletionPop": 0.005
+        },
+        "pathGrammar": {
+          "requirement": "exactly one uppercase M and no m/Z/z per path",
+          "allValid": true,
+          "paths": [
+            {
+              "motionIndex": 1,
+              "strokeId": "contact-right-edge-1",
+              "sourceIndex": 1,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 2,
+              "strokeId": "contact-right-edge-2",
+              "sourceIndex": 2,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 3,
+              "strokeId": "contact-lower-edge-1",
+              "sourceIndex": 3,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 4,
+              "strokeId": "contact-lower-edge-2",
+              "sourceIndex": 4,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 5,
+              "strokeId": "micro-stroke-03-1",
+              "sourceIndex": 5,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 6,
+              "strokeId": "micro-stroke-03-2",
+              "sourceIndex": 6,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 7,
+              "strokeId": "micro-stroke-04",
+              "sourceIndex": 7,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 8,
+              "strokeId": "micro-stroke-05-1",
+              "sourceIndex": 8,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 9,
+              "strokeId": "micro-stroke-05-2",
+              "sourceIndex": 9,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 10,
+              "strokeId": "micro-stroke-05-3",
+              "sourceIndex": 10,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 11,
+              "strokeId": "micro-stroke-06",
+              "sourceIndex": 11,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 12,
+              "strokeId": "micro-stroke-11-1",
+              "sourceIndex": 12,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 13,
+              "strokeId": "micro-stroke-11-2",
+              "sourceIndex": 13,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 14,
+              "strokeId": "micro-stroke-11-3",
+              "sourceIndex": 14,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 15,
+              "strokeId": "micro-stroke-12",
+              "sourceIndex": 15,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 16,
+              "strokeId": "micro-stroke-14",
+              "sourceIndex": 16,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 17,
+              "strokeId": "micro-stroke-15",
+              "sourceIndex": 17,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 18,
+              "strokeId": "micro-stroke-16",
+              "sourceIndex": 18,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 19,
+              "strokeId": "micro-stroke-17",
+              "sourceIndex": 19,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 20,
+              "strokeId": "micro-stroke-19",
+              "sourceIndex": 20,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 21,
+              "strokeId": "micro-stroke-20",
+              "sourceIndex": 21,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 22,
+              "strokeId": "micro-stroke-21-1",
+              "sourceIndex": 22,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 23,
+              "strokeId": "micro-stroke-21-2",
+              "sourceIndex": 23,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 24,
+              "strokeId": "micro-stroke-21-3",
+              "sourceIndex": 24,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 25,
+              "strokeId": "micro-stroke-22",
+              "sourceIndex": 25,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 26,
+              "strokeId": "micro-stroke-23",
+              "sourceIndex": 26,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 27,
+              "strokeId": "micro-stroke-24",
+              "sourceIndex": 27,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 28,
+              "strokeId": "micro-stroke-25-1",
+              "sourceIndex": 28,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 29,
+              "strokeId": "micro-stroke-25-2",
+              "sourceIndex": 29,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 30,
+              "strokeId": "micro-stroke-25-3",
+              "sourceIndex": 30,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 31,
+              "strokeId": "micro-stroke-25-4",
+              "sourceIndex": 31,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 32,
+              "strokeId": "micro-stroke-25-5",
+              "sourceIndex": 32,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 33,
+              "strokeId": "micro-stroke-26-1",
+              "sourceIndex": 33,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 34,
+              "strokeId": "micro-stroke-26-2",
+              "sourceIndex": 34,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 35,
+              "strokeId": "micro-stroke-26-3",
+              "sourceIndex": 35,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 36,
+              "strokeId": "micro-stroke-27-1",
+              "sourceIndex": 36,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 37,
+              "strokeId": "micro-stroke-28",
+              "sourceIndex": 37,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 38,
+              "strokeId": "micro-stroke-29",
+              "sourceIndex": 38,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 39,
+              "strokeId": "micro-stroke-30",
+              "sourceIndex": 39,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 40,
+              "strokeId": "micro-stroke-31",
+              "sourceIndex": 40,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 41,
+              "strokeId": "micro-stroke-32",
+              "sourceIndex": 41,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 42,
+              "strokeId": "micro-stroke-33",
+              "sourceIndex": 42,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 43,
+              "strokeId": "micro-stroke-34",
+              "sourceIndex": 43,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 44,
+              "strokeId": "micro-stroke-35",
+              "sourceIndex": 44,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            },
+            {
+              "motionIndex": 45,
+              "strokeId": "micro-stroke-36",
+              "sourceIndex": 45,
+              "uppercaseMoveCommandCount": 1,
+              "lowercaseMoveCommandCount": 0,
+              "moveCommandCount": 1,
+              "closeCommandCount": 0,
+              "valid": true
+            }
+          ]
+        },
+        "prefixes": [
+          {
+            "prefixStrokeCount": 1,
+            "strokeId": "contact-right-edge-1",
+            "sourceIndex": 1,
+            "alphaWeightedCoverage": 0.04494700056354263,
+            "alphaWeightedCoverageDelta": 0.04494700056354263,
+            "meaningfulPixelCoverage": 0.04332273449920509,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 269,
+              "newlyRevealedAlpha": 52720,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 269
+            }
+          },
+          {
+            "prefixStrokeCount": 2,
+            "strokeId": "contact-right-edge-2",
+            "sourceIndex": 2,
+            "alphaWeightedCoverage": 0.07782770941661829,
+            "alphaWeightedCoverageDelta": 0.03288070885307566,
+            "meaningfulPixelCoverage": 0.075516693163752,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 196,
+              "newlyRevealedAlpha": 38567,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 196
+            }
+          },
+          {
+            "prefixStrokeCount": 3,
+            "strokeId": "contact-lower-edge-1",
+            "sourceIndex": 3,
+            "alphaWeightedCoverage": 0.1139140465344686,
+            "alphaWeightedCoverageDelta": 0.03608633711785031,
+            "meaningfulPixelCoverage": 0.11009538950715421,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 218,
+              "newlyRevealedAlpha": 42327,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 218
+            }
+          },
+          {
+            "prefixStrokeCount": 4,
+            "strokeId": "contact-lower-edge-2",
+            "sourceIndex": 4,
+            "alphaWeightedCoverage": 0.11720152062728006,
+            "alphaWeightedCoverageDelta": 0.0032874740928114654,
+            "meaningfulPixelCoverage": 0.11387122416534182,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 35,
+              "newlyRevealedAlpha": 3856,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 27
+            }
+          },
+          {
+            "prefixStrokeCount": 5,
+            "strokeId": "micro-stroke-03-1",
+            "sourceIndex": 5,
+            "alphaWeightedCoverage": 0.1530636342787379,
+            "alphaWeightedCoverageDelta": 0.03586211365145783,
+            "meaningfulPixelCoverage": 0.15043720190779014,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 219,
+              "newlyRevealedAlpha": 42064,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 214
+            }
+          },
+          {
+            "prefixStrokeCount": 6,
+            "strokeId": "micro-stroke-03-2",
+            "sourceIndex": 6,
+            "alphaWeightedCoverage": 0.1764868871900196,
+            "alphaWeightedCoverageDelta": 0.023423252911281695,
+            "meaningfulPixelCoverage": 0.17170111287758347,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 140,
+              "newlyRevealedAlpha": 27474,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 140
+            }
+          },
+          {
+            "prefixStrokeCount": 7,
+            "strokeId": "micro-stroke-04",
+            "sourceIndex": 7,
+            "alphaWeightedCoverage": 0.1885753454789132,
+            "alphaWeightedCoverageDelta": 0.0120884582888936,
+            "meaningfulPixelCoverage": 0.18322734499205087,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 78,
+              "newlyRevealedAlpha": 14179,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 71
+            }
+          },
+          {
+            "prefixStrokeCount": 8,
+            "strokeId": "micro-stroke-05-1",
+            "sourceIndex": 8,
+            "alphaWeightedCoverage": 0.22460115078644463,
+            "alphaWeightedCoverageDelta": 0.03602580530753144,
+            "meaningfulPixelCoverage": 0.21899841017488075,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 219,
+              "newlyRevealedAlpha": 42256,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 212
+            }
+          },
+          {
+            "prefixStrokeCount": 9,
+            "strokeId": "micro-stroke-05-2",
+            "sourceIndex": 9,
+            "alphaWeightedCoverage": 0.26347450886108975,
+            "alphaWeightedCoverageDelta": 0.03887335807464512,
+            "meaningfulPixelCoverage": 0.2565580286168522,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 233,
+              "newlyRevealedAlpha": 45596,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 233
+            }
+          },
+          {
+            "prefixStrokeCount": 10,
+            "strokeId": "micro-stroke-05-3",
+            "sourceIndex": 10,
+            "alphaWeightedCoverage": 0.2791420170051759,
+            "alphaWeightedCoverageDelta": 0.01566750814408613,
+            "meaningfulPixelCoverage": 0.26967408585055647,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 97,
+              "newlyRevealedAlpha": 18377,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 97
+            }
+          },
+          {
+            "prefixStrokeCount": 11,
+            "strokeId": "micro-stroke-06",
+            "sourceIndex": 11,
+            "alphaWeightedCoverage": 0.29977313359541047,
+            "alphaWeightedCoverageDelta": 0.02063111659023459,
+            "meaningfulPixelCoverage": 0.2901430842607313,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 127,
+              "newlyRevealedAlpha": 24199,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 127
+            }
+          },
+          {
+            "prefixStrokeCount": 12,
+            "strokeId": "micro-stroke-11-1",
+            "sourceIndex": 12,
+            "alphaWeightedCoverage": 0.33152846231298017,
+            "alphaWeightedCoverageDelta": 0.0317553287175697,
+            "meaningfulPixelCoverage": 0.3217408585055644,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 199,
+              "newlyRevealedAlpha": 37247,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 196
+            }
+          },
+          {
+            "prefixStrokeCount": 13,
+            "strokeId": "micro-stroke-11-2",
+            "sourceIndex": 13,
+            "alphaWeightedCoverage": 0.3631397082707767,
+            "alphaWeightedCoverageDelta": 0.03161124595779652,
+            "meaningfulPixelCoverage": 0.3541335453100159,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 193,
+              "newlyRevealedAlpha": 37078,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 193
+            }
+          },
+          {
+            "prefixStrokeCount": 14,
+            "strokeId": "micro-stroke-11-3",
+            "sourceIndex": 14,
+            "alphaWeightedCoverage": 0.3863080455301521,
+            "alphaWeightedCoverageDelta": 0.023168337259375393,
+            "meaningfulPixelCoverage": 0.3748012718600954,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 138,
+              "newlyRevealedAlpha": 27175,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 138
+            }
+          },
+          {
+            "prefixStrokeCount": 15,
+            "strokeId": "micro-stroke-12",
+            "sourceIndex": 15,
+            "alphaWeightedCoverage": 0.39926526318122796,
+            "alphaWeightedCoverageDelta": 0.01295721765107588,
+            "meaningfulPixelCoverage": 0.38950715421303655,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 96,
+              "newlyRevealedAlpha": 15198,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 87
+            }
+          },
+          {
+            "prefixStrokeCount": 16,
+            "strokeId": "micro-stroke-14",
+            "sourceIndex": 16,
+            "alphaWeightedCoverage": 0.4231199118111203,
+            "alphaWeightedCoverageDelta": 0.02385464862989234,
+            "meaningfulPixelCoverage": 0.4113672496025437,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 142,
+              "newlyRevealedAlpha": 27980,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 142
+            }
+          },
+          {
+            "prefixStrokeCount": 17,
+            "strokeId": "micro-stroke-15",
+            "sourceIndex": 17,
+            "alphaWeightedCoverage": 0.4274219331473046,
+            "alphaWeightedCoverageDelta": 0.004302021336184292,
+            "meaningfulPixelCoverage": 0.4155405405405405,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 40,
+              "newlyRevealedAlpha": 5046,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 36
+            }
+          },
+          {
+            "prefixStrokeCount": 18,
+            "strokeId": "micro-stroke-16",
+            "sourceIndex": 18,
+            "alphaWeightedCoverage": 0.4497880107797776,
+            "alphaWeightedCoverageDelta": 0.022366077632473003,
+            "meaningfulPixelCoverage": 0.4379968203497615,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 140,
+              "newlyRevealedAlpha": 26234,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 135
+            }
+          },
+          {
+            "prefixStrokeCount": 19,
+            "strokeId": "micro-stroke-17",
+            "sourceIndex": 19,
+            "alphaWeightedCoverage": 0.4708283565101962,
+            "alphaWeightedCoverageDelta": 0.02104034573041863,
+            "meaningfulPixelCoverage": 0.457670906200318,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 130,
+              "newlyRevealedAlpha": 24679,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 126
+            }
+          },
+          {
+            "prefixStrokeCount": 20,
+            "strokeId": "micro-stroke-19",
+            "sourceIndex": 20,
+            "alphaWeightedCoverage": 0.47587892614863375,
+            "alphaWeightedCoverageDelta": 0.00505056963843753,
+            "meaningfulPixelCoverage": 0.4638314785373609,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 44,
+              "newlyRevealedAlpha": 5924,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 36
+            }
+          },
+          {
+            "prefixStrokeCount": 21,
+            "strokeId": "micro-stroke-20",
+            "sourceIndex": 21,
+            "alphaWeightedCoverage": 0.49004507488466986,
+            "alphaWeightedCoverageDelta": 0.01416614873603611,
+            "meaningfulPixelCoverage": 0.47774244833068363,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 95,
+              "newlyRevealedAlpha": 16616,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 95
+            }
+          },
+          {
+            "prefixStrokeCount": 22,
+            "strokeId": "micro-stroke-21-1",
+            "sourceIndex": 22,
+            "alphaWeightedCoverage": 0.5212922774198444,
+            "alphaWeightedCoverageDelta": 0.031247202535174545,
+            "meaningfulPixelCoverage": 0.509737678855326,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 185,
+              "newlyRevealedAlpha": 36651,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 185
+            }
+          },
+          {
+            "prefixStrokeCount": 23,
+            "strokeId": "micro-stroke-21-2",
+            "sourceIndex": 23,
+            "alphaWeightedCoverage": 0.5609329401323345,
+            "alphaWeightedCoverageDelta": 0.039640662712490116,
+            "meaningfulPixelCoverage": 0.5492845786963434,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 226,
+              "newlyRevealedAlpha": 46496,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 226
+            }
+          },
+          {
+            "prefixStrokeCount": 24,
+            "strokeId": "micro-stroke-21-3",
+            "sourceIndex": 24,
+            "alphaWeightedCoverage": 0.5937752837535178,
+            "alphaWeightedCoverageDelta": 0.03284234362118332,
+            "meaningfulPixelCoverage": 0.5806836248012719,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 189,
+              "newlyRevealedAlpha": 38522,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 189
+            }
+          },
+          {
+            "prefixStrokeCount": 25,
+            "strokeId": "micro-stroke-22",
+            "sourceIndex": 25,
+            "alphaWeightedCoverage": 0.5971224370959395,
+            "alphaWeightedCoverageDelta": 0.003347153342421638,
+            "meaningfulPixelCoverage": 0.5858505564387917,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 41,
+              "newlyRevealedAlpha": 3926,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 30
+            }
+          },
+          {
+            "prefixStrokeCount": 26,
+            "strokeId": "micro-stroke-23",
+            "sourceIndex": 26,
+            "alphaWeightedCoverage": 0.6228689179384741,
+            "alphaWeightedCoverageDelta": 0.025746480842534614,
+            "meaningfulPixelCoverage": 0.6136724960254372,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 172,
+              "newlyRevealedAlpha": 30199,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 172
+            }
+          },
+          {
+            "prefixStrokeCount": 27,
+            "strokeId": "micro-stroke-24",
+            "sourceIndex": 27,
+            "alphaWeightedCoverage": 0.651858539716967,
+            "alphaWeightedCoverageDelta": 0.028989621778492847,
+            "meaningfulPixelCoverage": 0.6401033386327504,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 173,
+              "newlyRevealedAlpha": 34003,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 173
+            }
+          },
+          {
+            "prefixStrokeCount": 28,
+            "strokeId": "micro-stroke-25-1",
+            "sourceIndex": 28,
+            "alphaWeightedCoverage": 0.681223288207295,
+            "alphaWeightedCoverageDelta": 0.029364748490328108,
+            "meaningfulPixelCoverage": 0.669912559618442,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 197,
+              "newlyRevealedAlpha": 34443,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 192
+            }
+          },
+          {
+            "prefixStrokeCount": 29,
+            "strokeId": "micro-stroke-25-2",
+            "sourceIndex": 29,
+            "alphaWeightedCoverage": 0.7040395178939705,
+            "alphaWeightedCoverageDelta": 0.022816229686675404,
+            "meaningfulPixelCoverage": 0.6943561208267091,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 150,
+              "newlyRevealedAlpha": 26762,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 150
+            }
+          },
+          {
+            "prefixStrokeCount": 30,
+            "strokeId": "micro-stroke-25-3",
+            "sourceIndex": 30,
+            "alphaWeightedCoverage": 0.7367863747157776,
+            "alphaWeightedCoverageDelta": 0.03274685682180711,
+            "meaningfulPixelCoverage": 0.7245627980922098,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 228,
+              "newlyRevealedAlpha": 38410,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 187
+            }
+          },
+          {
+            "prefixStrokeCount": 31,
+            "strokeId": "micro-stroke-25-4",
+            "sourceIndex": 31,
+            "alphaWeightedCoverage": 0.7650257430705997,
+            "alphaWeightedCoverageDelta": 0.028239368354822103,
+            "meaningfulPixelCoverage": 0.7517885532591415,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 193,
+              "newlyRevealedAlpha": 33123,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 175
+            }
+          },
+          {
+            "prefixStrokeCount": 32,
+            "strokeId": "micro-stroke-25-5",
+            "sourceIndex": 32,
+            "alphaWeightedCoverage": 0.7723645856512328,
+            "alphaWeightedCoverageDelta": 0.007338842580633109,
+            "meaningfulPixelCoverage": 0.7591414944356121,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 57,
+              "newlyRevealedAlpha": 8608,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 57
+            }
+          },
+          {
+            "prefixStrokeCount": 33,
+            "strokeId": "micro-stroke-26-1",
+            "sourceIndex": 33,
+            "alphaWeightedCoverage": 0.8141119258749617,
+            "alphaWeightedCoverageDelta": 0.041747340223728946,
+            "meaningfulPixelCoverage": 0.8008744038155803,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 245,
+              "newlyRevealedAlpha": 48967,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 245
+            }
+          },
+          {
+            "prefixStrokeCount": 34,
+            "strokeId": "micro-stroke-26-2",
+            "sourceIndex": 34,
+            "alphaWeightedCoverage": 0.8454264807061249,
+            "alphaWeightedCoverageDelta": 0.03131455483116319,
+            "meaningfulPixelCoverage": 0.8316772655007949,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 197,
+              "newlyRevealedAlpha": 36730,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 194
+            }
+          },
+          {
+            "prefixStrokeCount": 35,
+            "strokeId": "micro-stroke-26-3",
+            "sourceIndex": 35,
+            "alphaWeightedCoverage": 0.8585047619778385,
+            "alphaWeightedCoverageDelta": 0.013078281271713621,
+            "meaningfulPixelCoverage": 0.8447933227344993,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 104,
+              "newlyRevealedAlpha": 15340,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 99
+            }
+          },
+          {
+            "prefixStrokeCount": 36,
+            "strokeId": "micro-stroke-27-1",
+            "sourceIndex": 36,
+            "alphaWeightedCoverage": 0.891723084871566,
+            "alphaWeightedCoverageDelta": 0.0332183228937275,
+            "meaningfulPixelCoverage": 0.879570747217806,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 201,
+              "newlyRevealedAlpha": 38963,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 201
+            }
+          },
+          {
+            "prefixStrokeCount": 37,
+            "strokeId": "micro-stroke-28",
+            "sourceIndex": 37,
+            "alphaWeightedCoverage": 0.9072575935450924,
+            "alphaWeightedCoverageDelta": 0.015534508673526348,
+            "meaningfulPixelCoverage": 0.8970588235294118,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 108,
+              "newlyRevealedAlpha": 18221,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 106
+            }
+          },
+          {
+            "prefixStrokeCount": 38,
+            "strokeId": "micro-stroke-29",
+            "sourceIndex": 38,
+            "alphaWeightedCoverage": 0.9187850668876504,
+            "alphaWeightedCoverageDelta": 0.011527473342557992,
+            "meaningfulPixelCoverage": 0.9103736089030207,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 98,
+              "newlyRevealedAlpha": 13521,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 98
+            }
+          },
+          {
+            "prefixStrokeCount": 39,
+            "strokeId": "micro-stroke-30",
+            "sourceIndex": 39,
+            "alphaWeightedCoverage": 0.9371236477321458,
+            "alphaWeightedCoverageDelta": 0.018338580844495467,
+            "meaningfulPixelCoverage": 0.9282591414944356,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 111,
+              "newlyRevealedAlpha": 21510,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 111
+            }
+          },
+          {
+            "prefixStrokeCount": 40,
+            "strokeId": "micro-stroke-31",
+            "sourceIndex": 40,
+            "alphaWeightedCoverage": 0.9376803698749379,
+            "alphaWeightedCoverageDelta": 0.0005567221427920099,
+            "meaningfulPixelCoverage": 0.9290540540540541,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 16,
+              "newlyRevealedAlpha": 653,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 13
+            }
+          },
+          {
+            "prefixStrokeCount": 41,
+            "strokeId": "micro-stroke-32",
+            "sourceIndex": 41,
+            "alphaWeightedCoverage": 0.9531270647954664,
+            "alphaWeightedCoverageDelta": 0.015446694920528525,
+            "meaningfulPixelCoverage": 0.9455484896661367,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 104,
+              "newlyRevealedAlpha": 18118,
+              "connectedComponentCount": 3,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 100
+            }
+          },
+          {
+            "prefixStrokeCount": 42,
+            "strokeId": "micro-stroke-33",
+            "sourceIndex": 42,
+            "alphaWeightedCoverage": 0.9750685671949986,
+            "alphaWeightedCoverageDelta": 0.021941502399532187,
+            "meaningfulPixelCoverage": 0.9678060413354531,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 152,
+              "newlyRevealedAlpha": 25736,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 152
+            }
+          },
+          {
+            "prefixStrokeCount": 43,
+            "strokeId": "micro-stroke-34",
+            "sourceIndex": 43,
+            "alphaWeightedCoverage": 0.9767157144842391,
+            "alphaWeightedCoverageDelta": 0.0016471472892405359,
+            "meaningfulPixelCoverage": 0.9699920508744038,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 27,
+              "newlyRevealedAlpha": 1932,
+              "connectedComponentCount": 3,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 14
+            }
+          },
+          {
+            "prefixStrokeCount": 44,
+            "strokeId": "micro-stroke-35",
+            "sourceIndex": 44,
+            "alphaWeightedCoverage": 0.9879993554641042,
+            "alphaWeightedCoverageDelta": 0.011283640979865117,
+            "meaningfulPixelCoverage": 0.9817170111287759,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 77,
+              "newlyRevealedAlpha": 13235,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 77
+            }
+          },
+          {
+            "prefixStrokeCount": 45,
+            "strokeId": "micro-stroke-36",
+            "sourceIndex": 45,
+            "alphaWeightedCoverage": 0.9958846894590246,
+            "alphaWeightedCoverageDelta": 0.007885333994920418,
+            "meaningfulPixelCoverage": 0.9912559618441972,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 57,
+              "newlyRevealedAlpha": 9249,
+              "connectedComponentCount": 2,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 56
+            }
+          }
+        ],
+        "maxSingleStrokeDelta": 0.04494700056354263,
+        "minSingleStrokeDelta": 0.0005567221427920099,
+        "zeroContributionStrokeCount": 0,
+        "nontrivialContributionStrokeCount": 45,
+        "precompletionCoverage": 0.9958846894590246,
+        "completionCoverage": 1,
+        "completionExact": true,
+        "finalCompletionPop": 0.004115310540975359
       }
     }
   }
