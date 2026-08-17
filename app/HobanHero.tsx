@@ -1,7 +1,11 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- isolated source layers must keep their exact native pixels */
+
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
+import goldStrokePlan from "../public/assets/motion/gold-strokes.json";
+import houseStrokePlan from "../public/assets/motion/house-strokes.json";
 
 type MotionRole = "character" | "drawing";
 
@@ -17,6 +21,23 @@ type Layer = {
 };
 
 type RawLayer = readonly [string, number, number, number, number, string];
+
+type DrawingStroke = {
+  d: string;
+  duration: number;
+  gesture: number;
+  id: string;
+  lift: number;
+  width: number;
+};
+
+type DrawingTexture = {
+  file: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+};
 
 const assetPath = (path: string) =>
   `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
@@ -179,6 +200,27 @@ const taglineCharacters = [
   { name: "tagline-blue-char-3", file: "tagline-blue-char-3.png", x: 374, y: 231, width: 38, height: 33 },
 ] as const;
 
+const houseGestures = [0.5, 5.1, -5.4, 4.6, -4.8, 4.2, -3.8, 3.2, -2.8, 5, -4.6, 4.2];
+const goldGestures = [0.6, -4.2, 4.4, -4.6, 4.6, -3.8, 4.2, -4.6, 4.4, -3.6, 4.6, -4.4, 3.8, -4.6, 3.6, -3.8, 3.2, -3.5, 4, -4, 3.8, -3.8, 3.4];
+
+const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
+  d: stroke.d,
+  duration: stroke.drawMs / 1000,
+  gesture: houseGestures[index],
+  id: stroke.id,
+  lift: stroke.liftAfterMs / 1000,
+  width: stroke.strokeWidth,
+}));
+
+const goldStrokes: readonly DrawingStroke[] = goldStrokePlan.motionOrder.map((order) => goldStrokePlan.strokes[order - 1]).map((stroke, index) => ({
+  d: stroke.d,
+  duration: stroke.suggestedDurationMs / 1000,
+  gesture: goldGestures[index],
+  id: stroke.id,
+  lift: index === goldStrokePlan.strokes.length - 1 ? 0 : 0.045,
+  width: stroke.maskWidth,
+}));
+
 type LayerBounds = Pick<Layer, "x" | "y" | "width" | "height">;
 
 function layerStyle({ x, y, width, height }: LayerBounds) {
@@ -188,6 +230,87 @@ function layerStyle({ x, y, width, height }: LayerBounds) {
     width: pct(width, 1920),
     height: pct(height, 1068),
   };
+}
+
+function StrokeDrawing({
+  bounds,
+  id,
+  strokes,
+  textures,
+  viewBox,
+}: {
+  bounds: LayerBounds;
+  id: "house" | "gold";
+  strokes: readonly DrawingStroke[];
+  textures: readonly DrawingTexture[];
+  viewBox: readonly [number, number, number, number];
+}) {
+  const [viewX, viewY, viewWidth, viewHeight] = viewBox;
+  const maskId = `${id}-stroke-mask`;
+
+  return (
+    <svg
+      className="stroke-drawing"
+      data-motion={`${id}-drawing`}
+      data-draw-phase="complete"
+      data-active-stroke={strokes.length}
+      data-stroke-count={strokes.length}
+      style={layerStyle(bounds)}
+      viewBox={viewBox.join(" ")}
+      aria-hidden="true"
+    >
+      <defs>
+        <mask
+          id={maskId}
+          maskUnits="userSpaceOnUse"
+          maskContentUnits="userSpaceOnUse"
+          x={viewX - 20}
+          y={viewY - 20}
+          width={viewWidth + 40}
+          height={viewHeight + 40}
+        >
+          <rect x={viewX - 20} y={viewY - 20} width={viewWidth + 40} height={viewHeight + 40} fill="black" />
+          {strokes.map((stroke, index) => (
+            <path
+              key={stroke.id}
+              data-draw-stroke={index + 1}
+              data-stroke-id={stroke.id}
+              data-stroke-duration={stroke.duration}
+              data-stroke-gesture={stroke.gesture}
+              data-stroke-lift={stroke.lift}
+              d={stroke.d}
+              fill="none"
+              stroke="white"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={stroke.width}
+            />
+          ))}
+          <rect
+            data-mask-complete="true"
+            x={viewX - 20}
+            y={viewY - 20}
+            width={viewWidth + 40}
+            height={viewHeight + 40}
+            fill="white"
+          />
+        </mask>
+      </defs>
+      <g mask={`url(#${maskId})`}>
+        {textures.map((texture) => (
+          <image
+            key={texture.file}
+            href={assetPath(texture.file)}
+            x={texture.x}
+            y={texture.y}
+            width={texture.width}
+            height={texture.height}
+            preserveAspectRatio="none"
+          />
+        ))}
+      </g>
+    </svg>
+  );
 }
 
 function copyStyle({ x, y, width, height }: LayerBounds) {
@@ -419,58 +542,85 @@ export default function HobanHero() {
         transformOrigin: "50% 0%",
       });
 
-      const createDrawingLoop = ({
+      const createStrokeDrawingLoop = ({
         wrapper,
         actorTarget,
         characterTarget,
-        duration,
         delay,
-        tilt,
         transformOrigin,
       }: {
         wrapper: string;
         actorTarget: string;
         characterTarget: string;
-        duration: number;
         delay: number;
-        tilt: number;
         transformOrigin: string;
       }) => {
-        const drawing = q(wrapper);
-        const actor = q(actorTarget);
-        const character = q(characterTarget);
-        gsap.set(drawing, { "--reveal": "0%", autoAlpha: 0.12 });
+        const drawing = stage.querySelector<SVGSVGElement>(wrapper);
+        const actor = stage.querySelector<HTMLElement>(actorTarget);
+        const character = stage.querySelector<HTMLElement>(characterTarget);
+        if (!drawing || !actor || !character) return;
+
+        const strokes = Array.from(drawing.querySelectorAll<SVGPathElement>("[data-draw-stroke]"));
+        const completion = drawing.querySelector<SVGRectElement>("[data-mask-complete]");
+        if (!strokes.length || !completion) return;
+
+        strokes.forEach((stroke) => {
+          const length = stroke.getTotalLength();
+          stroke.dataset.strokeLength = String(length);
+          gsap.set(stroke, { opacity: 0, strokeDasharray: length, strokeDashoffset: length });
+        });
+        gsap.set(completion, { opacity: 0 });
+        gsap.set(drawing, { autoAlpha: 1 });
         gsap.set(actor, { rotation: 0, transformOrigin });
         gsap.set(character, { yPercent: 0, scaleX: 1, scaleY: 1, transformOrigin: "50% 100%" });
         const timeline = gsap.timeline({ repeat: -1, delay });
 
-        timeline.to(drawing, {
-          "--reveal": "100%",
-          autoAlpha: 1,
-          duration,
-          ease: "power1.inOut",
+        timeline.set(drawing, {
+          attr: { "data-active-stroke": "0", "data-draw-phase": "drawing" },
         });
-        timeline.to(
-          actor,
-          {
+        timeline.to({}, { duration: 0.15 });
+
+        strokes.forEach((stroke, index) => {
+          const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
+          const gesture = Number(stroke.dataset.strokeGesture ?? 0);
+          const lift = Number(stroke.dataset.strokeLift ?? 0.045);
+          const drawAt = timeline.duration();
+
+          timeline.set(drawing, {
+            attr: { "data-active-stroke": String(index + 1), "data-draw-phase": "drawing" },
+          });
+          timeline.set(stroke, { opacity: 1 });
+          timeline.to(stroke, {
+            strokeDashoffset: 0,
+            duration,
+            ease: "none",
+          });
+          timeline.to(actor, {
             keyframes: [
-              { rotation: tilt * 0.85, duration: duration * 0.1, ease: "power1.inOut" },
-              { rotation: -tilt * 0.72, duration: duration * 0.13, ease: "sine.inOut" },
-              { rotation: tilt, duration: duration * 0.13, ease: "sine.inOut" },
-              { rotation: -tilt * 0.84, duration: duration * 0.13, ease: "sine.inOut" },
-              { rotation: tilt * 0.76, duration: duration * 0.13, ease: "sine.inOut" },
-              { rotation: -tilt * 0.58, duration: duration * 0.14, ease: "sine.inOut" },
-              { rotation: tilt * 0.42, duration: duration * 0.11, ease: "sine.inOut" },
-              { rotation: 0, duration: duration * 0.13, ease: "back.out(1.7)" },
+              { rotation: gesture * 0.72, duration: duration * 0.28, ease: "power1.out" },
+              { rotation: gesture * 1.08, duration: duration * 0.44, ease: "sine.inOut" },
+              { rotation: gesture * 0.9, duration: duration * 0.28, ease: "sine.out" },
             ],
             transformOrigin,
-          },
-          0,
-        );
+          }, drawAt);
+
+          if (lift > 0) {
+            timeline.to(actor, {
+              rotation: gesture * 0.45,
+              duration: lift,
+              ease: "power2.out",
+            });
+          }
+        });
+
+        timeline.to(completion, { opacity: 1, duration: 0.08, ease: "none" });
+        timeline.set(drawing, {
+          attr: { "data-active-stroke": String(strokes.length), "data-draw-phase": "complete" },
+        });
         timeline.to(actor, {
           rotation: 0,
-          duration: 0.38,
-          ease: "back.out(1.5)",
+          duration: 0.16,
+          ease: "back.out(1.9)",
         });
         timeline.to(character, {
           keyframes: [
@@ -481,30 +631,34 @@ export default function HobanHero() {
             { scaleX: 1, scaleY: 1, duration: 0.12, ease: "back.out(2)" },
           ],
         });
-        timeline.to({}, { duration: 1.12 });
-        timeline.to(drawing, { autoAlpha: 0, duration: 0.46, ease: "sine.in" });
-        timeline.set(drawing, { "--reveal": "0%" });
-        timeline.to({}, { duration: 1.05 });
+        timeline.to({}, { duration: 0.5 });
+        timeline.to(drawing, { autoAlpha: 0, duration: 0.22, ease: "sine.in" });
+        timeline.set(strokes, {
+          opacity: 0,
+          strokeDashoffset: (_index: number, stroke: SVGPathElement) =>
+            Number(stroke.dataset.strokeLength ?? 0),
+        });
+        timeline.set(completion, { opacity: 0 });
+        timeline.set(drawing, {
+          autoAlpha: 1,
+          attr: { "data-active-stroke": "0", "data-draw-phase": "reset" },
+        });
       };
 
-      createDrawingLoop({
+      createStrokeDrawingLoop({
         wrapper: '[data-motion="house-drawing"]',
         actorTarget: '[data-motion="tiger-drawing-tool"]',
         characterTarget: '[data-motion="tiger-character"]',
-        duration: 2.15,
         delay: 0.25,
-        tilt: 5.2,
-        transformOrigin: "21% 77.5%",
+        transformOrigin: "16.4% 97.3%",
       });
 
-      createDrawingLoop({
+      createStrokeDrawingLoop({
         wrapper: '[data-motion="gold-drawing"]',
         actorTarget: '[data-motion="rabbit-drawing-tool"]',
         characterTarget: '[data-motion="rabbit-character"]',
-        duration: 1.85,
         delay: 2.1,
-        tilt: -4.8,
-        transformOrigin: "52.5% 84.5%",
+        transformOrigin: "80% 95.3%",
       });
 
       artboard.dataset.motionReady = "true";
@@ -590,21 +744,16 @@ export default function HobanHero() {
 
               if (layer.name === "sketch-gold") {
                 return (
-                  <span
-                    className="draw-reveal draw-reveal-gold"
-                    data-motion="gold-drawing"
-                    style={layerStyle(layer)}
+                  <StrokeDrawing
                     key={layer.name}
-                  >
-                    <img
-                      className="draw-reveal-image"
-                      src={assetPath(`/assets/isolated/${layer.file}`)}
-                      alt=""
-                      aria-hidden="true"
-                      data-layer={layer.name}
-                      data-motion-role={layer.role}
-                    />
-                  </span>
+                    bounds={layer}
+                    id="gold"
+                    strokes={goldStrokes}
+                    textures={[
+                      { file: "/assets/isolated/sketch-gold.svg", x: 1505, y: 666, width: 162, height: 126 },
+                    ]}
+                    viewBox={[1505, 666, 162, 126]}
+                  />
                 );
               }
 
@@ -664,20 +813,16 @@ export default function HobanHero() {
               )}
             </span>
 
-          <span
-            className="draw-reveal draw-reveal-house"
-            data-motion="house-drawing"
-            style={layerStyle(houseDrawingBounds)}
-          >
-            {renderGroupedImage(
-              { name: "sketch-house-smoke", label: "집 위 꼬리선", file: "sketch-house-smoke.png", x: 1132, y: 662, width: 62, height: 43, role: "drawing" },
-              houseDrawingBounds,
-            )}
-            {renderGroupedImage(
-              { name: "sketch-house-body", label: "호랑이가 그리는 집", file: "sketch-house-body.png", x: 1100, y: 709, width: 61, height: 92, role: "drawing" },
-              houseDrawingBounds,
-            )}
-          </span>
+            <StrokeDrawing
+              bounds={houseDrawingBounds}
+              id="house"
+              strokes={houseStrokes}
+              textures={[
+                { file: "/assets/isolated/sketch-house-smoke.png", x: 32, y: 0, width: 62, height: 43 },
+                { file: "/assets/isolated/sketch-house-body.png", x: 0, y: 47, width: 61, height: 92 },
+              ]}
+              viewBox={[0, 0, 94, 139]}
+            />
 
             <span
               className="character-motion-group"

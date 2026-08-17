@@ -5,6 +5,18 @@ import { test } from "node:test";
 const pagePath = new URL("../app/page.tsx", import.meta.url);
 const heroPath = new URL("../app/HobanHero.tsx", import.meta.url);
 const cssPath = new URL("../app/globals.css", import.meta.url);
+const houseStrokePath = new URL(
+  "../public/assets/motion/house-strokes.json",
+  import.meta.url,
+);
+const goldStrokePath = new URL(
+  "../public/assets/motion/gold-strokes.json",
+  import.meta.url,
+);
+const drawingValidationPath = new URL(
+  "../qa/drawing-validation.json",
+  import.meta.url,
+);
 const tigerPencilPath = new URL(
   "../public/assets/isolated/tiger-pencil-tip.svg",
   import.meta.url,
@@ -61,6 +73,16 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /repeat: -1/);
   assert.match(hero, /data-motion="house-drawing"/);
   assert.match(hero, /data-motion="gold-drawing"/);
+  assert.match(hero, /data-draw-stroke/);
+  assert.match(hero, /getTotalLength\(\)/);
+  assert.match(hero, /strokeDashoffset/);
+  assert.match(hero, /data-mask-complete/);
+  assert.match(hero, /transformOrigin: "16\.4% 97\.3%"/);
+  assert.match(hero, /transformOrigin: "80% 95\.3%"/);
+  assert.doesNotMatch(hero, /--reveal/);
+  assert.doesNotMatch(css, /\.draw-reveal/);
+  assert.match(css, /\.stroke-drawing \[data-draw-stroke\],[\s\S]*opacity: 0/);
+  assert.match(css, /prefers-reduced-motion[\s\S]*\[data-mask-complete\][\s\S]*opacity: 1/);
 
   for (const layer of protectedStaticLayers) {
     assert.match(hero, new RegExp(`staticCopyLayers[\\s\\S]*${layer}`));
@@ -70,6 +92,53 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
       `${layer} must stay completely static`,
     );
   }
+});
+
+test("draws the untouched house and gold artwork one logical stroke at a time", async () => {
+  const [housePlan, goldPlan, validation] = await Promise.all([
+    readFile(houseStrokePath, "utf8").then(JSON.parse),
+    readFile(goldStrokePath, "utf8").then(JSON.parse),
+    readFile(drawingValidationPath, "utf8").then(JSON.parse),
+  ]);
+
+  assert.equal(housePlan.strokes.length, 12);
+  assert.equal(goldPlan.strokes.length, 23);
+  assert.deepEqual(
+    housePlan.strokes.map((stroke) => stroke.order),
+    Array.from({ length: 12 }, (_, index) => index + 1),
+  );
+  assert.deepEqual(
+    goldPlan.strokes.map((stroke) => stroke.order),
+    Array.from({ length: 23 }, (_, index) => index + 1),
+  );
+  assert.deepEqual(
+    [...goldPlan.motionOrder].sort((a, b) => a - b),
+    Array.from({ length: 23 }, (_, index) => index + 1),
+  );
+  for (const stroke of [...housePlan.strokes, ...goldPlan.strokes]) {
+    assert.equal(
+      stroke.d.match(/(?:^|\s)[Mm](?=\s)/g)?.length,
+      1,
+      `${stroke.id} must be one continuous SVG path`,
+    );
+  }
+  assert.equal(goldPlan.rendering.pencilFollowsSamePath, false);
+  assert.ok(validation.cases.house.tracedMask.alphaWeightedCoverage > 0.995);
+  assert.ok(validation.cases.gold.tracedMask.alphaWeightedCoverage > 0.995);
+  assert.equal(validation.cases.house.completedFrame.exact, true);
+  assert.equal(validation.cases.gold.completedFrame.exact, true);
+  assert.equal(
+    validation.sourceSha256["/assets/isolated/sketch-house-body.png"],
+    "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
+  );
+  assert.equal(
+    validation.sourceSha256["/assets/isolated/sketch-house-smoke.png"],
+    "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
+  );
+  assert.equal(
+    validation.sourceSha256["/assets/isolated/sketch-gold.svg"],
+    "34159a27dac17580ddf09aa0f36cab647ff389670d6d15d6b8085ae7ef61e30a",
+  );
 });
 
 test("every layer source referenced by the page exists", async () => {

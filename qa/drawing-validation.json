@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-08-17T15:15:30.780Z",
+  "sourceSha256": {
+    "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
+    "/assets/isolated/sketch-house-smoke.png": "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
+    "/assets/isolated/sketch-gold.svg": "34159a27dac17580ddf09aa0f36cab647ff389670d6d15d6b8085ae7ef61e30a"
+  },
+  "cases": {
+    "house": {
+      "strokeCount": 12,
+      "tracedMask": {
+        "differentChannels": 41,
+        "exact": false,
+        "alphaWeightedCoverage": 0.9993366431349547,
+        "meaningfulPixelCoverage": 0.9987369750552574
+      },
+      "completedFrame": {
+        "differentChannels": 0,
+        "exact": true,
+        "alphaWeightedCoverage": 1,
+        "meaningfulPixelCoverage": 1
+      }
+    },
+    "gold": {
+      "strokeCount": 23,
+      "tracedMask": {
+        "differentChannels": 2,
+        "exact": false,
+        "alphaWeightedCoverage": 0.9999965897571651,
+        "meaningfulPixelCoverage": 1
+      },
+      "completedFrame": {
+        "differentChannels": 0,
+        "exact": true,
+        "alphaWeightedCoverage": 1,
+        "meaningfulPixelCoverage": 1
+      }
+    }
+  }
+}

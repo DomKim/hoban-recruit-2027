@@ -1,0 +1,224 @@
+{
+  "version": 1,
+  "name": "house-stroke-mask-plan",
+  "description": "Centerline paths that reveal the unchanged textured house and smoke rasters one logical pencil stroke at a time.",
+  "coordinateSpace": {
+    "viewBox": [0, 0, 94, 139],
+    "artboardOrigin": {
+      "x": 1100,
+      "y": 662
+    },
+    "sourceArtboard": {
+      "width": 1920,
+      "height": 1068
+    },
+    "units": "source-artboard-px"
+  },
+  "sourceAssets": [
+    {
+      "file": "/assets/isolated/sketch-house-smoke.png",
+      "x": 32,
+      "y": 0,
+      "width": 62,
+      "height": 43
+    },
+    {
+      "file": "/assets/isolated/sketch-house-body.png",
+      "x": 0,
+      "y": 47,
+      "width": 61,
+      "height": 92
+    }
+  ],
+  "pencilContact": {
+    "artboard": {
+      "x": 1102.65625,
+      "y": 776.550781
+    },
+    "drawingViewBoxAtRest": {
+      "x": 2.65625,
+      "y": 114.550781
+    },
+    "tigerToolLocal": {
+      "x": 78.65625,
+      "y": 1.550781
+    },
+    "note": "Use the sharpened graphite point, not the pencil element bounding-box corner, as the motion-path contact anchor."
+  },
+  "mask": {
+    "units": "userSpaceOnUse",
+    "contentUnits": "userSpaceOnUse",
+    "bounds": {
+      "x": -16,
+      "y": -16,
+      "width": 126,
+      "height": 171
+    },
+    "fill": "none",
+    "stroke": "white",
+    "linecap": "round",
+    "linejoin": "round",
+    "progressMethod": "stroke-dasharray-and-stroke-dashoffset",
+    "finalization": "After the final stroke completes, disable the mask for the hold frame so the original PNG alpha and texture are reproduced pixel-for-pixel."
+  },
+  "timeline": {
+    "loopMs": 6000,
+    "prepositionMs": 150,
+    "drawMs": 3810,
+    "liftCount": 11,
+    "defaultLiftMs": 65,
+    "doubleHopMs": 520,
+    "holdMs": 500,
+    "fadeAndResetMs": 305,
+    "repeat": -1,
+    "independent": true
+  },
+  "strokes": [
+    {
+      "order": 1,
+      "id": "left-wall",
+      "asset": "body",
+      "d": "M 5 114.55 C 5 106 4 98 5 90 C 4 98 5 106 5 114.55 C 4 123 4 131 5 135",
+      "strokeWidth": 13,
+      "drawMs": 260,
+      "liftAfterMs": 65,
+      "start": [5, 114.55],
+      "end": [5, 135]
+    },
+    {
+      "order": 2,
+      "id": "roof-left",
+      "asset": "body",
+      "d": "M 5 90 C 12 79 20 68 28 55",
+      "strokeWidth": 13,
+      "drawMs": 290,
+      "liftAfterMs": 65,
+      "start": [5, 90],
+      "end": [28, 55]
+    },
+    {
+      "order": 3,
+      "id": "roof-right",
+      "asset": "body",
+      "d": "M 28 55 C 38 68 48 79 57 90",
+      "strokeWidth": 13,
+      "drawMs": 300,
+      "liftAfterMs": 65,
+      "start": [28, 55],
+      "end": [57, 90]
+    },
+    {
+      "order": 4,
+      "id": "right-wall",
+      "asset": "body",
+      "d": "M 55.5 90 C 55.5 106 55.5 121 55.5 135",
+      "strokeWidth": 13,
+      "drawMs": 260,
+      "liftAfterMs": 65,
+      "start": [55.5, 90],
+      "end": [55.5, 135]
+    },
+    {
+      "order": 5,
+      "id": "base",
+      "asset": "body",
+      "d": "M 56 135 C 41 135 21 135 5 135",
+      "strokeWidth": 13,
+      "drawMs": 280,
+      "liftAfterMs": 65,
+      "start": [56, 135],
+      "end": [5, 135]
+    },
+    {
+      "order": 6,
+      "id": "roof-base",
+      "asset": "body",
+      "d": "M 5 90 C 21 90 42 90 57 90",
+      "strokeWidth": 12,
+      "drawMs": 240,
+      "liftAfterMs": 65,
+      "start": [5, 90],
+      "end": [57, 90]
+    },
+    {
+      "order": 7,
+      "id": "chimney",
+      "asset": "body",
+      "d": "M 39 69 L 41 48 C 43 47 46 47 49 48 L 52 77",
+      "strokeWidth": 11,
+      "drawMs": 360,
+      "liftAfterMs": 65,
+      "start": [39, 69],
+      "end": [52, 77]
+    },
+    {
+      "order": 8,
+      "id": "window-frame",
+      "asset": "body",
+      "d": "M 19 101 C 25 100 32 100 39 101 L 38 114 C 31 114 25 114 19 115 Z",
+      "strokeWidth": 9,
+      "drawMs": 430,
+      "liftAfterMs": 65,
+      "start": [19, 101],
+      "end": [19, 101]
+    },
+    {
+      "order": 9,
+      "id": "window-mullion",
+      "asset": "body",
+      "d": "M 28.5 101 L 28.5 114",
+      "strokeWidth": 8,
+      "drawMs": 170,
+      "liftAfterMs": 65,
+      "start": [28.5, 101],
+      "end": [28.5, 114]
+    },
+    {
+      "order": 10,
+      "id": "smoke-lower-curl",
+      "asset": "smoke",
+      "d": "M 63 34 C 58 29 57 25 51 24 C 43 21 36 26 36 32 C 36 38 45 41 51 40 C 56 39 57 36 55 34",
+      "strokeWidth": 16,
+      "drawMs": 450,
+      "liftAfterMs": 65,
+      "start": [63, 34],
+      "end": [55, 34]
+    },
+    {
+      "order": 11,
+      "id": "smoke-middle-curl",
+      "asset": "smoke",
+      "d": "M 56 27 C 55 20 56 13 62 11 C 67 9 72 12 72 18 C 72 21 73 23 76 24",
+      "strokeWidth": 14,
+      "drawMs": 380,
+      "liftAfterMs": 65,
+      "start": [56, 27],
+      "end": [76, 24]
+    },
+    {
+      "order": 12,
+      "id": "smoke-upper-curl",
+      "asset": "smoke",
+      "d": "M 75 24 C 71 20 70 15 73 11 C 77 5 83 3 88 6 C 92 9 89 14 93 14",
+      "strokeWidth": 14,
+      "drawMs": 390,
+      "liftAfterMs": 0,
+      "start": [75, 24],
+      "end": [93, 14]
+    }
+  ],
+  "validation": {
+    "method": "All paths were rasterized at 8x in the 94 by 139 user-space, downsampled with Lanczos, and compared against the alpha channels of both untouched source PNGs at their production offsets.",
+    "alphaWeightedCoverage": 0.9990236885,
+    "meaningfulPixelCoverageAtAlpha64": 0.9996493689,
+    "fullyCoveredPixelRatioAtAlpha64AndMask240": 0.9971949509,
+    "exactFinalFrameCoverage": 1,
+    "exactFinalFrameReason": "The hold frame removes the temporary SVG mask and displays the untouched source rasters; no traced vector replaces the original artwork.",
+    "acceptanceChecks": [
+      "Each visible edge, roof, chimney, window, and smoke curl has its own ordered reveal path.",
+      "The first stroke begins at the resting graphite point; the fixed-shoulder pencil gesture stays synchronized with each reveal without stretching or detaching the arm.",
+      "No source colors, alpha, dimensions, or texture pixels are rewritten.",
+      "All mask strokes have round caps and joins to match the crayon texture and avoid clipped corners."
+    ]
+  }
+}
