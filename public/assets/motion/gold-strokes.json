@@ -35,8 +35,8 @@
     "minimumVisibleStrokeMs": 70,
     "maxStructuralMaskWidth": 11.75,
     "maxPathLength": 35.01,
-    "recommendedCycleMs": 6291,
-    "recommendedDrawAndLiftMs": 4601,
+    "recommendedCycleMs": 6308,
+    "recommendedDrawAndLiftMs": 4618,
     "notes": [
       "Every entry is one continuous path containing exactly one M command and no Z command.",
       "Outlines are split at 35 artboard units so no single animation reveals a large gold-bar region at once.",
@@ -709,7 +709,7 @@
       "phase": "top-bar",
       "d": "M 1534 719 L 1534 716 L 1535 716 L 1535 715 L 1536 715 L 1536 714 L 1537 714 L 1540 711 L 1541 711 L 1543 709 L 1544 709 L 1546 707 L 1547 707 L 1547 706 L 1550 705 L 1550 704 L 1551 704 L 1551 703 L 1552 703 L 1552 702 L 1553 702 L 1553 701 L 1554 701 L 1555.37 699.629",
       "maskWidth": 11.75,
-      "suggestedDurationMs": 133,
+      "suggestedDurationMs": 150,
       "liftAfterMs": 0,
       "gesture": 2.4,
       "start": {

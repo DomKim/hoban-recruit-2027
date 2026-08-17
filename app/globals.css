@@ -215,10 +215,11 @@ main {
 
   .stroke-drawing {
     opacity: 1 !important;
+    visibility: visible !important;
   }
 
   .stroke-drawing [data-mask-complete] {
-    opacity: 1;
+    opacity: 1 !important;
   }
 
   .tagline-static {

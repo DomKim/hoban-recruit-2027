@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T17:09:50.656Z",
+  "generatedAt": "2026-08-17T17:42:39.446Z",
   "sourceSha256": {
     "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
     "/assets/isolated/sketch-house-smoke.png": "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
@@ -9,10 +9,10 @@
     "house": {
       "strokeCount": 13,
       "tracedMask": {
-        "differentChannels": 41,
+        "differentChannels": 39,
         "exact": false,
-        "alphaWeightedCoverage": 0.9993310569718806,
-        "meaningfulPixelCoverage": 0.9987369750552574
+        "alphaWeightedCoverage": 0.9993855220618528,
+        "meaningfulPixelCoverage": 0.999052731291443
       },
       "completedFrame": {
         "differentChannels": 0,
@@ -26,7 +26,9 @@
         "stalledFrameThreshold": 0.00001,
         "thresholds": {
           "maximumFrameAlphaDelta": 0.017,
-          "maximumStallDurationMs": 65,
+          "maximumDrawingStallDurationMs": 65,
+          "maximumTotalStallDurationMs": 105,
+          "maximumPenLiftDurationMs": 55,
           "maximumRegressionMagnitude": 0.0001,
           "maximumFinalTraceMismatch": 0.00002
         },
@@ -35,130 +37,134 @@
           "durationRatio": 0.7,
           "easing": "none"
         },
-        "totalFrameCount": 233,
-        "maximumFrameDelta": 0.0164903533946415,
+        "totalDurationMs": 4495,
+        "totalFrameCount": 270,
+        "maximumConfiguredPenLiftMs": 55,
+        "maximumFrameDelta": 0.014180474963515377,
         "minimumFrameDelta": 0,
-        "maximumConsecutiveStalledFrames": 3,
-        "maximumConsecutiveStalledDurationMs": 50,
+        "maximumConsecutiveStalledFrames": 5,
+        "maximumConsecutiveStalledDurationMs": 83.33333333333334,
+        "maximumConsecutiveDrawingStalledFrames": 3,
+        "maximumConsecutiveDrawingStalledDurationMs": 50,
         "regressionFrameCount": 0,
-        "finalCoverage": 0.9993436258387973,
+        "finalCoverage": 0.9993855220618528,
         "strokes": [
           {
             "strokeId": "left-wall-upper",
             "durationMs": 200,
-            "frameCount": 12,
-            "coverageDelta": 0.05780002932735614,
+            "liftAfterMs": 35,
+            "sampledDrawingFrameCount": 11,
             "maximumFrameDelta": 0.010514555446159861,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "minimumFrameDelta": 0.0002988597244625024,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "left-wall-lower",
             "durationMs": 120,
-            "frameCount": 8,
-            "coverageDelta": 0.04792648609394529,
-            "maximumFrameDelta": 0.01210940500380557,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 7,
+            "maximumFrameDelta": 0.013120500520211437,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "roof-left",
             "durationMs": 290,
-            "frameCount": 18,
-            "coverageDelta": 0.08799184420191186,
-            "maximumFrameDelta": 0.010867880260594515,
-            "minimumFrameDelta": 0.00008937860918503682,
-            "stalledFrameCount": 0
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 17,
+            "maximumFrameDelta": 0.010867880260594487,
+            "minimumFrameDelta": 0.0010488021171558143,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "roof-right",
             "durationMs": 300,
-            "frameCount": 18,
-            "coverageDelta": 0.09216470801823881,
-            "maximumFrameDelta": 0.008722793640153353,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 18,
+            "maximumFrameDelta": 0.009338668119069055,
+            "minimumFrameDelta": 0.000034913519212920185,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "right-wall",
-            "durationMs": 260,
-            "frameCount": 16,
-            "coverageDelta": 0.12095718904274116,
-            "maximumFrameDelta": 0.0164903533946415,
+            "durationMs": 300,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 18,
+            "maximumFrameDelta": 0.014180474963515377,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "base",
             "durationMs": 280,
-            "frameCount": 17,
-            "coverageDelta": 0.09546613039501156,
-            "maximumFrameDelta": 0.011592684919454532,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 17,
+            "maximumFrameDelta": 0.010964241573622135,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 2
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "roof-base",
             "durationMs": 240,
-            "frameCount": 15,
-            "coverageDelta": 0.08100914035932993,
-            "maximumFrameDelta": 0.011096912946631177,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 15,
+            "maximumFrameDelta": 0.010457297274650723,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 2
           },
           {
             "strokeId": "chimney",
             "durationMs": 360,
-            "frameCount": 22,
-            "coverageDelta": 0.08233306100788351,
-            "maximumFrameDelta": 0.009627752058151917,
-            "minimumFrameDelta": 0.00009915439456475994,
-            "stalledFrameCount": 0
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 22,
+            "maximumFrameDelta": 0.009189238256837817,
+            "minimumFrameDelta": 0.0003379628659809786,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "window-frame",
             "durationMs": 430,
-            "frameCount": 26,
-            "coverageDelta": 0.07106995970979879,
-            "maximumFrameDelta": 0.006701999148110094,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 26,
+            "maximumFrameDelta": 0.007197771120933449,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 3
+            "stalledDrawingFrameCount": 2
           },
           {
             "strokeId": "window-mullion",
             "durationMs": 95,
-            "frameCount": 6,
-            "coverageDelta": 0.016910712165964847,
-            "maximumFrameDelta": 0.005826368086250366,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 6,
+            "maximumFrameDelta": 0.006054004231518584,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "smoke-lower-curl",
             "durationMs": 600,
-            "frameCount": 36,
-            "coverageDelta": 0.12454350573629125,
-            "maximumFrameDelta": 0.009081704617662112,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 36,
+            "maximumFrameDelta": 0.009557925019726188,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 3
+            "stalledDrawingFrameCount": 3
           },
           {
             "strokeId": "smoke-middle-curl",
             "durationMs": 380,
-            "frameCount": 23,
-            "coverageDelta": 0.06844446306498797,
-            "maximumFrameDelta": 0.007905817290571271,
+            "liftAfterMs": 55,
+            "sampledDrawingFrameCount": 23,
+            "maximumFrameDelta": 0.007812249059080623,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 2
+            "stalledDrawingFrameCount": 2
           },
           {
             "strokeId": "smoke-upper-curl",
             "durationMs": 260,
-            "frameCount": 16,
-            "coverageDelta": 0.05272639671533619,
-            "maximumFrameDelta": 0.008566381074079477,
-            "minimumFrameDelta": 0.000009775785379639856,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 15,
+            "maximumFrameDelta": 0.008686483580171878,
+            "minimumFrameDelta": 0.00014663678069426478,
+            "stalledDrawingFrameCount": 0
           }
         ]
       },
@@ -169,7 +175,9 @@
           "stalledFrameThreshold": 0.00001,
           "thresholds": {
             "maximumFrameAlphaDelta": 0.017,
-            "maximumStallDurationMs": 65,
+            "maximumDrawingStallDurationMs": 65,
+            "maximumTotalStallDurationMs": 105,
+            "maximumPenLiftDurationMs": 55,
             "maximumRegressionMagnitude": 0.0001,
             "maximumFinalTraceMismatch": 0.00002
           },
@@ -178,13 +186,17 @@
             "durationRatio": 0.7,
             "easing": "none"
           },
-          "totalFrameCount": 382,
-          "maximumFrameDelta": 0.010846932149066735,
+          "totalDurationMs": 4495,
+          "totalFrameCount": 450,
+          "maximumConfiguredPenLiftMs": 55,
+          "maximumFrameDelta": 0.00966406211813342,
           "minimumFrameDelta": 0,
-          "maximumConsecutiveStalledFrames": 5,
-          "maximumConsecutiveStalledDurationMs": 50,
+          "maximumConsecutiveStalledFrames": 10,
+          "maximumConsecutiveStalledDurationMs": 100,
+          "maximumConsecutiveDrawingStalledFrames": 6,
+          "maximumConsecutiveDrawingStalledDurationMs": 60,
           "regressionFrameCount": 0,
-          "finalCoverage": 0.9993436258387973
+          "finalCoverage": 0.9993855220618528
         },
         "120": {
           "framesPerSecond": 120,
@@ -192,7 +204,9 @@
           "stalledFrameThreshold": 0.00001,
           "thresholds": {
             "maximumFrameAlphaDelta": 0.017,
-            "maximumStallDurationMs": 65,
+            "maximumDrawingStallDurationMs": 65,
+            "maximumTotalStallDurationMs": 105,
+            "maximumPenLiftDurationMs": 55,
             "maximumRegressionMagnitude": 0.0001,
             "maximumFinalTraceMismatch": 0.00002
           },
@@ -201,13 +215,17 @@
             "durationRatio": 0.7,
             "easing": "none"
           },
-          "totalFrameCount": 463,
-          "maximumFrameDelta": 0.008299641787292922,
+          "totalDurationMs": 4495,
+          "totalFrameCount": 540,
+          "maximumConfiguredPenLiftMs": 55,
+          "maximumFrameDelta": 0.0074533380815719474,
           "minimumFrameDelta": 0,
-          "maximumConsecutiveStalledFrames": 7,
-          "maximumConsecutiveStalledDurationMs": 58.333333333333336,
+          "maximumConsecutiveStalledFrames": 12,
+          "maximumConsecutiveStalledDurationMs": 100,
+          "maximumConsecutiveDrawingStalledFrames": 7,
+          "maximumConsecutiveDrawingStalledDurationMs": 58.333333333333336,
           "regressionFrameCount": 0,
-          "finalCoverage": 0.9993436258387973
+          "finalCoverage": 0.9993855220618528
         }
       },
       "ownershipIsolation": {
@@ -333,7 +351,9 @@
         "stalledFrameThreshold": 0.00001,
         "thresholds": {
           "maximumFrameAlphaDelta": 0.011,
-          "maximumStallDurationMs": 65,
+          "maximumDrawingStallDurationMs": 65,
+          "maximumTotalStallDurationMs": 105,
+          "maximumPenLiftDurationMs": 35,
           "maximumRegressionMagnitude": 0.0001,
           "maximumFinalTraceMismatch": 0.00002
         },
@@ -342,418 +362,422 @@
           "durationRatio": 0.7,
           "easing": "none"
         },
-        "totalFrameCount": 286,
-        "maximumFrameDelta": 0.010453246849575049,
+        "totalDurationMs": 4618,
+        "totalFrameCount": 278,
+        "maximumConfiguredPenLiftMs": 35,
+        "maximumFrameDelta": 0.010602444973600411,
         "minimumFrameDelta": 0,
-        "maximumConsecutiveStalledFrames": 1,
-        "maximumConsecutiveStalledDurationMs": 16.666666666666668,
+        "maximumConsecutiveStalledFrames": 2,
+        "maximumConsecutiveStalledDurationMs": 33.333333333333336,
+        "maximumConsecutiveDrawingStalledFrames": 1,
+        "maximumConsecutiveDrawingStalledDurationMs": 16.666666666666668,
         "regressionFrameCount": 0,
         "finalCoverage": 0.9953364929233198,
         "strokes": [
           {
             "strokeId": "contact-right-edge-1",
             "durationMs": 150,
-            "frameCount": 9,
-            "coverageDelta": 0.03253201152321054,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
             "maximumFrameDelta": 0.006744607766657546,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "minimumFrameDelta": 0.001912293669651479,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "contact-right-edge-2",
             "durationMs": 117,
-            "frameCount": 8,
-            "coverageDelta": 0.03227539074988683,
-            "maximumFrameDelta": 0.008026006511858697,
-            "minimumFrameDelta": 0.00018415311308279947,
-            "stalledFrameCount": 0
+            "liftAfterMs": 30,
+            "sampledDrawingFrameCount": 7,
+            "maximumFrameDelta": 0.008755798478520163,
+            "minimumFrameDelta": 0.0002966911266333999,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "contact-lower-edge-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.031559239754564816,
-            "maximumFrameDelta": 0.00731241319866284,
-            "minimumFrameDelta": 0.00019182615946124193,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.006833274080364077,
+            "minimumFrameDelta": 0.0002378644377319522,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "contact-lower-edge-2",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.004637077694709946,
-            "maximumFrameDelta": 0.0013572766482769366,
-            "minimumFrameDelta": 8.52560708711203e-7,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.001601109010969895,
+            "minimumFrameDelta": 0.0003734215904178939,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-03-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.034730765590990836,
-            "maximumFrameDelta": 0.008513671237244613,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.008434383091333958,
+            "minimumFrameDelta": 0.000001705121417422406,
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-03-2",
             "durationMs": 75,
-            "frameCount": 5,
-            "coverageDelta": 0.022365225071764278,
-            "maximumFrameDelta": 0.006066822003227806,
-            "minimumFrameDelta": 0.0028151554601824336,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.007175150924559448,
+            "minimumFrameDelta": 0.000023019139135327382,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-04",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.008094211368556037,
-            "maximumFrameDelta": 0.002388022545115387,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.003471627205894251,
+            "minimumFrameDelta": 0.0011407262282628894,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-05-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.03562936457797819,
-            "maximumFrameDelta": 0.008386639691645853,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.008033679558237139,
+            "minimumFrameDelta": 0.0005626900677530022,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-05-2",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.03382108331479014,
-            "maximumFrameDelta": 0.007446265229931359,
-            "minimumFrameDelta": 0.0001901210380438334,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.007448822912057507,
+            "minimumFrameDelta": 0.0005976450568103697,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-05-3",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.012049240496292635,
-            "maximumFrameDelta": 0.0036063317978714815,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 25,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.004304579018310467,
+            "minimumFrameDelta": 0.0014152507764696731,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-06",
             "durationMs": 89,
-            "frameCount": 6,
-            "coverageDelta": 0.018835623737677304,
-            "maximumFrameDelta": 0.006536582953730663,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.007445412669222662,
+            "minimumFrameDelta": 0.0010912777071573343,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-11-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.029475581382461313,
-            "maximumFrameDelta": 0.006860556023042974,
-            "minimumFrameDelta": 0.000005115364252350485,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.007141048496210778,
+            "minimumFrameDelta": 0.00031118465868157363,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-11-2",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.031708437878590234,
-            "maximumFrameDelta": 0.0074923035082020695,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.007531521300803035,
+            "minimumFrameDelta": 0.0005183569108996866,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-11-3",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.014310231495809234,
-            "maximumFrameDelta": 0.005261152133490543,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.00640273092246213,
+            "minimumFrameDelta": 0.0008687593621822809,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-12",
             "durationMs": 88,
-            "frameCount": 6,
-            "coverageDelta": 0.02742091007445413,
-            "maximumFrameDelta": 0.009126662386811923,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 6,
+            "maximumFrameDelta": 0.008974054019951605,
+            "minimumFrameDelta": 0.00016710189890850602,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-14",
             "durationMs": 74,
-            "frameCount": 5,
-            "coverageDelta": 0.012858320608864715,
-            "maximumFrameDelta": 0.005834925490456833,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.006552781607196301,
+            "minimumFrameDelta": 0.0013606868911117953,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-15",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.002174029807227529,
-            "maximumFrameDelta": 0.0006223693173632028,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.0007417278165834928,
+            "minimumFrameDelta": 0.0003239730693123666,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-16",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.02325359333024707,
-            "maximumFrameDelta": 0.007898122405551211,
-            "minimumFrameDelta": 0.001370065058907688,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.008343159095501262,
+            "minimumFrameDelta": 0.0006121385888585573,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-17",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.014710082468197327,
-            "maximumFrameDelta": 0.00568402224501402,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.005834072929748135,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-19",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.014679390282683558,
-            "maximumFrameDelta": 0.0058153165941564056,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.006376301540491902,
+            "minimumFrameDelta": 0.0004620879041244419,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-20",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.015128689776177262,
-            "maximumFrameDelta": 0.005998617146530494,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 35,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.00702595280053403,
+            "minimumFrameDelta": 0.0015482502470294812,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-21-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.030672576617499447,
-            "maximumFrameDelta": 0.007979115672879233,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.00772420002097296,
+            "minimumFrameDelta": 0.00014493532048182045,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-21-2",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.03723899919603524,
-            "maximumFrameDelta": 0.009782281571815044,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.0100568061200218,
+            "minimumFrameDelta": 0.00006905741740603766,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-21-3",
             "durationMs": 93,
-            "frameCount": 6,
-            "coverageDelta": 0.029031397253219904,
-            "maximumFrameDelta": 0.009817236560872411,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 6,
+            "maximumFrameDelta": 0.009282680996507087,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-22",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.01573571300078358,
-            "maximumFrameDelta": 0.006193000988117814,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.007009754147068503,
+            "minimumFrameDelta": 0.000743432938000943,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-23",
             "durationMs": 127,
-            "frameCount": 8,
-            "coverageDelta": 0.038899787456615265,
-            "maximumFrameDelta": 0.009777166207562749,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.0098240570465421,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-24",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.023563072867511248,
-            "maximumFrameDelta": 0.008698676911036096,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.009675711483225546,
+            "minimumFrameDelta": 0.0000034102428349003233,
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.02944915200049103,
-            "maximumFrameDelta": 0.007368682205438182,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.007845263641610756,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-2",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.026469452323526377,
-            "maximumFrameDelta": 0.006204084277331212,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.006718178384687357,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-3",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.026086652565312507,
-            "maximumFrameDelta": 0.006214315005835802,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.0069432544117885575,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-4",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.025538456029607692,
-            "maximumFrameDelta": 0.006507595889634343,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.006635479995941829,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-5",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.0049874801459925955,
-            "maximumFrameDelta": 0.0015013594080500736,
-            "minimumFrameDelta": 0.000005115364252294974,
-            "stalledFrameCount": 1
+            "liftAfterMs": 30,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.0017733262741306266,
+            "minimumFrameDelta": 0.000207172252218224,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-26-1",
-            "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.04277979124198483,
-            "maximumFrameDelta": 0.010453246849575049,
+            "durationMs": 150,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 9,
+            "maximumFrameDelta": 0.010602444973600411,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-26-2",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.03347579622775987,
-            "maximumFrameDelta": 0.008005545054849517,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.008520491722914358,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-26-3",
             "durationMs": 90,
-            "frameCount": 6,
-            "coverageDelta": 0.015099702712080831,
-            "maximumFrameDelta": 0.00505397988127243,
-            "minimumFrameDelta": 0.00020376200938321265,
-            "stalledFrameCount": 0
+            "liftAfterMs": 30,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.0054538308536604685,
+            "minimumFrameDelta": 0.0011117391641665142,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-27-1",
             "durationMs": 133,
-            "frameCount": 8,
-            "coverageDelta": 0.03497374539297515,
-            "maximumFrameDelta": 0.00716065739251126,
-            "minimumFrameDelta": 0.0015866154789218045,
-            "stalledFrameCount": 0
+            "liftAfterMs": 35,
+            "sampledDrawingFrameCount": 8,
+            "maximumFrameDelta": 0.008222095474863522,
+            "minimumFrameDelta": 0.000888368258482819,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-28",
             "durationMs": 115,
-            "frameCount": 7,
-            "coverageDelta": 0.03052167337205658,
-            "maximumFrameDelta": 0.009477917398803215,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 7,
+            "maximumFrameDelta": 0.009968992367023977,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-29",
             "durationMs": 73,
-            "frameCount": 5,
-            "coverageDelta": 0.013568503679225796,
-            "maximumFrameDelta": 0.0042389318437393575,
-            "minimumFrameDelta": 0.00020290944867462635,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.004787128379444061,
+            "minimumFrameDelta": 0.0021876707785669636,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-30",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.009355148656747914,
-            "maximumFrameDelta": 0.002678745746787725,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.00323035252532744,
+            "minimumFrameDelta": 0.0010188100469163963,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-31",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.0055186254675230195,
-            "maximumFrameDelta": 0.0015917308431740995,
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.0018918322126423304,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "stalledDrawingFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-32",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.02307029277787298,
-            "maximumFrameDelta": 0.007482925340406177,
-            "minimumFrameDelta": 0.002056376429424578,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.008550331347719431,
+            "minimumFrameDelta": 0.002320670249126744,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-33",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.013361331427007572,
-            "maximumFrameDelta": 0.004714660719203123,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.0056584454237524895,
+            "minimumFrameDelta": 0.001007726757703109,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-34",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.004623436723370511,
-            "maximumFrameDelta": 0.0013265844627631251,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.0015780898718344982,
+            "minimumFrameDelta": 0.0006522089421683308,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-35",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.016901163489599136,
-            "maximumFrameDelta": 0.0059201815613284525,
-            "minimumFrameDelta": 0.000006820485669689624,
-            "stalledFrameCount": 1
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 4,
+            "maximumFrameDelta": 0.007314970880789029,
+            "minimumFrameDelta": 0.0006769332027209973,
+            "stalledDrawingFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-36",
             "durationMs": 70,
-            "frameCount": 5,
-            "coverageDelta": 0.012166041313386833,
-            "maximumFrameDelta": 0.003887676831747955,
-            "minimumFrameDelta": 0.00005882668890144771,
-            "stalledFrameCount": 0
+            "liftAfterMs": 0,
+            "sampledDrawingFrameCount": 5,
+            "maximumFrameDelta": 0.004377046678551322,
+            "minimumFrameDelta": 0.0002250760271012009,
+            "stalledDrawingFrameCount": 0
           }
         ]
       },
@@ -764,7 +788,9 @@
           "stalledFrameThreshold": 0.00001,
           "thresholds": {
             "maximumFrameAlphaDelta": 0.011,
-            "maximumStallDurationMs": 65,
+            "maximumDrawingStallDurationMs": 65,
+            "maximumTotalStallDurationMs": 105,
+            "maximumPenLiftDurationMs": 35,
             "maximumRegressionMagnitude": 0.0001,
             "maximumFinalTraceMismatch": 0.00002
           },
@@ -773,11 +799,15 @@
             "durationRatio": 0.7,
             "easing": "none"
           },
-          "totalFrameCount": 456,
-          "maximumFrameDelta": 0.00714360617833687,
+          "totalDurationMs": 4618,
+          "totalFrameCount": 462,
+          "maximumConfiguredPenLiftMs": 35,
+          "maximumFrameDelta": 0.00694922233674955,
           "minimumFrameDelta": 0,
-          "maximumConsecutiveStalledFrames": 2,
-          "maximumConsecutiveStalledDurationMs": 20,
+          "maximumConsecutiveStalledFrames": 5,
+          "maximumConsecutiveStalledDurationMs": 50,
+          "maximumConsecutiveDrawingStalledFrames": 2,
+          "maximumConsecutiveDrawingStalledDurationMs": 20,
           "regressionFrameCount": 0,
           "finalCoverage": 0.9953364929233198
         },
@@ -787,7 +817,9 @@
           "stalledFrameThreshold": 0.00001,
           "thresholds": {
             "maximumFrameAlphaDelta": 0.011,
-            "maximumStallDurationMs": 65,
+            "maximumDrawingStallDurationMs": 65,
+            "maximumTotalStallDurationMs": 105,
+            "maximumPenLiftDurationMs": 35,
             "maximumRegressionMagnitude": 0.0001,
             "maximumFinalTraceMismatch": 0.00002
           },
@@ -796,11 +828,15 @@
             "durationRatio": 0.7,
             "easing": "none"
           },
-          "totalFrameCount": 546,
-          "maximumFrameDelta": 0.0060548861533057385,
+          "totalDurationMs": 4618,
+          "totalFrameCount": 555,
+          "maximumConfiguredPenLiftMs": 35,
+          "maximumFrameDelta": 0.006499070282547148,
           "minimumFrameDelta": 0,
-          "maximumConsecutiveStalledFrames": 3,
-          "maximumConsecutiveStalledDurationMs": 25,
+          "maximumConsecutiveStalledFrames": 6,
+          "maximumConsecutiveStalledDurationMs": 50,
+          "maximumConsecutiveDrawingStalledFrames": 3,
+          "maximumConsecutiveDrawingStalledDurationMs": 25,
           "regressionFrameCount": 0,
           "finalCoverage": 0.9953364929233198
         }

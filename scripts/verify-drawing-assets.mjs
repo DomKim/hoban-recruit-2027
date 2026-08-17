@@ -418,73 +418,111 @@ async function buildFrameProgression(drawing, source, framesPerSecond = 60) {
   const stalledFrameThreshold = 0.00001;
   const thresholds = {
     maximumFrameAlphaDelta: drawing.name === "gold" ? 0.011 : 0.017,
-    maximumStallDurationMs: 65,
+    maximumDrawingStallDurationMs: 65,
+    maximumTotalStallDurationMs: 105,
+    maximumPenLiftDurationMs: drawing.name === "gold" ? 35 : 55,
     maximumRegressionMagnitude: 0.0001,
     maximumFinalTraceMismatch: 0.00002,
   };
-  const completedStrokes = [];
-  const strokeSummaries = [];
+  const strokeTimeline = [];
+  let timelineCursorMs = 0;
+  for (const stroke of drawing.strokes) {
+    const startMs = timelineCursorMs;
+    const drawEndMs = startMs + stroke.durationMs;
+    const liftEndMs = drawEndMs + stroke.liftAfterMs;
+    strokeTimeline.push({ stroke, startMs, drawEndMs, liftEndMs });
+    timelineCursorMs = liftEndMs;
+  }
+  const totalDurationMs = timelineCursorMs;
+  const frameCount = Math.max(2, Math.ceil(totalDurationMs / frameDurationMs));
+  const strokeSummaries = drawing.strokes.map((stroke) => ({
+    strokeId: stroke.id,
+    durationMs: stroke.durationMs,
+    liftAfterMs: stroke.liftAfterMs,
+    sampledDrawingFrameCount: 0,
+    maximumFrameDelta: 0,
+    minimumFrameDelta: Number.POSITIVE_INFINITY,
+    stalledDrawingFrameCount: 0,
+  }));
   let previousCoverage = 0;
   let maximumFrameDelta = 0;
   let maximumConsecutiveStalledFrames = 0;
+  let maximumConsecutiveDrawingStalledFrames = 0;
+  let consecutiveStalledFrames = 0;
+  let consecutiveDrawingStalledFrames = 0;
   let regressionFrameCount = 0;
   let minimumFrameDelta = Number.POSITIVE_INFINITY;
-  let totalFrameCount = 0;
+  for (let frame = 1; frame <= frameCount; frame += 1) {
+    const elapsedMs = Math.min(totalDurationMs, frame * frameDurationMs);
+    const visibleStrokes = [];
+    let activeStrokeIndex = -1;
+    let inIntentionalLift = false;
 
-  for (const stroke of drawing.strokes) {
-    const frameCount = Math.max(2, Math.ceil(stroke.durationMs / frameDurationMs));
-    let consecutiveStalledFrames = 0;
-    let strokeMaximumFrameDelta = 0;
-    let strokeMinimumFrameDelta = Number.POSITIVE_INFINITY;
-    let strokeStalledFrameCount = 0;
-    const strokeStartCoverage = previousCoverage;
-
-    for (let frame = 1; frame <= frameCount; frame += 1) {
-      const progress = frame / frameCount;
-      const elapsedMs = progress * stroke.durationMs;
-      const contactFadeMs = Math.min(80, stroke.durationMs * 0.7);
-      const contactFadeProgress = Math.min(1, elapsedMs / contactFadeMs);
-      const [, frameRaster] = await renderDrawing({
-        ...drawing,
-        strokes: [
-          ...completedStrokes,
-          { ...stroke, progress, opacity: contactFadeProgress },
-        ],
-        completed: false,
-      });
-      const coverage = compare(source, frameRaster).alphaWeightedCoverage;
-      const delta = coverage - previousCoverage;
-
-      if (delta < -thresholds.maximumRegressionMagnitude) regressionFrameCount += 1;
-      if (delta <= stalledFrameThreshold) {
-        consecutiveStalledFrames += 1;
-        strokeStalledFrameCount += 1;
-      } else {
-        consecutiveStalledFrames = 0;
+    for (let index = 0; index < strokeTimeline.length; index += 1) {
+      const segment = strokeTimeline[index];
+      if (elapsedMs >= segment.drawEndMs) {
+        visibleStrokes.push({ ...segment.stroke, progress: 1, opacity: 1 });
+        if (elapsedMs < segment.liftEndMs) inIntentionalLift = true;
+        continue;
       }
+      if (elapsedMs <= segment.startMs) break;
 
-      maximumConsecutiveStalledFrames = Math.max(
-        maximumConsecutiveStalledFrames,
-        consecutiveStalledFrames,
-      );
-      maximumFrameDelta = Math.max(maximumFrameDelta, delta);
-      minimumFrameDelta = Math.min(minimumFrameDelta, delta);
-      strokeMaximumFrameDelta = Math.max(strokeMaximumFrameDelta, delta);
-      strokeMinimumFrameDelta = Math.min(strokeMinimumFrameDelta, delta);
-      previousCoverage = coverage;
-      totalFrameCount += 1;
+      const strokeElapsedMs = elapsedMs - segment.startMs;
+      const progress = strokeElapsedMs / segment.stroke.durationMs;
+      const contactFadeMs = Math.min(80, segment.stroke.durationMs * 0.7);
+      visibleStrokes.push({
+        ...segment.stroke,
+        progress,
+        opacity: Math.min(1, strokeElapsedMs / contactFadeMs),
+      });
+      activeStrokeIndex = index;
+      break;
     }
 
-    strokeSummaries.push({
-      strokeId: stroke.id,
-      durationMs: stroke.durationMs,
-      frameCount,
-      coverageDelta: previousCoverage - strokeStartCoverage,
-      maximumFrameDelta: strokeMaximumFrameDelta,
-      minimumFrameDelta: strokeMinimumFrameDelta,
-      stalledFrameCount: strokeStalledFrameCount,
+    const [, frameRaster] = await renderDrawing({
+      ...drawing,
+      strokes: visibleStrokes,
+      completed: false,
     });
-    completedStrokes.push(stroke);
+    const coverage = compare(source, frameRaster).alphaWeightedCoverage;
+    const delta = coverage - previousCoverage;
+
+    if (delta < -thresholds.maximumRegressionMagnitude) regressionFrameCount += 1;
+    if (delta <= stalledFrameThreshold) {
+      consecutiveStalledFrames += 1;
+      if (inIntentionalLift) {
+        consecutiveDrawingStalledFrames = 0;
+      } else {
+        consecutiveDrawingStalledFrames += 1;
+      }
+    } else {
+      consecutiveStalledFrames = 0;
+      consecutiveDrawingStalledFrames = 0;
+    }
+
+    maximumConsecutiveStalledFrames = Math.max(
+      maximumConsecutiveStalledFrames,
+      consecutiveStalledFrames,
+    );
+    maximumConsecutiveDrawingStalledFrames = Math.max(
+      maximumConsecutiveDrawingStalledFrames,
+      consecutiveDrawingStalledFrames,
+    );
+    maximumFrameDelta = Math.max(maximumFrameDelta, delta);
+    minimumFrameDelta = Math.min(minimumFrameDelta, delta);
+
+    if (activeStrokeIndex >= 0) {
+      const summary = strokeSummaries[activeStrokeIndex];
+      summary.sampledDrawingFrameCount += 1;
+      summary.maximumFrameDelta = Math.max(summary.maximumFrameDelta, delta);
+      summary.minimumFrameDelta = Math.min(summary.minimumFrameDelta, delta);
+      if (delta <= stalledFrameThreshold) summary.stalledDrawingFrameCount += 1;
+    }
+    previousCoverage = coverage;
+  }
+
+  for (const summary of strokeSummaries) {
+    if (!Number.isFinite(summary.minimumFrameDelta)) summary.minimumFrameDelta = 0;
   }
 
   return {
@@ -497,12 +535,20 @@ async function buildFrameProgression(drawing, source, framesPerSecond = 60) {
       durationRatio: 0.7,
       easing: "none",
     },
-    totalFrameCount,
+    totalDurationMs,
+    totalFrameCount: frameCount,
+    maximumConfiguredPenLiftMs: Math.max(
+      0,
+      ...drawing.strokes.map((stroke) => stroke.liftAfterMs),
+    ),
     maximumFrameDelta,
     minimumFrameDelta,
     maximumConsecutiveStalledFrames,
     maximumConsecutiveStalledDurationMs:
       maximumConsecutiveStalledFrames * frameDurationMs,
+    maximumConsecutiveDrawingStalledFrames,
+    maximumConsecutiveDrawingStalledDurationMs:
+      maximumConsecutiveDrawingStalledFrames * frameDurationMs,
     regressionFrameCount,
     finalCoverage: previousCoverage,
     strokes: strokeSummaries,
@@ -520,6 +566,7 @@ const houseStrokes = housePlan.strokes.map((stroke) => ({
   id: stroke.id,
   d: stroke.d,
   durationMs: stroke.drawMs,
+  liftAfterMs: stroke.liftAfterMs,
   width: stroke.strokeWidth,
 }));
 const goldMotionOrder =
@@ -534,7 +581,7 @@ if (
 ) {
   throw new Error("gold motionOrder must be a complete 1-based permutation of its strokes");
 }
-const goldStrokes = goldMotionOrder.map((sourceIndex) => {
+const goldStrokes = goldMotionOrder.map((sourceIndex, motionIndex) => {
   const stroke = goldPlan.strokes[sourceIndex - 1];
   return {
     id: stroke.id ?? `stroke-${sourceIndex}`,
@@ -544,6 +591,10 @@ const goldStrokes = goldMotionOrder.map((sourceIndex) => {
       goldPlan.rendering.minimumVisibleStrokeMs,
       stroke.suggestedDurationMs,
     ),
+    liftAfterMs:
+      motionIndex === goldMotionOrder.length - 1
+        ? 0
+        : (stroke.liftAfterMs ?? goldPlan.rendering.penLiftBetweenStrokesMs),
     width: stroke.maskWidth,
   };
 });
@@ -581,7 +632,16 @@ for (const [file, expected] of Object.entries(expectedSourceSha256)) {
 
 const report = { generatedAt: new Date().toISOString(), sourceSha256, cases: {} };
 for (const drawing of cases) {
-  const [source, traced] = await renderDrawing({ ...drawing, completed: false });
+  const runtimeCompletedStrokes = drawing.strokes.map((stroke) => ({
+    ...stroke,
+    progress: 1,
+    opacity: 1,
+  }));
+  const [source, traced] = await renderDrawing({
+    ...drawing,
+    strokes: runtimeCompletedStrokes,
+    completed: false,
+  });
   const [, completed] = await renderDrawing({ ...drawing, completed: true });
   const tracedMask = compare(source, traced);
   const completedFrame = compare(source, completed);
@@ -641,16 +701,37 @@ for (const [name, result] of Object.entries(report.cases)) {
   ];
   for (const frames of frameRuns) {
     if (frames.maximumFrameDelta > frames.thresholds.maximumFrameAlphaDelta) {
+      const peakStroke = frames.strokes?.reduce(
+        (peak, stroke) =>
+          !peak || stroke.maximumFrameDelta > peak.maximumFrameDelta ? stroke : peak,
+        null,
+      );
       throw new Error(
-        `${name} ${frames.framesPerSecond} fps alpha jump ${(frames.maximumFrameDelta * 100).toFixed(3)}% exceeds ${(frames.thresholds.maximumFrameAlphaDelta * 100).toFixed(1)}%`,
+        `${name} ${frames.framesPerSecond} fps alpha jump ${(frames.maximumFrameDelta * 100).toFixed(3)}%${peakStroke ? ` at ${peakStroke.strokeId}` : ""} exceeds ${(frames.thresholds.maximumFrameAlphaDelta * 100).toFixed(1)}%`,
+      );
+    }
+    if (
+      frames.maximumConsecutiveDrawingStalledDurationMs >
+      frames.thresholds.maximumDrawingStallDurationMs
+    ) {
+      throw new Error(
+        `${name} ${frames.framesPerSecond} fps has an unplanned drawing stall for ${frames.maximumConsecutiveDrawingStalledDurationMs.toFixed(1)} ms`,
       );
     }
     if (
       frames.maximumConsecutiveStalledDurationMs >
-      frames.thresholds.maximumStallDurationMs
+      frames.thresholds.maximumTotalStallDurationMs
     ) {
       throw new Error(
-        `${name} ${frames.framesPerSecond} fps stalls for ${frames.maximumConsecutiveStalledDurationMs.toFixed(1)} ms`,
+        `${name} ${frames.framesPerSecond} fps total stall lasts ${frames.maximumConsecutiveStalledDurationMs.toFixed(1)} ms`,
+      );
+    }
+    if (
+      frames.maximumConfiguredPenLiftMs >
+      frames.thresholds.maximumPenLiftDurationMs
+    ) {
+      throw new Error(
+        `${name} pen lift ${frames.maximumConfiguredPenLiftMs} ms exceeds ${frames.thresholds.maximumPenLiftDurationMs} ms`,
       );
     }
     if (frames.regressionFrameCount > 0) {
@@ -663,7 +744,7 @@ for (const [name, result] of Object.entries(report.cases)) {
       frames.thresholds.maximumFinalTraceMismatch
     ) {
       throw new Error(
-        `${name} ${frames.framesPerSecond} fps progression does not reach its traced mask coverage`,
+        `${name} ${frames.framesPerSecond} fps progression coverage ${frames.finalCoverage.toFixed(8)} does not match traced ${result.tracedMask.alphaWeightedCoverage.toFixed(8)}`,
       );
     }
   }

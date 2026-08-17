@@ -83,6 +83,8 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.doesNotMatch(css, /\.draw-reveal/);
   assert.match(css, /\.stroke-drawing \[data-draw-stroke\],[\s\S]*opacity: 0/);
   assert.match(css, /prefers-reduced-motion[\s\S]*\[data-mask-complete\][\s\S]*opacity: 1/);
+  assert.match(css, /prefers-reduced-motion[\s\S]*visibility: visible !important/);
+  assert.match(css, /prefers-reduced-motion[\s\S]*\[data-mask-complete\][\s\S]*opacity: 1 !important/);
 
   for (const layer of protectedStaticLayers) {
     assert.match(hero, new RegExp(`staticCopyLayers[\\s\\S]*${layer}`));
@@ -131,6 +133,25 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
   assert.ok(validation.cases.gold.temporalProgression.minSingleStrokeDelta >= 0.0005);
   assert.ok(validation.cases.gold.temporalProgression.precompletionCoverage >= 0.995);
   assert.ok(validation.cases.gold.temporalProgression.finalCompletionPop < 0.005);
+  const expectedHouseDrawingMs = housePlan.strokes.reduce(
+    (total, stroke) => total + stroke.drawMs + stroke.liftAfterMs,
+    0,
+  );
+  const expectedGoldDrawingMs = goldPlan.motionOrder.reduce((total, sourceIndex, index) => {
+    const stroke = goldPlan.strokes[sourceIndex - 1];
+    const drawMs = Math.max(
+      goldPlan.rendering.minimumVisibleStrokeMs,
+      stroke.suggestedDurationMs,
+    );
+    const liftMs = index === goldPlan.motionOrder.length - 1
+      ? 0
+      : (stroke.liftAfterMs ?? goldPlan.rendering.penLiftBetweenStrokesMs);
+    return total + drawMs + liftMs;
+  }, 0);
+  assert.equal(expectedHouseDrawingMs, 4495);
+  assert.equal(expectedGoldDrawingMs, 4618);
+  assert.equal(housePlan.timeline.loopMs, expectedHouseDrawingMs + 1690);
+  assert.equal(goldPlan.rendering.recommendedCycleMs, expectedGoldDrawingMs + 1690);
   for (const drawing of [validation.cases.house, validation.cases.gold]) {
     assert.equal(drawing.ownershipIsolation.unassignedSourcePixelCount, 0);
     assert.equal(drawing.ownershipIsolation.multiplyAssignedSourcePixelCount, 0);
@@ -144,10 +165,24 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
       [60, 100, 120],
     );
     for (const frames of frameRuns) {
+      assert.equal(
+        frames.totalDurationMs,
+        drawing === validation.cases.house
+          ? expectedHouseDrawingMs
+          : expectedGoldDrawingMs,
+      );
       assert.ok(frames.maximumFrameDelta <= frames.thresholds.maximumFrameAlphaDelta);
       assert.ok(
+        frames.maximumConsecutiveDrawingStalledDurationMs <=
+          frames.thresholds.maximumDrawingStallDurationMs,
+      );
+      assert.ok(
         frames.maximumConsecutiveStalledDurationMs <=
-          frames.thresholds.maximumStallDurationMs,
+          frames.thresholds.maximumTotalStallDurationMs,
+      );
+      assert.ok(
+        frames.maximumConfiguredPenLiftMs <=
+          frames.thresholds.maximumPenLiftDurationMs,
       );
       assert.equal(frames.regressionFrameCount, 0);
     }
