@@ -643,6 +643,9 @@ export default function HobanHero() {
         timeline.set(drawing, {
           attr: { "data-active-stroke": "0", "data-draw-phase": "drawing" },
         });
+        timeline.set(actor, {
+          attr: { "data-writing-phase": "preposition", "data-writing-stroke": "0" },
+        });
         timeline.to({}, { duration: 0.15 });
 
         const clampRotation = (rotation: number) =>

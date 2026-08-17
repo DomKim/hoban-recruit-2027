@@ -80,6 +80,7 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /transformOrigin: "16\.4% 97\.3%"/);
   assert.match(hero, /transformOrigin: "80% 95\.3%"/);
   assert.match(hero, /data-writing-phase/);
+  assert.match(hero, /data-writing-phase": "preposition"/);
   assert.match(hero, /const strokeRotations = strokes\.map/);
   assert.match(hero, /maximumRotation: 2\.1/);
   assert.match(hero, /maximumRotation: 2,/);
