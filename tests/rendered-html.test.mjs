@@ -132,16 +132,39 @@ test("draws the untouched house and gold artwork one logical stroke at a time", 
   assert.ok(validation.cases.gold.temporalProgression.precompletionCoverage >= 0.995);
   assert.ok(validation.cases.gold.temporalProgression.finalCompletionPop < 0.005);
   for (const drawing of [validation.cases.house, validation.cases.gold]) {
-    const frames = drawing.frameProgression;
-    assert.ok(frames.maximumFrameDelta <= frames.thresholds.maximumFrameAlphaDelta);
-    assert.ok(
-      frames.maximumConsecutiveStalledFrames <=
-        frames.thresholds.maximumConsecutiveStalledFrames,
+    assert.equal(drawing.ownershipIsolation.unassignedSourcePixelCount, 0);
+    assert.equal(drawing.ownershipIsolation.multiplyAssignedSourcePixelCount, 0);
+    assert.equal(drawing.ownershipIsolation.maximumPreRevealRatio, 0);
+    const frameRuns = [
+      drawing.frameProgression,
+      ...Object.values(drawing.highRefreshProgression),
+    ];
+    assert.deepEqual(
+      frameRuns.map((frames) => frames.framesPerSecond),
+      [60, 100, 120],
     );
-    assert.equal(frames.regressionFrameCount, 0);
+    for (const frames of frameRuns) {
+      assert.ok(frames.maximumFrameDelta <= frames.thresholds.maximumFrameAlphaDelta);
+      assert.ok(
+        frames.maximumConsecutiveStalledDurationMs <=
+          frames.thresholds.maximumStallDurationMs,
+      );
+      assert.equal(frames.regressionFrameCount, 0);
+    }
   }
   assert.equal(validation.cases.house.completedFrame.exact, true);
   assert.equal(validation.cases.gold.completedFrame.exact, true);
+
+  for (const [name, count] of [["house", 13], ["gold", 45]]) {
+    for (let index = 1; index <= count; index += 1) {
+      await access(
+        new URL(
+          `../public/assets/motion/ownership/${name}/${String(index).padStart(3, "0")}.png`,
+          import.meta.url,
+        ),
+      );
+    }
+  }
   assert.equal(
     validation.sourceSha256["/assets/isolated/sketch-house-body.png"],
     "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",

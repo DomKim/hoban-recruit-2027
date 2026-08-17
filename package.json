@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "generate:ownership": "node scripts/generate-stroke-ownership.mjs",
     "start": "next start",
     "test": "node --test tests/rendered-html.test.mjs",
     "verify:drawing": "node scripts/verify-drawing-assets.mjs",

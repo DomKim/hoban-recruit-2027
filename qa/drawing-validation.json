@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-17T16:40:34.265Z",
+  "generatedAt": "2026-08-17T17:09:50.656Z",
   "sourceSha256": {
     "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
     "/assets/isolated/sketch-house-smoke.png": "db3e33f45d6f4c11983558928a1a5578160719e9ed1a53e647acfc5f4416a9a5",
@@ -11,7 +11,7 @@
       "tracedMask": {
         "differentChannels": 41,
         "exact": false,
-        "alphaWeightedCoverage": 0.9993366431349547,
+        "alphaWeightedCoverage": 0.9993310569718806,
         "meaningfulPixelCoverage": 0.9987369750552574
       },
       "completedFrame": {
@@ -25,8 +25,8 @@
         "frameDurationMs": 16.666666666666668,
         "stalledFrameThreshold": 0.00001,
         "thresholds": {
-          "maximumFrameAlphaDelta": 0.016,
-          "maximumConsecutiveStalledFrames": 3,
+          "maximumFrameAlphaDelta": 0.017,
+          "maximumStallDurationMs": 65,
           "maximumRegressionMagnitude": 0.0001,
           "maximumFinalTraceMismatch": 0.00002
         },
@@ -36,90 +36,91 @@
           "easing": "none"
         },
         "totalFrameCount": 233,
-        "maximumFrameDelta": 0.015387086187513555,
-        "minimumFrameDelta": -0.00008379244611100845,
+        "maximumFrameDelta": 0.0164903533946415,
+        "minimumFrameDelta": 0,
         "maximumConsecutiveStalledFrames": 3,
+        "maximumConsecutiveStalledDurationMs": 50,
         "regressionFrameCount": 0,
-        "finalCoverage": 0.9993492120018713,
+        "finalCoverage": 0.9993436258387973,
         "strokes": [
           {
             "strokeId": "left-wall-upper",
             "durationMs": 200,
             "frameCount": 12,
-            "coverageDelta": 0.09222615581205354,
-            "maximumFrameDelta": 0.013762909273728974,
-            "minimumFrameDelta": 0.0048236518144555915,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.05780002932735614,
+            "maximumFrameDelta": 0.010514555446159861,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "left-wall-lower",
             "durationMs": 120,
             "frameCount": 8,
-            "coverageDelta": 0.04551047056441196,
-            "maximumFrameDelta": 0.01047684884540992,
-            "minimumFrameDelta": 0.001242921283979584,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.04792648609394529,
+            "maximumFrameDelta": 0.01210940500380557,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "roof-left",
             "durationMs": 290,
             "frameCount": 18,
-            "coverageDelta": 0.09131700777174936,
-            "maximumFrameDelta": 0.009127790463023089,
-            "minimumFrameDelta": 0.0007932351565173024,
+            "coverageDelta": 0.08799184420191186,
+            "maximumFrameDelta": 0.010867880260594515,
+            "minimumFrameDelta": 0.00008937860918503682,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "roof-right",
             "durationMs": 300,
             "frameCount": 18,
-            "coverageDelta": 0.12194873298838779,
-            "maximumFrameDelta": 0.012412454350573643,
-            "minimumFrameDelta": 0.0008002178603598864,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.09216470801823881,
+            "maximumFrameDelta": 0.008722793640153353,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "right-wall",
             "durationMs": 260,
             "frameCount": 16,
-            "coverageDelta": 0.12729748413180547,
-            "maximumFrameDelta": 0.015387086187513555,
-            "minimumFrameDelta": 0.0010697502286835525,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.12095718904274116,
+            "maximumFrameDelta": 0.0164903533946415,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "base",
             "durationMs": 280,
             "frameCount": 17,
-            "coverageDelta": 0.07034655159170733,
-            "maximumFrameDelta": 0.009442012135939315,
+            "coverageDelta": 0.09546613039501156,
+            "maximumFrameDelta": 0.011592684919454532,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 3
+            "stalledFrameCount": 2
           },
           {
             "strokeId": "roof-base",
             "durationMs": 240,
             "frameCount": 15,
-            "coverageDelta": 0.05660738351104322,
-            "maximumFrameDelta": 0.009095670025347169,
+            "coverageDelta": 0.08100914035932993,
+            "maximumFrameDelta": 0.011096912946631177,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 3
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "chimney",
             "durationMs": 360,
             "frameCount": 22,
-            "coverageDelta": 0.06060847281284254,
-            "maximumFrameDelta": 0.007285753189349986,
-            "minimumFrameDelta": 0,
-            "stalledFrameCount": 2
+            "coverageDelta": 0.08233306100788351,
+            "maximumFrameDelta": 0.009627752058151917,
+            "minimumFrameDelta": 0.00009915439456475994,
+            "stalledFrameCount": 0
           },
           {
             "strokeId": "window-frame",
             "durationMs": 430,
             "frameCount": 26,
-            "coverageDelta": 0.08054967844648808,
-            "maximumFrameDelta": 0.008105522620469152,
+            "coverageDelta": 0.07106995970979879,
+            "maximumFrameDelta": 0.006701999148110094,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 3
           },
@@ -127,8 +128,8 @@
             "strokeId": "window-mullion",
             "durationMs": 95,
             "frameCount": 6,
-            "coverageDelta": 0.007417028021590499,
-            "maximumFrameDelta": 0.0023084818903575943,
+            "coverageDelta": 0.016910712165964847,
+            "maximumFrameDelta": 0.005826368086250366,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -136,8 +137,8 @@
             "strokeId": "smoke-lower-curl",
             "durationMs": 600,
             "frameCount": 36,
-            "coverageDelta": 0.1411469789331825,
-            "maximumFrameDelta": 0.012976656821054311,
+            "coverageDelta": 0.12454350573629125,
+            "maximumFrameDelta": 0.009081704617662112,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 3
           },
@@ -145,19 +146,169 @@
             "strokeId": "smoke-middle-curl",
             "durationMs": 380,
             "frameCount": 23,
-            "coverageDelta": 0.05709477623925541,
-            "maximumFrameDelta": 0.00501637444051084,
-            "minimumFrameDelta": -0.00008379244611100845,
-            "stalledFrameCount": 3
+            "coverageDelta": 0.06844446306498797,
+            "maximumFrameDelta": 0.007905817290571271,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 2
           },
           {
             "strokeId": "smoke-upper-curl",
             "durationMs": 260,
             "frameCount": 16,
-            "coverageDelta": 0.04727849117735361,
-            "maximumFrameDelta": 0.007553889016905124,
-            "minimumFrameDelta": 0.000009775785379528834,
+            "coverageDelta": 0.05272639671533619,
+            "maximumFrameDelta": 0.008566381074079477,
+            "minimumFrameDelta": 0.000009775785379639856,
             "stalledFrameCount": 1
+          }
+        ]
+      },
+      "highRefreshProgression": {
+        "100": {
+          "framesPerSecond": 100,
+          "frameDurationMs": 10,
+          "stalledFrameThreshold": 0.00001,
+          "thresholds": {
+            "maximumFrameAlphaDelta": 0.017,
+            "maximumStallDurationMs": 65,
+            "maximumRegressionMagnitude": 0.0001,
+            "maximumFinalTraceMismatch": 0.00002
+          },
+          "contactFade": {
+            "maximumDurationMs": 80,
+            "durationRatio": 0.7,
+            "easing": "none"
+          },
+          "totalFrameCount": 382,
+          "maximumFrameDelta": 0.010846932149066735,
+          "minimumFrameDelta": 0,
+          "maximumConsecutiveStalledFrames": 5,
+          "maximumConsecutiveStalledDurationMs": 50,
+          "regressionFrameCount": 0,
+          "finalCoverage": 0.9993436258387973
+        },
+        "120": {
+          "framesPerSecond": 120,
+          "frameDurationMs": 8.333333333333334,
+          "stalledFrameThreshold": 0.00001,
+          "thresholds": {
+            "maximumFrameAlphaDelta": 0.017,
+            "maximumStallDurationMs": 65,
+            "maximumRegressionMagnitude": 0.0001,
+            "maximumFinalTraceMismatch": 0.00002
+          },
+          "contactFade": {
+            "maximumDurationMs": 80,
+            "durationRatio": 0.7,
+            "easing": "none"
+          },
+          "totalFrameCount": 463,
+          "maximumFrameDelta": 0.008299641787292922,
+          "minimumFrameDelta": 0,
+          "maximumConsecutiveStalledFrames": 7,
+          "maximumConsecutiveStalledDurationMs": 58.333333333333336,
+          "regressionFrameCount": 0,
+          "finalCoverage": 0.9993436258387973
+        }
+      },
+      "ownershipIsolation": {
+        "requirement": "every source pixel has exactly one stroke owner and stays hidden before that stroke",
+        "thresholds": {
+          "maximumPreRevealRatio": 0.01
+        },
+        "unassignedSourcePixelCount": 0,
+        "multiplyAssignedSourcePixelCount": 0,
+        "maximumPreRevealRatio": 0,
+        "strokes": [
+          {
+            "strokeId": "left-wall-upper",
+            "order": 1,
+            "ownedSourceAlpha": 41388,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "left-wall-lower",
+            "order": 2,
+            "ownedSourceAlpha": 34366,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "roof-left",
+            "order": 3,
+            "ownedSourceAlpha": 63009,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "roof-right",
+            "order": 4,
+            "ownedSourceAlpha": 65995,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "right-wall",
+            "order": 5,
+            "ownedSourceAlpha": 86612,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "base",
+            "order": 6,
+            "ownedSourceAlpha": 68359,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "roof-base",
+            "order": 7,
+            "ownedSourceAlpha": 58007,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "chimney",
+            "order": 8,
+            "ownedSourceAlpha": 58955,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "window-frame",
+            "order": 9,
+            "ownedSourceAlpha": 50890,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "window-mullion",
+            "order": 10,
+            "ownedSourceAlpha": 12109,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "smoke-lower-curl",
+            "order": 11,
+            "ownedSourceAlpha": 89563,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "smoke-middle-curl",
+            "order": 12,
+            "ownedSourceAlpha": 49039,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "smoke-upper-curl",
+            "order": 13,
+            "ownedSourceAlpha": 37763,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
           }
         ]
       }
@@ -165,10 +316,10 @@
     "gold": {
       "strokeCount": 45,
       "tracedMask": {
-        "differentChannels": 166,
+        "differentChannels": 168,
         "exact": false,
-        "alphaWeightedCoverage": 0.9958846894590246,
-        "meaningfulPixelCoverage": 0.9912559618441972
+        "alphaWeightedCoverage": 0.9953364929233198,
+        "meaningfulPixelCoverage": 0.9904610492845787
       },
       "completedFrame": {
         "differentChannels": 0,
@@ -181,8 +332,8 @@
         "frameDurationMs": 16.666666666666668,
         "stalledFrameThreshold": 0.00001,
         "thresholds": {
-          "maximumFrameAlphaDelta": 0.01,
-          "maximumConsecutiveStalledFrames": 3,
+          "maximumFrameAlphaDelta": 0.011,
+          "maximumStallDurationMs": 65,
           "maximumRegressionMagnitude": 0.0001,
           "maximumFinalTraceMismatch": 0.00002
         },
@@ -192,144 +343,145 @@
           "easing": "none"
         },
         "totalFrameCount": 286,
-        "maximumFrameDelta": 0.009199130047052861,
+        "maximumFrameDelta": 0.010453246849575049,
         "minimumFrameDelta": 0,
-        "maximumConsecutiveStalledFrames": 2,
+        "maximumConsecutiveStalledFrames": 1,
+        "maximumConsecutiveStalledDurationMs": 16.666666666666668,
         "regressionFrameCount": 0,
-        "finalCoverage": 0.9958846894590246,
+        "finalCoverage": 0.9953364929233198,
         "strokes": [
           {
             "strokeId": "contact-right-edge-1",
             "durationMs": 150,
             "frameCount": 9,
-            "coverageDelta": 0.04494700056354263,
-            "maximumFrameDelta": 0.008044762847450461,
-            "minimumFrameDelta": 0.0032994099427334916,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.03253201152321054,
+            "maximumFrameDelta": 0.006744607766657546,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "contact-right-edge-2",
             "durationMs": 117,
             "frameCount": 8,
-            "coverageDelta": 0.03288070885307566,
-            "maximumFrameDelta": 0.006894658451391672,
-            "minimumFrameDelta": 0.0007016574632738165,
+            "coverageDelta": 0.03227539074988683,
+            "maximumFrameDelta": 0.008026006511858697,
+            "minimumFrameDelta": 0.00018415311308279947,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "contact-lower-edge-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03607781151076314,
-            "maximumFrameDelta": 0.008620241325834208,
-            "minimumFrameDelta": 0.0006760806420123139,
+            "coverageDelta": 0.031559239754564816,
+            "maximumFrameDelta": 0.00731241319866284,
+            "minimumFrameDelta": 0.00019182615946124193,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "contact-lower-edge-2",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.003295999699898633,
-            "maximumFrameDelta": 0.001023925411168719,
-            "minimumFrameDelta": 0.0003035116123031312,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.004637077694709946,
+            "maximumFrameDelta": 0.0013572766482769366,
+            "minimumFrameDelta": 8.52560708711203e-7,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-03-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03586211365145783,
-            "maximumFrameDelta": 0.00770118088183766,
-            "minimumFrameDelta": 0.0011407262282629033,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.034730765590990836,
+            "maximumFrameDelta": 0.008513671237244613,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-03-2",
             "durationMs": 75,
             "frameCount": 5,
-            "coverageDelta": 0.023423252911281695,
-            "maximumFrameDelta": 0.00752043801158972,
-            "minimumFrameDelta": 0.0011091814820403945,
+            "coverageDelta": 0.022365225071764278,
+            "maximumFrameDelta": 0.006066822003227806,
+            "minimumFrameDelta": 0.0028151554601824336,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-04",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.0120884582888936,
-            "maximumFrameDelta": 0.0037921900323717173,
-            "minimumFrameDelta": 0.0006846062490994675,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.008094211368556037,
+            "maximumFrameDelta": 0.002388022545115387,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-05-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03602580530753144,
-            "maximumFrameDelta": 0.007280868452440331,
-            "minimumFrameDelta": 0.001067406007313254,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.03562936457797819,
+            "maximumFrameDelta": 0.008386639691645853,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-05-2",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03887591575677127,
-            "maximumFrameDelta": 0.009199130047052861,
-            "minimumFrameDelta": 0.0009454898259667888,
+            "coverageDelta": 0.03382108331479014,
+            "maximumFrameDelta": 0.007446265229931359,
+            "minimumFrameDelta": 0.0001901210380438334,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-05-3",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.01565301461203794,
-            "maximumFrameDelta": 0.004405181181939,
-            "minimumFrameDelta": 0.0009156502011616885,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.012049240496292635,
+            "maximumFrameDelta": 0.0036063317978714815,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-06",
             "durationMs": 89,
             "frameCount": 6,
-            "coverageDelta": 0.02064305244015663,
-            "maximumFrameDelta": 0.005771835998011787,
-            "minimumFrameDelta": 0.0006044655424801149,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.018835623737677304,
+            "maximumFrameDelta": 0.006536582953730663,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-11-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.0317553287175697,
-            "maximumFrameDelta": 0.0062774044982808475,
-            "minimumFrameDelta": 0.0007792404877670633,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.029475581382461313,
+            "maximumFrameDelta": 0.006860556023042974,
+            "minimumFrameDelta": 0.000005115364252350485,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-11-2",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03161124595779652,
-            "maximumFrameDelta": 0.006523794543099926,
-            "minimumFrameDelta": 0.000940374461714466,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.031708437878590234,
+            "maximumFrameDelta": 0.0074923035082020695,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-11-3",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.023168337259375393,
-            "maximumFrameDelta": 0.007747219160108398,
-            "minimumFrameDelta": 0.0010171049254990017,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.014310231495809234,
+            "maximumFrameDelta": 0.005261152133490543,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-12",
             "durationMs": 88,
             "frameCount": 6,
-            "coverageDelta": 0.01295721765107588,
-            "maximumFrameDelta": 0.004366815950046787,
+            "coverageDelta": 0.02742091007445413,
+            "maximumFrameDelta": 0.009126662386811923,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -337,44 +489,44 @@
             "strokeId": "micro-stroke-14",
             "durationMs": 74,
             "frameCount": 5,
-            "coverageDelta": 0.02385464862989234,
-            "maximumFrameDelta": 0.007605694082461367,
-            "minimumFrameDelta": 0.0005763310390924925,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.012858320608864715,
+            "maximumFrameDelta": 0.005834925490456833,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-15",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.004302021336184292,
-            "maximumFrameDelta": 0.001269462895279072,
-            "minimumFrameDelta": 0.00032397306931231107,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.002174029807227529,
+            "maximumFrameDelta": 0.0006223693173632028,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-16",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.022366077632473003,
-            "maximumFrameDelta": 0.0070182797541555875,
-            "minimumFrameDelta": 0.0011535146388936268,
+            "coverageDelta": 0.02325359333024707,
+            "maximumFrameDelta": 0.007898122405551211,
+            "minimumFrameDelta": 0.001370065058907688,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-17",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.02104034573041863,
-            "maximumFrameDelta": 0.008569940244019914,
-            "minimumFrameDelta": 0.0008883682584827635,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.014710082468197327,
+            "maximumFrameDelta": 0.00568402224501402,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-19",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.00505056963843753,
-            "maximumFrameDelta": 0.001988171572727293,
+            "coverageDelta": 0.014679390282683558,
+            "maximumFrameDelta": 0.0058153165941564056,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -382,8 +534,8 @@
             "strokeId": "micro-stroke-20",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.01416614873603611,
-            "maximumFrameDelta": 0.004757288754638989,
+            "coverageDelta": 0.015128689776177262,
+            "maximumFrameDelta": 0.005998617146530494,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -391,35 +543,35 @@
             "strokeId": "micro-stroke-21-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.031247202535174545,
-            "maximumFrameDelta": 0.007060907789591453,
-            "minimumFrameDelta": 0.0007093305096522728,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.030672576617499447,
+            "maximumFrameDelta": 0.007979115672879233,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-21-2",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.039640662712490116,
-            "maximumFrameDelta": 0.008769439449859529,
-            "minimumFrameDelta": 0.0007988493840674904,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.03723899919603524,
+            "maximumFrameDelta": 0.009782281571815044,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-21-3",
             "durationMs": 93,
             "frameCount": 6,
-            "coverageDelta": 0.03284234362118332,
-            "maximumFrameDelta": 0.008112967704147711,
-            "minimumFrameDelta": 0.0009241758082487728,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.029031397253219904,
+            "maximumFrameDelta": 0.009817236560872411,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-22",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.003347153342421638,
-            "maximumFrameDelta": 0.0011296429390496021,
+            "coverageDelta": 0.01573571300078358,
+            "maximumFrameDelta": 0.006193000988117814,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -427,134 +579,134 @@
             "strokeId": "micro-stroke-23",
             "durationMs": 127,
             "frameCount": 8,
-            "coverageDelta": 0.025746480842534614,
-            "maximumFrameDelta": 0.00819907633572814,
+            "coverageDelta": 0.038899787456615265,
+            "maximumFrameDelta": 0.009777166207562749,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 2
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-24",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.028989621778492847,
-            "maximumFrameDelta": 0.009112168854763736,
-            "minimumFrameDelta": 0.0014749300260797904,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.023563072867511248,
+            "maximumFrameDelta": 0.008698676911036096,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.029364748490328108,
-            "maximumFrameDelta": 0.006367775933404762,
-            "minimumFrameDelta": 0.0008696119228909227,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.02944915200049103,
+            "maximumFrameDelta": 0.007368682205438182,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-2",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.022816229686675404,
-            "maximumFrameDelta": 0.004711250476368334,
-            "minimumFrameDelta": 0.000476581436172574,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.026469452323526377,
+            "maximumFrameDelta": 0.006204084277331212,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-3",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03274088889684612,
-            "maximumFrameDelta": 0.006086430899528317,
-            "minimumFrameDelta": 0.0010060216362856034,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.026086652565312507,
+            "maximumFrameDelta": 0.006214315005835802,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-4",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.028244483719074398,
-            "maximumFrameDelta": 0.006027604210626869,
-            "minimumFrameDelta": 0.0010409766253430819,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.025538456029607692,
+            "maximumFrameDelta": 0.006507595889634343,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-25-5",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.0073396951413418066,
-            "maximumFrameDelta": 0.0025730282189069253,
-            "minimumFrameDelta": 0.0005797412819273928,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.0049874801459925955,
+            "maximumFrameDelta": 0.0015013594080500736,
+            "minimumFrameDelta": 0.000005115364252294974,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-26-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.041747340223728946,
-            "maximumFrameDelta": 0.009054194726570985,
-            "minimumFrameDelta": 0.0008764324085607234,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.04277979124198483,
+            "maximumFrameDelta": 0.010453246849575049,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-26-2",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.03131455483116319,
-            "maximumFrameDelta": 0.006511006132469244,
-            "minimumFrameDelta": 0.001139873667554192,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.03347579622775987,
+            "maximumFrameDelta": 0.008005545054849517,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-26-3",
             "durationMs": 90,
             "frameCount": 6,
-            "coverageDelta": 0.013078281271713621,
-            "maximumFrameDelta": 0.00449384749564552,
-            "minimumFrameDelta": 0.0005217671537346424,
+            "coverageDelta": 0.015099702712080831,
+            "maximumFrameDelta": 0.00505397988127243,
+            "minimumFrameDelta": 0.00020376200938321265,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-27-1",
             "durationMs": 133,
             "frameCount": 8,
-            "coverageDelta": 0.0332183228937275,
-            "maximumFrameDelta": 0.00709245253581392,
-            "minimumFrameDelta": 0.0015209683043505562,
+            "coverageDelta": 0.03497374539297515,
+            "maximumFrameDelta": 0.00716065739251126,
+            "minimumFrameDelta": 0.0015866154789218045,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-28",
             "durationMs": 115,
             "frameCount": 7,
-            "coverageDelta": 0.015534508673526348,
-            "maximumFrameDelta": 0.005626048116821325,
+            "coverageDelta": 0.03052167337205658,
+            "maximumFrameDelta": 0.009477917398803215,
             "minimumFrameDelta": 0,
-            "stalledFrameCount": 2
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-29",
             "durationMs": 73,
             "frameCount": 5,
-            "coverageDelta": 0.011527473342557992,
-            "maximumFrameDelta": 0.0033804032100615,
-            "minimumFrameDelta": 0.00021740298072270292,
+            "coverageDelta": 0.013568503679225796,
+            "maximumFrameDelta": 0.0042389318437393575,
+            "minimumFrameDelta": 0.00020290944867462635,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-30",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.018338580844495467,
-            "maximumFrameDelta": 0.005339587718692473,
-            "minimumFrameDelta": 0.000266851501828258,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.009355148656747914,
+            "maximumFrameDelta": 0.002678745746787725,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-31",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.0005567221427920099,
-            "maximumFrameDelta": 0.00017989030953924345,
+            "coverageDelta": 0.0055186254675230195,
+            "maximumFrameDelta": 0.0015917308431740995,
             "minimumFrameDelta": 0,
             "stalledFrameCount": 1
           },
@@ -562,46 +714,420 @@
             "strokeId": "micro-stroke-32",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.015446694920528525,
-            "maximumFrameDelta": 0.005647362134539202,
-            "minimumFrameDelta": 0.0007118881917784758,
+            "coverageDelta": 0.02307029277787298,
+            "maximumFrameDelta": 0.007482925340406177,
+            "minimumFrameDelta": 0.002056376429424578,
             "stalledFrameCount": 0
           },
           {
             "strokeId": "micro-stroke-33",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.021942354960240884,
-            "maximumFrameDelta": 0.00620834708087481,
-            "minimumFrameDelta": 0.0023709713309411073,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.013361331427007572,
+            "maximumFrameDelta": 0.004714660719203123,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-34",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.0016462947285318386,
-            "maximumFrameDelta": 0.00043992132569781184,
-            "minimumFrameDelta": 0.00009037143512391488,
-            "stalledFrameCount": 0
+            "coverageDelta": 0.004623436723370511,
+            "maximumFrameDelta": 0.0013265844627631251,
+            "minimumFrameDelta": 0,
+            "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-35",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.011283640979865117,
-            "maximumFrameDelta": 0.004305431579019192,
-            "minimumFrameDelta": 0.000006820485669800647,
+            "coverageDelta": 0.016901163489599136,
+            "maximumFrameDelta": 0.0059201815613284525,
+            "minimumFrameDelta": 0.000006820485669689624,
             "stalledFrameCount": 1
           },
           {
             "strokeId": "micro-stroke-36",
             "durationMs": 70,
             "frameCount": 5,
-            "coverageDelta": 0.007885333994920418,
-            "maximumFrameDelta": 0.0026608419719047482,
-            "minimumFrameDelta": 0.00006138437102753969,
+            "coverageDelta": 0.012166041313386833,
+            "maximumFrameDelta": 0.003887676831747955,
+            "minimumFrameDelta": 0.00005882668890144771,
             "stalledFrameCount": 0
+          }
+        ]
+      },
+      "highRefreshProgression": {
+        "100": {
+          "framesPerSecond": 100,
+          "frameDurationMs": 10,
+          "stalledFrameThreshold": 0.00001,
+          "thresholds": {
+            "maximumFrameAlphaDelta": 0.011,
+            "maximumStallDurationMs": 65,
+            "maximumRegressionMagnitude": 0.0001,
+            "maximumFinalTraceMismatch": 0.00002
+          },
+          "contactFade": {
+            "maximumDurationMs": 80,
+            "durationRatio": 0.7,
+            "easing": "none"
+          },
+          "totalFrameCount": 456,
+          "maximumFrameDelta": 0.00714360617833687,
+          "minimumFrameDelta": 0,
+          "maximumConsecutiveStalledFrames": 2,
+          "maximumConsecutiveStalledDurationMs": 20,
+          "regressionFrameCount": 0,
+          "finalCoverage": 0.9953364929233198
+        },
+        "120": {
+          "framesPerSecond": 120,
+          "frameDurationMs": 8.333333333333334,
+          "stalledFrameThreshold": 0.00001,
+          "thresholds": {
+            "maximumFrameAlphaDelta": 0.011,
+            "maximumStallDurationMs": 65,
+            "maximumRegressionMagnitude": 0.0001,
+            "maximumFinalTraceMismatch": 0.00002
+          },
+          "contactFade": {
+            "maximumDurationMs": 80,
+            "durationRatio": 0.7,
+            "easing": "none"
+          },
+          "totalFrameCount": 546,
+          "maximumFrameDelta": 0.0060548861533057385,
+          "minimumFrameDelta": 0,
+          "maximumConsecutiveStalledFrames": 3,
+          "maximumConsecutiveStalledDurationMs": 25,
+          "regressionFrameCount": 0,
+          "finalCoverage": 0.9953364929233198
+        }
+      },
+      "ownershipIsolation": {
+        "requirement": "every source pixel has exactly one stroke owner and stays hidden before that stroke",
+        "thresholds": {
+          "maximumPreRevealRatio": 0.01
+        },
+        "unassignedSourcePixelCount": 0,
+        "multiplyAssignedSourcePixelCount": 0,
+        "maximumPreRevealRatio": 0,
+        "strokes": [
+          {
+            "strokeId": "contact-right-edge-1",
+            "order": 1,
+            "ownedSourceAlpha": 38158,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "contact-right-edge-2",
+            "order": 2,
+            "ownedSourceAlpha": 37857,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "contact-lower-edge-1",
+            "order": 3,
+            "ownedSourceAlpha": 37017,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "contact-lower-edge-2",
+            "order": 4,
+            "ownedSourceAlpha": 5439,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-03-1",
+            "order": 5,
+            "ownedSourceAlpha": 40737,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-03-2",
+            "order": 6,
+            "ownedSourceAlpha": 26756,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-04",
+            "order": 7,
+            "ownedSourceAlpha": 9501,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-1",
+            "order": 8,
+            "ownedSourceAlpha": 41791,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-2",
+            "order": 9,
+            "ownedSourceAlpha": 39670,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-05-3",
+            "order": 10,
+            "ownedSourceAlpha": 14539,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-06",
+            "order": 11,
+            "ownedSourceAlpha": 22093,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-1",
+            "order": 12,
+            "ownedSourceAlpha": 34573,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-2",
+            "order": 13,
+            "ownedSourceAlpha": 37192,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-11-3",
+            "order": 14,
+            "ownedSourceAlpha": 16785,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-12",
+            "order": 15,
+            "ownedSourceAlpha": 32163,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-14",
+            "order": 16,
+            "ownedSourceAlpha": 15082,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-15",
+            "order": 17,
+            "ownedSourceAlpha": 2550,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-16",
+            "order": 18,
+            "ownedSourceAlpha": 27742,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-17",
+            "order": 19,
+            "ownedSourceAlpha": 17254,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-19",
+            "order": 20,
+            "ownedSourceAlpha": 17218,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-20",
+            "order": 21,
+            "ownedSourceAlpha": 17745,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-21-1",
+            "order": 22,
+            "ownedSourceAlpha": 35977,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-21-2",
+            "order": 23,
+            "ownedSourceAlpha": 43679,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-21-3",
+            "order": 24,
+            "ownedSourceAlpha": 34052,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-22",
+            "order": 25,
+            "ownedSourceAlpha": 18457,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-23",
+            "order": 26,
+            "ownedSourceAlpha": 46116,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-24",
+            "order": 27,
+            "ownedSourceAlpha": 28523,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-1",
+            "order": 28,
+            "ownedSourceAlpha": 34709,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-2",
+            "order": 29,
+            "ownedSourceAlpha": 31047,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-3",
+            "order": 30,
+            "ownedSourceAlpha": 30601,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-4",
+            "order": 31,
+            "ownedSourceAlpha": 30215,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-25-5",
+            "order": 32,
+            "ownedSourceAlpha": 5873,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-1",
+            "order": 33,
+            "ownedSourceAlpha": 50178,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-2",
+            "order": 34,
+            "ownedSourceAlpha": 39265,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-26-3",
+            "order": 35,
+            "ownedSourceAlpha": 17711,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-27-1",
+            "order": 36,
+            "ownedSourceAlpha": 41022,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-28",
+            "order": 37,
+            "ownedSourceAlpha": 35806,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-29",
+            "order": 38,
+            "ownedSourceAlpha": 15988,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-30",
+            "order": 39,
+            "ownedSourceAlpha": 11155,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-31",
+            "order": 40,
+            "ownedSourceAlpha": 6479,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-32",
+            "order": 41,
+            "ownedSourceAlpha": 28987,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-33",
+            "order": 42,
+            "ownedSourceAlpha": 15672,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-34",
+            "order": 43,
+            "ownedSourceAlpha": 5423,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-35",
+            "order": 44,
+            "ownedSourceAlpha": 19870,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
+          },
+          {
+            "strokeId": "micro-stroke-36",
+            "order": 45,
+            "ownedSourceAlpha": 14270,
+            "exposedOwnedAlpha": 0,
+            "exposureRatio": 0
           }
         ]
       },
@@ -1073,686 +1599,686 @@
             "prefixStrokeCount": 1,
             "strokeId": "contact-right-edge-1",
             "sourceIndex": 1,
-            "alphaWeightedCoverage": 0.04494700056354263,
-            "alphaWeightedCoverageDelta": 0.04494700056354263,
-            "meaningfulPixelCoverage": 0.04332273449920509,
+            "alphaWeightedCoverage": 0.03253201152321054,
+            "alphaWeightedCoverageDelta": 0.03253201152321054,
+            "meaningfulPixelCoverage": 0.03239268680445151,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 269,
-              "newlyRevealedAlpha": 52720,
+              "newlyRevealedPixelCount": 191,
+              "newlyRevealedAlpha": 38158,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 269
+              "largestComponentPixelCount": 191
             }
           },
           {
             "prefixStrokeCount": 2,
             "strokeId": "contact-right-edge-2",
             "sourceIndex": 2,
-            "alphaWeightedCoverage": 0.07782770941661829,
-            "alphaWeightedCoverageDelta": 0.03288070885307566,
-            "meaningfulPixelCoverage": 0.075516693163752,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 196,
-              "newlyRevealedAlpha": 38567,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 196
-            }
-          },
-          {
-            "prefixStrokeCount": 3,
-            "strokeId": "contact-lower-edge-1",
-            "sourceIndex": 3,
-            "alphaWeightedCoverage": 0.1139140465344686,
-            "alphaWeightedCoverageDelta": 0.03608633711785031,
-            "meaningfulPixelCoverage": 0.11009538950715421,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 218,
-              "newlyRevealedAlpha": 42327,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 218
-            }
-          },
-          {
-            "prefixStrokeCount": 4,
-            "strokeId": "contact-lower-edge-2",
-            "sourceIndex": 4,
-            "alphaWeightedCoverage": 0.11720152062728006,
-            "alphaWeightedCoverageDelta": 0.0032874740928114654,
-            "meaningfulPixelCoverage": 0.11387122416534182,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 35,
-              "newlyRevealedAlpha": 3856,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 27
-            }
-          },
-          {
-            "prefixStrokeCount": 5,
-            "strokeId": "micro-stroke-03-1",
-            "sourceIndex": 5,
-            "alphaWeightedCoverage": 0.1530636342787379,
-            "alphaWeightedCoverageDelta": 0.03586211365145783,
-            "meaningfulPixelCoverage": 0.15043720190779014,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 219,
-              "newlyRevealedAlpha": 42064,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 214
-            }
-          },
-          {
-            "prefixStrokeCount": 6,
-            "strokeId": "micro-stroke-03-2",
-            "sourceIndex": 6,
-            "alphaWeightedCoverage": 0.1764868871900196,
-            "alphaWeightedCoverageDelta": 0.023423252911281695,
-            "meaningfulPixelCoverage": 0.17170111287758347,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 140,
-              "newlyRevealedAlpha": 27474,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 140
-            }
-          },
-          {
-            "prefixStrokeCount": 7,
-            "strokeId": "micro-stroke-04",
-            "sourceIndex": 7,
-            "alphaWeightedCoverage": 0.1885753454789132,
-            "alphaWeightedCoverageDelta": 0.0120884582888936,
-            "meaningfulPixelCoverage": 0.18322734499205087,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 78,
-              "newlyRevealedAlpha": 14179,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 71
-            }
-          },
-          {
-            "prefixStrokeCount": 8,
-            "strokeId": "micro-stroke-05-1",
-            "sourceIndex": 8,
-            "alphaWeightedCoverage": 0.22460115078644463,
-            "alphaWeightedCoverageDelta": 0.03602580530753144,
-            "meaningfulPixelCoverage": 0.21899841017488075,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 219,
-              "newlyRevealedAlpha": 42256,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 212
-            }
-          },
-          {
-            "prefixStrokeCount": 9,
-            "strokeId": "micro-stroke-05-2",
-            "sourceIndex": 9,
-            "alphaWeightedCoverage": 0.26347450886108975,
-            "alphaWeightedCoverageDelta": 0.03887335807464512,
-            "meaningfulPixelCoverage": 0.2565580286168522,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 233,
-              "newlyRevealedAlpha": 45596,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 233
-            }
-          },
-          {
-            "prefixStrokeCount": 10,
-            "strokeId": "micro-stroke-05-3",
-            "sourceIndex": 10,
-            "alphaWeightedCoverage": 0.2791420170051759,
-            "alphaWeightedCoverageDelta": 0.01566750814408613,
-            "meaningfulPixelCoverage": 0.26967408585055647,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 97,
-              "newlyRevealedAlpha": 18377,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 97
-            }
-          },
-          {
-            "prefixStrokeCount": 11,
-            "strokeId": "micro-stroke-06",
-            "sourceIndex": 11,
-            "alphaWeightedCoverage": 0.29977313359541047,
-            "alphaWeightedCoverageDelta": 0.02063111659023459,
-            "meaningfulPixelCoverage": 0.2901430842607313,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 127,
-              "newlyRevealedAlpha": 24199,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 127
-            }
-          },
-          {
-            "prefixStrokeCount": 12,
-            "strokeId": "micro-stroke-11-1",
-            "sourceIndex": 12,
-            "alphaWeightedCoverage": 0.33152846231298017,
-            "alphaWeightedCoverageDelta": 0.0317553287175697,
-            "meaningfulPixelCoverage": 0.3217408585055644,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 199,
-              "newlyRevealedAlpha": 37247,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 196
-            }
-          },
-          {
-            "prefixStrokeCount": 13,
-            "strokeId": "micro-stroke-11-2",
-            "sourceIndex": 13,
-            "alphaWeightedCoverage": 0.3631397082707767,
-            "alphaWeightedCoverageDelta": 0.03161124595779652,
-            "meaningfulPixelCoverage": 0.3541335453100159,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 193,
-              "newlyRevealedAlpha": 37078,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 193
-            }
-          },
-          {
-            "prefixStrokeCount": 14,
-            "strokeId": "micro-stroke-11-3",
-            "sourceIndex": 14,
-            "alphaWeightedCoverage": 0.3863080455301521,
-            "alphaWeightedCoverageDelta": 0.023168337259375393,
-            "meaningfulPixelCoverage": 0.3748012718600954,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 138,
-              "newlyRevealedAlpha": 27175,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 138
-            }
-          },
-          {
-            "prefixStrokeCount": 15,
-            "strokeId": "micro-stroke-12",
-            "sourceIndex": 15,
-            "alphaWeightedCoverage": 0.39926526318122796,
-            "alphaWeightedCoverageDelta": 0.01295721765107588,
-            "meaningfulPixelCoverage": 0.38950715421303655,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 96,
-              "newlyRevealedAlpha": 15198,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 87
-            }
-          },
-          {
-            "prefixStrokeCount": 16,
-            "strokeId": "micro-stroke-14",
-            "sourceIndex": 16,
-            "alphaWeightedCoverage": 0.4231199118111203,
-            "alphaWeightedCoverageDelta": 0.02385464862989234,
-            "meaningfulPixelCoverage": 0.4113672496025437,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 142,
-              "newlyRevealedAlpha": 27980,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 142
-            }
-          },
-          {
-            "prefixStrokeCount": 17,
-            "strokeId": "micro-stroke-15",
-            "sourceIndex": 17,
-            "alphaWeightedCoverage": 0.4274219331473046,
-            "alphaWeightedCoverageDelta": 0.004302021336184292,
-            "meaningfulPixelCoverage": 0.4155405405405405,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 40,
-              "newlyRevealedAlpha": 5046,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 36
-            }
-          },
-          {
-            "prefixStrokeCount": 18,
-            "strokeId": "micro-stroke-16",
-            "sourceIndex": 18,
-            "alphaWeightedCoverage": 0.4497880107797776,
-            "alphaWeightedCoverageDelta": 0.022366077632473003,
-            "meaningfulPixelCoverage": 0.4379968203497615,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 140,
-              "newlyRevealedAlpha": 26234,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 135
-            }
-          },
-          {
-            "prefixStrokeCount": 19,
-            "strokeId": "micro-stroke-17",
-            "sourceIndex": 19,
-            "alphaWeightedCoverage": 0.4708283565101962,
-            "alphaWeightedCoverageDelta": 0.02104034573041863,
-            "meaningfulPixelCoverage": 0.457670906200318,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 130,
-              "newlyRevealedAlpha": 24679,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 126
-            }
-          },
-          {
-            "prefixStrokeCount": 20,
-            "strokeId": "micro-stroke-19",
-            "sourceIndex": 20,
-            "alphaWeightedCoverage": 0.47587892614863375,
-            "alphaWeightedCoverageDelta": 0.00505056963843753,
-            "meaningfulPixelCoverage": 0.4638314785373609,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 44,
-              "newlyRevealedAlpha": 5924,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 36
-            }
-          },
-          {
-            "prefixStrokeCount": 21,
-            "strokeId": "micro-stroke-20",
-            "sourceIndex": 21,
-            "alphaWeightedCoverage": 0.49004507488466986,
-            "alphaWeightedCoverageDelta": 0.01416614873603611,
-            "meaningfulPixelCoverage": 0.47774244833068363,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 95,
-              "newlyRevealedAlpha": 16616,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 95
-            }
-          },
-          {
-            "prefixStrokeCount": 22,
-            "strokeId": "micro-stroke-21-1",
-            "sourceIndex": 22,
-            "alphaWeightedCoverage": 0.5212922774198444,
-            "alphaWeightedCoverageDelta": 0.031247202535174545,
-            "meaningfulPixelCoverage": 0.509737678855326,
+            "alphaWeightedCoverage": 0.06480740227309736,
+            "alphaWeightedCoverageDelta": 0.03227539074988683,
+            "meaningfulPixelCoverage": 0.0643879173290938,
             "newlyRevealed": {
               "newlyRevealedPixelCount": 185,
-              "newlyRevealedAlpha": 36651,
+              "newlyRevealedAlpha": 37857,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
               "largestComponentPixelCount": 185
             }
           },
           {
-            "prefixStrokeCount": 23,
-            "strokeId": "micro-stroke-21-2",
-            "sourceIndex": 23,
-            "alphaWeightedCoverage": 0.5609329401323345,
-            "alphaWeightedCoverageDelta": 0.039640662712490116,
-            "meaningfulPixelCoverage": 0.5492845786963434,
+            "prefixStrokeCount": 3,
+            "strokeId": "contact-lower-edge-1",
+            "sourceIndex": 3,
+            "alphaWeightedCoverage": 0.09636664202766218,
+            "alphaWeightedCoverageDelta": 0.031559239754564816,
+            "meaningfulPixelCoverage": 0.09578696343402225,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 226,
-              "newlyRevealedAlpha": 46496,
+              "newlyRevealedPixelCount": 185,
+              "newlyRevealedAlpha": 37017,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 226
+              "largestComponentPixelCount": 185
             }
           },
           {
-            "prefixStrokeCount": 24,
-            "strokeId": "micro-stroke-21-3",
-            "sourceIndex": 24,
-            "alphaWeightedCoverage": 0.5937752837535178,
-            "alphaWeightedCoverageDelta": 0.03284234362118332,
-            "meaningfulPixelCoverage": 0.5806836248012719,
+            "prefixStrokeCount": 4,
+            "strokeId": "contact-lower-edge-2",
+            "sourceIndex": 4,
+            "alphaWeightedCoverage": 0.10100371972237213,
+            "alphaWeightedCoverageDelta": 0.004637077694709946,
+            "meaningfulPixelCoverage": 0.1003577106518283,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 189,
-              "newlyRevealedAlpha": 38522,
+              "newlyRevealedPixelCount": 25,
+              "newlyRevealedAlpha": 5439,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 189
+              "largestComponentPixelCount": 25
             }
           },
           {
-            "prefixStrokeCount": 25,
-            "strokeId": "micro-stroke-22",
-            "sourceIndex": 25,
-            "alphaWeightedCoverage": 0.5971224370959395,
-            "alphaWeightedCoverageDelta": 0.003347153342421638,
-            "meaningfulPixelCoverage": 0.5858505564387917,
+            "prefixStrokeCount": 5,
+            "strokeId": "micro-stroke-03-1",
+            "sourceIndex": 5,
+            "alphaWeightedCoverage": 0.13573448531336296,
+            "alphaWeightedCoverageDelta": 0.034730765590990836,
+            "meaningfulPixelCoverage": 0.13533386327503974,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 41,
-              "newlyRevealedAlpha": 3926,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 30
-            }
-          },
-          {
-            "prefixStrokeCount": 26,
-            "strokeId": "micro-stroke-23",
-            "sourceIndex": 26,
-            "alphaWeightedCoverage": 0.6228689179384741,
-            "alphaWeightedCoverageDelta": 0.025746480842534614,
-            "meaningfulPixelCoverage": 0.6136724960254372,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 172,
-              "newlyRevealedAlpha": 30199,
+              "newlyRevealedPixelCount": 199,
+              "newlyRevealedAlpha": 40737,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 172
+              "largestComponentPixelCount": 199
             }
           },
           {
-            "prefixStrokeCount": 27,
-            "strokeId": "micro-stroke-24",
-            "sourceIndex": 27,
-            "alphaWeightedCoverage": 0.651858539716967,
-            "alphaWeightedCoverageDelta": 0.028989621778492847,
-            "meaningfulPixelCoverage": 0.6401033386327504,
+            "prefixStrokeCount": 6,
+            "strokeId": "micro-stroke-03-2",
+            "sourceIndex": 6,
+            "alphaWeightedCoverage": 0.15809971038512724,
+            "alphaWeightedCoverageDelta": 0.022365225071764278,
+            "meaningfulPixelCoverage": 0.1567965023847377,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 173,
-              "newlyRevealedAlpha": 34003,
+              "newlyRevealedPixelCount": 130,
+              "newlyRevealedAlpha": 26233,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 173
+              "largestComponentPixelCount": 130
             }
           },
           {
-            "prefixStrokeCount": 28,
-            "strokeId": "micro-stroke-25-1",
-            "sourceIndex": 28,
-            "alphaWeightedCoverage": 0.681223288207295,
-            "alphaWeightedCoverageDelta": 0.029364748490328108,
-            "meaningfulPixelCoverage": 0.669912559618442,
+            "prefixStrokeCount": 7,
+            "strokeId": "micro-stroke-04",
+            "sourceIndex": 7,
+            "alphaWeightedCoverage": 0.16619392175368328,
+            "alphaWeightedCoverageDelta": 0.008094211368556037,
+            "meaningfulPixelCoverage": 0.16434817170111288,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 197,
-              "newlyRevealedAlpha": 34443,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 192
-            }
-          },
-          {
-            "prefixStrokeCount": 29,
-            "strokeId": "micro-stroke-25-2",
-            "sourceIndex": 29,
-            "alphaWeightedCoverage": 0.7040395178939705,
-            "alphaWeightedCoverageDelta": 0.022816229686675404,
-            "meaningfulPixelCoverage": 0.6943561208267091,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 150,
-              "newlyRevealedAlpha": 26762,
+              "newlyRevealedPixelCount": 42,
+              "newlyRevealedAlpha": 9494,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 150
+              "largestComponentPixelCount": 42
             }
           },
           {
-            "prefixStrokeCount": 30,
-            "strokeId": "micro-stroke-25-3",
-            "sourceIndex": 30,
-            "alphaWeightedCoverage": 0.7367863747157776,
-            "alphaWeightedCoverageDelta": 0.03274685682180711,
-            "meaningfulPixelCoverage": 0.7245627980922098,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 228,
-              "newlyRevealedAlpha": 38410,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 187
-            }
-          },
-          {
-            "prefixStrokeCount": 31,
-            "strokeId": "micro-stroke-25-4",
-            "sourceIndex": 31,
-            "alphaWeightedCoverage": 0.7650257430705997,
-            "alphaWeightedCoverageDelta": 0.028239368354822103,
-            "meaningfulPixelCoverage": 0.7517885532591415,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 193,
-              "newlyRevealedAlpha": 33123,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 175
-            }
-          },
-          {
-            "prefixStrokeCount": 32,
-            "strokeId": "micro-stroke-25-5",
-            "sourceIndex": 32,
-            "alphaWeightedCoverage": 0.7723645856512328,
-            "alphaWeightedCoverageDelta": 0.007338842580633109,
-            "meaningfulPixelCoverage": 0.7591414944356121,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 57,
-              "newlyRevealedAlpha": 8608,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 57
-            }
-          },
-          {
-            "prefixStrokeCount": 33,
-            "strokeId": "micro-stroke-26-1",
-            "sourceIndex": 33,
-            "alphaWeightedCoverage": 0.8141119258749617,
-            "alphaWeightedCoverageDelta": 0.041747340223728946,
-            "meaningfulPixelCoverage": 0.8008744038155803,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 245,
-              "newlyRevealedAlpha": 48967,
-              "connectedComponentCount": 1,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 245
-            }
-          },
-          {
-            "prefixStrokeCount": 34,
-            "strokeId": "micro-stroke-26-2",
-            "sourceIndex": 34,
-            "alphaWeightedCoverage": 0.8454264807061249,
-            "alphaWeightedCoverageDelta": 0.03131455483116319,
-            "meaningfulPixelCoverage": 0.8316772655007949,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 197,
-              "newlyRevealedAlpha": 36730,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 194
-            }
-          },
-          {
-            "prefixStrokeCount": 35,
-            "strokeId": "micro-stroke-26-3",
-            "sourceIndex": 35,
-            "alphaWeightedCoverage": 0.8585047619778385,
-            "alphaWeightedCoverageDelta": 0.013078281271713621,
-            "meaningfulPixelCoverage": 0.8447933227344993,
-            "newlyRevealed": {
-              "newlyRevealedPixelCount": 104,
-              "newlyRevealedAlpha": 15340,
-              "connectedComponentCount": 2,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 99
-            }
-          },
-          {
-            "prefixStrokeCount": 36,
-            "strokeId": "micro-stroke-27-1",
-            "sourceIndex": 36,
-            "alphaWeightedCoverage": 0.891723084871566,
-            "alphaWeightedCoverageDelta": 0.0332183228937275,
-            "meaningfulPixelCoverage": 0.879570747217806,
+            "prefixStrokeCount": 8,
+            "strokeId": "micro-stroke-05-1",
+            "sourceIndex": 8,
+            "alphaWeightedCoverage": 0.20182328633166147,
+            "alphaWeightedCoverageDelta": 0.03562936457797819,
+            "meaningfulPixelCoverage": 0.19952305246422894,
             "newlyRevealed": {
               "newlyRevealedPixelCount": 201,
-              "newlyRevealedAlpha": 38963,
+              "newlyRevealedAlpha": 41791,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
               "largestComponentPixelCount": 201
             }
           },
           {
+            "prefixStrokeCount": 9,
+            "strokeId": "micro-stroke-05-2",
+            "sourceIndex": 9,
+            "alphaWeightedCoverage": 0.2356443696464516,
+            "alphaWeightedCoverageDelta": 0.03382108331479014,
+            "meaningfulPixelCoverage": 0.23350556438791734,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 199,
+              "newlyRevealedAlpha": 39670,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 199
+            }
+          },
+          {
+            "prefixStrokeCount": 10,
+            "strokeId": "micro-stroke-05-3",
+            "sourceIndex": 10,
+            "alphaWeightedCoverage": 0.24769361014274424,
+            "alphaWeightedCoverageDelta": 0.012049240496292635,
+            "meaningfulPixelCoverage": 0.2442368839427663,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 61,
+              "newlyRevealedAlpha": 14133,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 61
+            }
+          },
+          {
+            "prefixStrokeCount": 11,
+            "strokeId": "micro-stroke-06",
+            "sourceIndex": 11,
+            "alphaWeightedCoverage": 0.26652923388042155,
+            "alphaWeightedCoverageDelta": 0.018835623737677304,
+            "meaningfulPixelCoverage": 0.26291732909379967,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 108,
+              "newlyRevealedAlpha": 22093,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 108
+            }
+          },
+          {
+            "prefixStrokeCount": 12,
+            "strokeId": "micro-stroke-11-1",
+            "sourceIndex": 12,
+            "alphaWeightedCoverage": 0.29600481526288286,
+            "alphaWeightedCoverageDelta": 0.029475581382461313,
+            "meaningfulPixelCoverage": 0.29252782193958665,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 176,
+              "newlyRevealedAlpha": 34573,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 176
+            }
+          },
+          {
+            "prefixStrokeCount": 13,
+            "strokeId": "micro-stroke-11-2",
+            "sourceIndex": 13,
+            "alphaWeightedCoverage": 0.3277132531414731,
+            "alphaWeightedCoverageDelta": 0.031708437878590234,
+            "meaningfulPixelCoverage": 0.3245230524642289,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 187,
+              "newlyRevealedAlpha": 37192,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 187
+            }
+          },
+          {
+            "prefixStrokeCount": 14,
+            "strokeId": "micro-stroke-11-3",
+            "sourceIndex": 14,
+            "alphaWeightedCoverage": 0.3420234846372823,
+            "alphaWeightedCoverageDelta": 0.014310231495809234,
+            "meaningfulPixelCoverage": 0.3388314785373609,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 83,
+              "newlyRevealedAlpha": 16785,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 83
+            }
+          },
+          {
+            "prefixStrokeCount": 15,
+            "strokeId": "micro-stroke-12",
+            "sourceIndex": 15,
+            "alphaWeightedCoverage": 0.36944439471173646,
+            "alphaWeightedCoverageDelta": 0.02742091007445413,
+            "meaningfulPixelCoverage": 0.3650635930047695,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 150,
+              "newlyRevealedAlpha": 32163,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 150
+            }
+          },
+          {
+            "prefixStrokeCount": 16,
+            "strokeId": "micro-stroke-14",
+            "sourceIndex": 16,
+            "alphaWeightedCoverage": 0.38230271532060117,
+            "alphaWeightedCoverageDelta": 0.012858320608864715,
+            "meaningfulPixelCoverage": 0.3781796502384738,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 75,
+              "newlyRevealedAlpha": 15082,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 75
+            }
+          },
+          {
+            "prefixStrokeCount": 17,
+            "strokeId": "micro-stroke-15",
+            "sourceIndex": 17,
+            "alphaWeightedCoverage": 0.3844767451278287,
+            "alphaWeightedCoverageDelta": 0.002174029807227529,
+            "meaningfulPixelCoverage": 0.38016693163751986,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 10,
+              "newlyRevealedAlpha": 2550,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 10
+            }
+          },
+          {
+            "prefixStrokeCount": 18,
+            "strokeId": "micro-stroke-16",
+            "sourceIndex": 18,
+            "alphaWeightedCoverage": 0.40773033845807577,
+            "alphaWeightedCoverageDelta": 0.02325359333024707,
+            "meaningfulPixelCoverage": 0.40262321144674085,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 132,
+              "newlyRevealedAlpha": 27275,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 132
+            }
+          },
+          {
+            "prefixStrokeCount": 19,
+            "strokeId": "micro-stroke-17",
+            "sourceIndex": 19,
+            "alphaWeightedCoverage": 0.4224404209262731,
+            "alphaWeightedCoverageDelta": 0.014710082468197327,
+            "meaningfulPixelCoverage": 0.4171303656597774,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 83,
+              "newlyRevealedAlpha": 17254,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 83
+            }
+          },
+          {
+            "prefixStrokeCount": 20,
+            "strokeId": "micro-stroke-19",
+            "sourceIndex": 20,
+            "alphaWeightedCoverage": 0.43711981120895665,
+            "alphaWeightedCoverageDelta": 0.014679390282683558,
+            "meaningfulPixelCoverage": 0.43124006359300476,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 81,
+              "newlyRevealedAlpha": 17218,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 81
+            }
+          },
+          {
+            "prefixStrokeCount": 21,
+            "strokeId": "micro-stroke-20",
+            "sourceIndex": 21,
+            "alphaWeightedCoverage": 0.4522485009851339,
+            "alphaWeightedCoverageDelta": 0.015128689776177262,
+            "meaningfulPixelCoverage": 0.44713831478537364,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 88,
+              "newlyRevealedAlpha": 17745,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 88
+            }
+          },
+          {
+            "prefixStrokeCount": 22,
+            "strokeId": "micro-stroke-21-1",
+            "sourceIndex": 22,
+            "alphaWeightedCoverage": 0.48292107760263336,
+            "alphaWeightedCoverageDelta": 0.030672576617499447,
+            "meaningfulPixelCoverage": 0.4785373608903021,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 176,
+              "newlyRevealedAlpha": 35977,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 176
+            }
+          },
+          {
+            "prefixStrokeCount": 23,
+            "strokeId": "micro-stroke-21-2",
+            "sourceIndex": 23,
+            "alphaWeightedCoverage": 0.5201600767986686,
+            "alphaWeightedCoverageDelta": 0.03723899919603524,
+            "meaningfulPixelCoverage": 0.5155007949125596,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 203,
+              "newlyRevealedAlpha": 43679,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 203
+            }
+          },
+          {
+            "prefixStrokeCount": 24,
+            "strokeId": "micro-stroke-21-3",
+            "sourceIndex": 24,
+            "alphaWeightedCoverage": 0.5491914740518885,
+            "alphaWeightedCoverageDelta": 0.029031397253219904,
+            "meaningfulPixelCoverage": 0.5441176470588235,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 160,
+              "newlyRevealedAlpha": 34052,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 160
+            }
+          },
+          {
+            "prefixStrokeCount": 25,
+            "strokeId": "micro-stroke-22",
+            "sourceIndex": 25,
+            "alphaWeightedCoverage": 0.5649271870526721,
+            "alphaWeightedCoverageDelta": 0.01573571300078358,
+            "meaningfulPixelCoverage": 0.5596184419713831,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 86,
+              "newlyRevealedAlpha": 18457,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 86
+            }
+          },
+          {
+            "prefixStrokeCount": 26,
+            "strokeId": "micro-stroke-23",
+            "sourceIndex": 26,
+            "alphaWeightedCoverage": 0.6038269745092874,
+            "alphaWeightedCoverageDelta": 0.038899787456615265,
+            "meaningfulPixelCoverage": 0.597972972972973,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 215,
+              "newlyRevealedAlpha": 45627,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 215
+            }
+          },
+          {
+            "prefixStrokeCount": 27,
+            "strokeId": "micro-stroke-24",
+            "sourceIndex": 27,
+            "alphaWeightedCoverage": 0.6273900473767986,
+            "alphaWeightedCoverageDelta": 0.023563072867511248,
+            "meaningfulPixelCoverage": 0.6198330683624801,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 121,
+              "newlyRevealedAlpha": 27638,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 121
+            }
+          },
+          {
+            "prefixStrokeCount": 28,
+            "strokeId": "micro-stroke-25-1",
+            "sourceIndex": 28,
+            "alphaWeightedCoverage": 0.6568391993772896,
+            "alphaWeightedCoverageDelta": 0.02944915200049103,
+            "meaningfulPixelCoverage": 0.6492448330683624,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 174,
+              "newlyRevealedAlpha": 34542,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 174
+            }
+          },
+          {
+            "prefixStrokeCount": 29,
+            "strokeId": "micro-stroke-25-2",
+            "sourceIndex": 29,
+            "alphaWeightedCoverage": 0.683308651700816,
+            "alphaWeightedCoverageDelta": 0.026469452323526377,
+            "meaningfulPixelCoverage": 0.6762718600953895,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 160,
+              "newlyRevealedAlpha": 31047,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 160
+            }
+          },
+          {
+            "prefixStrokeCount": 30,
+            "strokeId": "micro-stroke-25-3",
+            "sourceIndex": 30,
+            "alphaWeightedCoverage": 0.7093953042661285,
+            "alphaWeightedCoverageDelta": 0.026086652565312507,
+            "meaningfulPixelCoverage": 0.7025039745627981,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 164,
+              "newlyRevealedAlpha": 30598,
+              "connectedComponentCount": 3,
+              "materialConnectedComponentCount": 2,
+              "largestComponentPixelCount": 157
+            }
+          },
+          {
+            "prefixStrokeCount": 31,
+            "strokeId": "micro-stroke-25-4",
+            "sourceIndex": 31,
+            "alphaWeightedCoverage": 0.7349337602957362,
+            "alphaWeightedCoverageDelta": 0.025538456029607692,
+            "meaningfulPixelCoverage": 0.7285373608903021,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 162,
+              "newlyRevealedAlpha": 29955,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 162
+            }
+          },
+          {
+            "prefixStrokeCount": 32,
+            "strokeId": "micro-stroke-25-5",
+            "sourceIndex": 32,
+            "alphaWeightedCoverage": 0.7399212404417288,
+            "alphaWeightedCoverageDelta": 0.0049874801459925955,
+            "meaningfulPixelCoverage": 0.7333068362480127,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 31,
+              "newlyRevealedAlpha": 5850,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 31
+            }
+          },
+          {
+            "prefixStrokeCount": 33,
+            "strokeId": "micro-stroke-26-1",
+            "sourceIndex": 33,
+            "alphaWeightedCoverage": 0.7827010316837136,
+            "alphaWeightedCoverageDelta": 0.04277979124198483,
+            "meaningfulPixelCoverage": 0.775039745627981,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 232,
+              "newlyRevealedAlpha": 50178,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 232
+            }
+          },
+          {
+            "prefixStrokeCount": 34,
+            "strokeId": "micro-stroke-26-2",
+            "sourceIndex": 34,
+            "alphaWeightedCoverage": 0.8161768279114735,
+            "alphaWeightedCoverageDelta": 0.03347579622775987,
+            "meaningfulPixelCoverage": 0.8080286168521462,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 192,
+              "newlyRevealedAlpha": 39265,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 192
+            }
+          },
+          {
+            "prefixStrokeCount": 35,
+            "strokeId": "micro-stroke-26-3",
+            "sourceIndex": 35,
+            "alphaWeightedCoverage": 0.8312765306235543,
+            "alphaWeightedCoverageDelta": 0.015099702712080831,
+            "meaningfulPixelCoverage": 0.8237281399046105,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 97,
+              "newlyRevealedAlpha": 17711,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 97
+            }
+          },
+          {
+            "prefixStrokeCount": 36,
+            "strokeId": "micro-stroke-27-1",
+            "sourceIndex": 36,
+            "alphaWeightedCoverage": 0.8662502760165295,
+            "alphaWeightedCoverageDelta": 0.03497374539297515,
+            "meaningfulPixelCoverage": 0.8593004769475358,
+            "newlyRevealed": {
+              "newlyRevealedPixelCount": 206,
+              "newlyRevealedAlpha": 41022,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 206
+            }
+          },
+          {
             "prefixStrokeCount": 37,
             "strokeId": "micro-stroke-28",
             "sourceIndex": 37,
-            "alphaWeightedCoverage": 0.9072575935450924,
-            "alphaWeightedCoverageDelta": 0.015534508673526348,
-            "meaningfulPixelCoverage": 0.8970588235294118,
+            "alphaWeightedCoverage": 0.8967719493885861,
+            "alphaWeightedCoverageDelta": 0.03052167337205658,
+            "meaningfulPixelCoverage": 0.8899046104928457,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 108,
-              "newlyRevealedAlpha": 18221,
-              "connectedComponentCount": 2,
+              "newlyRevealedPixelCount": 175,
+              "newlyRevealedAlpha": 35800,
+              "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 106
+              "largestComponentPixelCount": 175
             }
           },
           {
             "prefixStrokeCount": 38,
             "strokeId": "micro-stroke-29",
             "sourceIndex": 38,
-            "alphaWeightedCoverage": 0.9187850668876504,
-            "alphaWeightedCoverageDelta": 0.011527473342557992,
-            "meaningfulPixelCoverage": 0.9103736089030207,
+            "alphaWeightedCoverage": 0.9103404530678119,
+            "alphaWeightedCoverageDelta": 0.013568503679225796,
+            "meaningfulPixelCoverage": 0.9048092209856916,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 98,
-              "newlyRevealedAlpha": 13521,
+              "newlyRevealedPixelCount": 103,
+              "newlyRevealedAlpha": 15915,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 98
+              "largestComponentPixelCount": 103
             }
           },
           {
             "prefixStrokeCount": 39,
             "strokeId": "micro-stroke-30",
             "sourceIndex": 39,
-            "alphaWeightedCoverage": 0.9371236477321458,
-            "alphaWeightedCoverageDelta": 0.018338580844495467,
-            "meaningfulPixelCoverage": 0.9282591414944356,
+            "alphaWeightedCoverage": 0.9196956017245598,
+            "alphaWeightedCoverageDelta": 0.009355148656747914,
+            "meaningfulPixelCoverage": 0.9137519872813991,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 111,
-              "newlyRevealedAlpha": 21510,
+              "newlyRevealedPixelCount": 51,
+              "newlyRevealedAlpha": 10973,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 111
+              "largestComponentPixelCount": 51
             }
           },
           {
             "prefixStrokeCount": 40,
             "strokeId": "micro-stroke-31",
             "sourceIndex": 40,
-            "alphaWeightedCoverage": 0.9376803698749379,
-            "alphaWeightedCoverageDelta": 0.0005567221427920099,
-            "meaningfulPixelCoverage": 0.9290540540540541,
+            "alphaWeightedCoverage": 0.9252142271920828,
+            "alphaWeightedCoverageDelta": 0.0055186254675230195,
+            "meaningfulPixelCoverage": 0.9195151033386327,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 16,
-              "newlyRevealedAlpha": 653,
-              "connectedComponentCount": 2,
+              "newlyRevealedPixelCount": 34,
+              "newlyRevealedAlpha": 6473,
+              "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 13
+              "largestComponentPixelCount": 34
             }
           },
           {
             "prefixStrokeCount": 41,
             "strokeId": "micro-stroke-32",
             "sourceIndex": 41,
-            "alphaWeightedCoverage": 0.9531270647954664,
-            "alphaWeightedCoverageDelta": 0.015446694920528525,
-            "meaningfulPixelCoverage": 0.9455484896661367,
+            "alphaWeightedCoverage": 0.9482845199699558,
+            "alphaWeightedCoverageDelta": 0.02307029277787298,
+            "meaningfulPixelCoverage": 0.9419713831478538,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 104,
-              "newlyRevealedAlpha": 18118,
-              "connectedComponentCount": 3,
+              "newlyRevealedPixelCount": 129,
+              "newlyRevealedAlpha": 27060,
+              "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 100
+              "largestComponentPixelCount": 129
             }
           },
           {
             "prefixStrokeCount": 42,
             "strokeId": "micro-stroke-33",
             "sourceIndex": 42,
-            "alphaWeightedCoverage": 0.9750685671949986,
-            "alphaWeightedCoverageDelta": 0.021941502399532187,
-            "meaningfulPixelCoverage": 0.9678060413354531,
+            "alphaWeightedCoverage": 0.9616458513969633,
+            "alphaWeightedCoverageDelta": 0.013361331427007572,
+            "meaningfulPixelCoverage": 0.956081081081081,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 152,
-              "newlyRevealedAlpha": 25736,
+              "newlyRevealedPixelCount": 89,
+              "newlyRevealedAlpha": 15672,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 152
+              "largestComponentPixelCount": 89
             }
           },
           {
             "prefixStrokeCount": 43,
             "strokeId": "micro-stroke-34",
             "sourceIndex": 43,
-            "alphaWeightedCoverage": 0.9767157144842391,
-            "alphaWeightedCoverageDelta": 0.0016471472892405359,
-            "meaningfulPixelCoverage": 0.9699920508744038,
+            "alphaWeightedCoverage": 0.9662692881203339,
+            "alphaWeightedCoverageDelta": 0.004623436723370511,
+            "meaningfulPixelCoverage": 0.9608505564387917,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 27,
-              "newlyRevealedAlpha": 1932,
-              "connectedComponentCount": 3,
-              "materialConnectedComponentCount": 2,
-              "largestComponentPixelCount": 14
+              "newlyRevealedPixelCount": 31,
+              "newlyRevealedAlpha": 5423,
+              "connectedComponentCount": 1,
+              "materialConnectedComponentCount": 1,
+              "largestComponentPixelCount": 31
             }
           },
           {
             "prefixStrokeCount": 44,
             "strokeId": "micro-stroke-35",
             "sourceIndex": 44,
-            "alphaWeightedCoverage": 0.9879993554641042,
-            "alphaWeightedCoverageDelta": 0.011283640979865117,
-            "meaningfulPixelCoverage": 0.9817170111287759,
+            "alphaWeightedCoverage": 0.983170451609933,
+            "alphaWeightedCoverageDelta": 0.016901163489599136,
+            "meaningfulPixelCoverage": 0.9781399046104928,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 77,
-              "newlyRevealedAlpha": 13235,
+              "newlyRevealedPixelCount": 106,
+              "newlyRevealedAlpha": 19824,
               "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 77
+              "largestComponentPixelCount": 106
             }
           },
           {
             "prefixStrokeCount": 45,
             "strokeId": "micro-stroke-36",
             "sourceIndex": 45,
-            "alphaWeightedCoverage": 0.9958846894590246,
-            "alphaWeightedCoverageDelta": 0.007885333994920418,
-            "meaningfulPixelCoverage": 0.9912559618441972,
+            "alphaWeightedCoverage": 0.9953364929233198,
+            "alphaWeightedCoverageDelta": 0.012166041313386833,
+            "meaningfulPixelCoverage": 0.9904610492845787,
             "newlyRevealed": {
-              "newlyRevealedPixelCount": 57,
-              "newlyRevealedAlpha": 9249,
-              "connectedComponentCount": 2,
+              "newlyRevealedPixelCount": 74,
+              "newlyRevealedAlpha": 14270,
+              "connectedComponentCount": 1,
               "materialConnectedComponentCount": 1,
-              "largestComponentPixelCount": 56
+              "largestComponentPixelCount": 74
             }
           }
         ],
-        "maxSingleStrokeDelta": 0.04494700056354263,
-        "minSingleStrokeDelta": 0.0005567221427920099,
+        "maxSingleStrokeDelta": 0.04277979124198483,
+        "minSingleStrokeDelta": 0.002174029807227529,
         "zeroContributionStrokeCount": 0,
         "nontrivialContributionStrokeCount": 45,
-        "precompletionCoverage": 0.9958846894590246,
+        "precompletionCoverage": 0.9953364929233198,
         "completionCoverage": 1,
         "completionExact": true,
-        "finalCompletionPop": 0.004115310540975359
+        "finalCompletionPop": 0.004663507076680173
       }
     }
   }

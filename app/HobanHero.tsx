@@ -201,7 +201,7 @@ const taglineCharacters = [
 ] as const;
 
 const houseActorCadence = [-1.1, 1.25, -2.5, 2.75, 2.45, 1.2, 2.25, 2.1, 1.2, 1.75, -1.1, 1.2, 1.6];
-const goldActorCadence = [-1.15, 2.55, -2.35, 2.7, -2.05, 1.35, -1.7];
+const goldActorCadence = [1.15, -2.55, -2.35, 2.7, 2.05, 1.35, -1.7];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -272,6 +272,30 @@ function StrokeDrawing({
       aria-hidden="true"
     >
       <defs>
+        {strokes.map((stroke, index) => (
+          <mask
+            key={`${stroke.id}-owner`}
+            id={`${maskId}-owner-${index + 1}`}
+            maskUnits="userSpaceOnUse"
+            maskContentUnits="userSpaceOnUse"
+            x={viewX}
+            y={viewY}
+            width={viewWidth}
+            height={viewHeight}
+          >
+            <image
+              href={assetPath(
+                `/assets/motion/ownership/${id}/${String(index + 1).padStart(3, "0")}.png`,
+              )}
+              x={viewX}
+              y={viewY}
+              width={viewWidth}
+              height={viewHeight}
+              preserveAspectRatio="none"
+              style={{ imageRendering: "pixelated" }}
+            />
+          </mask>
+        ))}
         <mask
           id={maskId}
           maskUnits="userSpaceOnUse"
@@ -283,20 +307,24 @@ function StrokeDrawing({
         >
           <rect x={viewX - 20} y={viewY - 20} width={viewWidth + 40} height={viewHeight + 40} fill="black" />
           {strokes.map((stroke, index) => (
-            <path
+            <g
               key={stroke.id}
-              data-draw-stroke={index + 1}
-              data-stroke-id={stroke.id}
-              data-stroke-duration={stroke.duration}
-              data-stroke-gesture={stroke.gesture}
-              data-stroke-lift={stroke.lift}
-              d={stroke.d}
-              fill="none"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={stroke.width}
-            />
+              mask={`url(#${maskId}-owner-${index + 1})`}
+            >
+              <path
+                data-draw-stroke={index + 1}
+                data-stroke-id={stroke.id}
+                data-stroke-duration={stroke.duration}
+                data-stroke-gesture={stroke.gesture}
+                data-stroke-lift={stroke.lift}
+                d={stroke.d}
+                fill="none"
+                stroke="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={stroke.width}
+              />
+            </g>
           ))}
           <rect
             data-mask-complete="true"

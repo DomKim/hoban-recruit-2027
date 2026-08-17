@@ -27,6 +27,8 @@
     "maskFill": "none",
     "maskStroke": "white",
     "animate": "stroke-dashoffset",
+    "ownershipStrategy": "nearest-centerline-disjoint-pixel-partition",
+    "ownershipMaskRoot": "/assets/motion/ownership/gold",
     "pencilFollowsSamePath": false,
     "hideOriginalUntilRevealed": true,
     "penLiftBetweenStrokesMs": 30,
@@ -41,6 +43,7 @@
       "Redundant crop and overlap strokes are omitted so every animated stroke makes a visible contribution.",
       "Only genuine spatial jumps use a 25–35 ms pen lift; continuations use liftAfterMs 0.",
       "Every visible micro-stroke stays on screen for at least 70 ms so its direction remains readable at 60 fps.",
+      "A disjoint ownership mask prevents every stroke from revealing pixels assigned to a later stroke.",
       "All paths are alpha masks over the untouched source artwork."
     ]
   },

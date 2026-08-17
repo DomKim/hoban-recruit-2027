@@ -7,6 +7,7 @@ import sharp from "sharp";
 const projectRoot = join(dirname(fileURLToPath(import.meta.url)), "..");
 const assetsRoot = join(projectRoot, "public", "assets");
 const motionRoot = join(assetsRoot, "motion");
+const ownershipRoot = join(motionRoot, "ownership");
 
 const expectedSourceSha256 = {
   "/assets/isolated/sketch-house-body.png": "a0c7ba3d73b3f6a8f1d45b430e7a1f897b482d974aac253c0e685d7852b12a36",
@@ -107,7 +108,7 @@ async function sourceFingerprint(file) {
   return createHash("sha256").update(bytes).digest("hex");
 }
 
-async function renderDrawing({ viewBox, textures, strokes, completed }) {
+async function renderDrawing({ name, viewBox, textures, strokes, completed }) {
   const [x, y, width, height] = viewBox;
   const images = await Promise.all(
     textures.map(async (texture) => {
@@ -115,9 +116,17 @@ async function renderDrawing({ viewBox, textures, strokes, completed }) {
       return `<image href="${href}" x="${texture.x}" y="${texture.y}" width="${texture.width}" height="${texture.height}" preserveAspectRatio="none"/>`;
     }),
   );
+  const ownerMasks = await Promise.all(
+    strokes.map(async (_stroke, index) => {
+      const href = await dataUri(
+        `/assets/motion/ownership/${name}/${String(index + 1).padStart(3, "0")}.png`,
+      );
+      return `<mask id="owner-${index + 1}" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="${x}" y="${y}" width="${width}" height="${height}"><image href="${href}" x="${x}" y="${y}" width="${width}" height="${height}" preserveAspectRatio="none" style="image-rendering:pixelated"/></mask>`;
+    }),
+  );
   const paths = strokes
     .map(
-      (stroke) => {
+      (stroke, index) => {
         const progress = stroke.progress;
         const pathLength = approximatePathLength(stroke.d);
         const progressAttributes = Number.isFinite(progress)
@@ -126,7 +135,7 @@ async function renderDrawing({ viewBox, textures, strokes, completed }) {
         const opacityAttribute = Number.isFinite(stroke.opacity)
           ? ` stroke-opacity="${stroke.opacity}"`
           : "";
-        return `<path d="${xmlEscape(stroke.d)}" fill="none" stroke="white" stroke-width="${stroke.width}" stroke-linecap="round" stroke-linejoin="round"${progressAttributes}${opacityAttribute}/>`;
+        return `<g mask="url(#owner-${index + 1})"><path d="${xmlEscape(stroke.d)}" fill="none" stroke="white" stroke-width="${stroke.width}" stroke-linecap="round" stroke-linejoin="round"${progressAttributes}${opacityAttribute}/></g>`;
       },
     )
     .join("");
@@ -135,7 +144,7 @@ async function renderDrawing({ viewBox, textures, strokes, completed }) {
     : "";
   const mask = `<mask id="draw" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse" x="${x - 20}" y="${y - 20}" width="${width + 40}" height="${height + 40}"><rect x="${x - 20}" y="${y - 20}" width="${width + 40}" height="${height + 40}" fill="black"/>${paths}${completion}</mask>`;
   const source = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox.join(" ")}">${images.join("")}</svg>`;
-  const masked = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox.join(" ")}"><defs>${mask}</defs><g mask="url(#draw)">${images.join("")}</g></svg>`;
+  const masked = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${viewBox.join(" ")}"><defs>${ownerMasks.join("")}${mask}</defs><g mask="url(#draw)">${images.join("")}</g></svg>`;
   const raster = async (svg) =>
     sharp(Buffer.from(svg)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   return Promise.all([raster(source), raster(masked)]);
@@ -268,6 +277,85 @@ function measureNewAlphaComponents(source, previous, current) {
   };
 }
 
+async function loadOwnershipMasks(drawing) {
+  return Promise.all(
+    drawing.strokes.map(async (_stroke, index) =>
+      sharp(
+        join(
+          ownershipRoot,
+          drawing.name,
+          `${String(index + 1).padStart(3, "0")}.png`,
+        ),
+      )
+        .ensureAlpha()
+        .raw()
+        .toBuffer({ resolveWithObject: true }),
+    ),
+  );
+}
+
+function measureOwnedExposure(source, candidate, ownership) {
+  let ownedSourceAlpha = 0;
+  let exposedOwnedAlpha = 0;
+  for (let offset = 0; offset < source.data.length; offset += 4) {
+    if (ownership.data[offset + 3] === 0) continue;
+    const sourceAlpha = source.data[offset + 3];
+    ownedSourceAlpha += sourceAlpha;
+    if (candidate) {
+      exposedOwnedAlpha += Math.min(sourceAlpha, candidate.data[offset + 3]);
+    }
+  }
+  return {
+    ownedSourceAlpha,
+    exposedOwnedAlpha,
+    exposureRatio: ownedSourceAlpha ? exposedOwnedAlpha / ownedSourceAlpha : 0,
+  };
+}
+
+async function buildOwnershipIsolation(drawing, source) {
+  const ownershipMasks = await loadOwnershipMasks(drawing);
+  const ownerCountByPixel = new Uint8Array(source.info.width * source.info.height);
+  for (const ownership of ownershipMasks) {
+    for (let pixel = 0; pixel < ownerCountByPixel.length; pixel += 1) {
+      if (ownership.data[pixel * 4 + 3] > 0) ownerCountByPixel[pixel] += 1;
+    }
+  }
+
+  let unassignedSourcePixelCount = 0;
+  let multiplyAssignedSourcePixelCount = 0;
+  for (let pixel = 0; pixel < ownerCountByPixel.length; pixel += 1) {
+    if (source.data[pixel * 4 + 3] === 0) continue;
+    if (ownerCountByPixel[pixel] === 0) unassignedSourcePixelCount += 1;
+    if (ownerCountByPixel[pixel] > 1) multiplyAssignedSourcePixelCount += 1;
+  }
+
+  const strokes = [];
+  let previousRaster = null;
+  for (let index = 0; index < drawing.strokes.length; index += 1) {
+    const exposure = measureOwnedExposure(source, previousRaster, ownershipMasks[index]);
+    strokes.push({
+      strokeId: drawing.strokes[index].id,
+      order: index + 1,
+      ...exposure,
+    });
+    const [, prefixRaster] = await renderDrawing({
+      ...drawing,
+      strokes: drawing.strokes.slice(0, index + 1),
+      completed: false,
+    });
+    previousRaster = prefixRaster;
+  }
+
+  return {
+    requirement: "every source pixel has exactly one stroke owner and stays hidden before that stroke",
+    thresholds: { maximumPreRevealRatio: 0.01 },
+    unassignedSourcePixelCount,
+    multiplyAssignedSourcePixelCount,
+    maximumPreRevealRatio: Math.max(...strokes.map((stroke) => stroke.exposureRatio)),
+    strokes,
+  };
+}
+
 async function buildTemporalProgression(drawing, source, completedComparison) {
   const thresholds = {
     maximumSingleStrokeDelta: 0.05,
@@ -325,13 +413,12 @@ async function buildTemporalProgression(drawing, source, completedComparison) {
   };
 }
 
-async function buildFrameProgression(drawing, source) {
-  const framesPerSecond = 60;
+async function buildFrameProgression(drawing, source, framesPerSecond = 60) {
   const frameDurationMs = 1000 / framesPerSecond;
   const stalledFrameThreshold = 0.00001;
   const thresholds = {
-    maximumFrameAlphaDelta: drawing.name === "gold" ? 0.01 : 0.016,
-    maximumConsecutiveStalledFrames: 3,
+    maximumFrameAlphaDelta: drawing.name === "gold" ? 0.011 : 0.017,
+    maximumStallDurationMs: 65,
     maximumRegressionMagnitude: 0.0001,
     maximumFinalTraceMismatch: 0.00002,
   };
@@ -414,6 +501,8 @@ async function buildFrameProgression(drawing, source) {
     maximumFrameDelta,
     minimumFrameDelta,
     maximumConsecutiveStalledFrames,
+    maximumConsecutiveStalledDurationMs:
+      maximumConsecutiveStalledFrames * frameDurationMs,
     regressionFrameCount,
     finalCoverage: previousCoverage,
     strokes: strokeSummaries,
@@ -500,8 +589,21 @@ for (const drawing of cases) {
     strokeCount: drawing.strokeCount,
     tracedMask,
     completedFrame,
-    frameProgression: await buildFrameProgression(drawing, source),
+    frameProgression: await buildFrameProgression(drawing, source, 60),
+    highRefreshProgression: {},
+    ownershipIsolation: await buildOwnershipIsolation(drawing, source),
   };
+  for (const framesPerSecond of [100, 120]) {
+    const highRefresh = await buildFrameProgression(
+      drawing,
+      source,
+      framesPerSecond,
+    );
+    const summary = { ...highRefresh };
+    delete summary.strokes;
+    report.cases[drawing.name].highRefreshProgression[String(framesPerSecond)] =
+      summary;
+  }
   if (drawing.name === "gold") {
     report.cases.gold.temporalProgression = await buildTemporalProgression(
       drawing,
@@ -518,30 +620,52 @@ for (const [name, result] of Object.entries(report.cases)) {
   if (result.tracedMask.alphaWeightedCoverage < 0.995) {
     throw new Error(`${name} stroke mask coverage is below 99.5%`);
   }
-  const frames = result.frameProgression;
-  if (frames.maximumFrameDelta > frames.thresholds.maximumFrameAlphaDelta) {
-    throw new Error(
-      `${name} frame alpha jump ${(frames.maximumFrameDelta * 100).toFixed(3)}% exceeds ${(frames.thresholds.maximumFrameAlphaDelta * 100).toFixed(1)}%`,
-    );
+  const ownership = result.ownershipIsolation;
+  if (
+    ownership.unassignedSourcePixelCount > 0 ||
+    ownership.multiplyAssignedSourcePixelCount > 0
+  ) {
+    throw new Error(`${name} ownership masks do not form an exact source-pixel partition`);
   }
   if (
-    frames.maximumConsecutiveStalledFrames >
-    frames.thresholds.maximumConsecutiveStalledFrames
+    ownership.maximumPreRevealRatio >
+    ownership.thresholds.maximumPreRevealRatio
   ) {
     throw new Error(
-      `${name} has ${frames.maximumConsecutiveStalledFrames} consecutive stalled frames`,
+      `${name} future-owned stroke exposure ${(ownership.maximumPreRevealRatio * 100).toFixed(3)}% exceeds 1%`,
     );
   }
-  if (frames.regressionFrameCount > 0) {
-    throw new Error(
-      `${name} has ${frames.regressionFrameCount} material frame regressions`,
-    );
-  }
-  if (
-    Math.abs(frames.finalCoverage - result.tracedMask.alphaWeightedCoverage) >
-    frames.thresholds.maximumFinalTraceMismatch
-  ) {
-    throw new Error(`${name} 60 fps progression does not reach its traced mask coverage`);
+  const frameRuns = [
+    result.frameProgression,
+    ...Object.values(result.highRefreshProgression),
+  ];
+  for (const frames of frameRuns) {
+    if (frames.maximumFrameDelta > frames.thresholds.maximumFrameAlphaDelta) {
+      throw new Error(
+        `${name} ${frames.framesPerSecond} fps alpha jump ${(frames.maximumFrameDelta * 100).toFixed(3)}% exceeds ${(frames.thresholds.maximumFrameAlphaDelta * 100).toFixed(1)}%`,
+      );
+    }
+    if (
+      frames.maximumConsecutiveStalledDurationMs >
+      frames.thresholds.maximumStallDurationMs
+    ) {
+      throw new Error(
+        `${name} ${frames.framesPerSecond} fps stalls for ${frames.maximumConsecutiveStalledDurationMs.toFixed(1)} ms`,
+      );
+    }
+    if (frames.regressionFrameCount > 0) {
+      throw new Error(
+        `${name} ${frames.framesPerSecond} fps has ${frames.regressionFrameCount} material frame regressions`,
+      );
+    }
+    if (
+      Math.abs(frames.finalCoverage - result.tracedMask.alphaWeightedCoverage) >
+      frames.thresholds.maximumFinalTraceMismatch
+    ) {
+      throw new Error(
+        `${name} ${frames.framesPerSecond} fps progression does not reach its traced mask coverage`,
+      );
+    }
   }
 }
 

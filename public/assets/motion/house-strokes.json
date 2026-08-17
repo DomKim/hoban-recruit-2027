@@ -58,6 +58,8 @@
     "stroke": "white",
     "linecap": "round",
     "linejoin": "round",
+    "ownershipStrategy": "nearest-centerline-disjoint-pixel-partition",
+    "ownershipMaskRoot": "/assets/motion/ownership/house",
     "progressMethod": "stroke-dasharray-and-stroke-dashoffset",
     "finalization": "After the final stroke completes, disable the mask for the hold frame so the original PNG alpha and texture are reproduced pixel-for-pixel."
   },
@@ -231,6 +233,7 @@
       "Each visible edge, roof, chimney, window, and smoke curl has its own ordered reveal path.",
       "The first stroke begins at the resting graphite point; the fixed-shoulder pencil gesture stays synchronized with each reveal without stretching or detaching the arm.",
       "No source colors, alpha, dimensions, or texture pixels are rewritten.",
+      "Each source pixel belongs to exactly one stroke, so neighboring paths cannot appear before their turn.",
       "All mask strokes have round caps and joins to match the crayon texture and avoid clipped corners."
     ]
   }
