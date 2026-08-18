@@ -134,7 +134,13 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /wristContactPress: 0\.24/);
   assert.match(hero, /wristHorizontalSweep: 1\.1/);
   assert.match(hero, /wristHorizontalSweep: 1,/);
+  assert.match(hero, /wristHorizontalBias: 0\.35/);
+  assert.match(hero, /wristHorizontalPulse: 0\.65/);
+  assert.match(hero, /wristHorizontalPulseHold: 2/);
+  assert.match(hero, /Math\.floor\(wristPulseIndex\+\+ \/ wristHorizontalPulseHold\)/);
+  assert.match(hero, /strokeDirection\.pulse\.toFixed\(0\)/);
   assert.match(hero, /"data-wrist-horizontal": "0"/);
+  assert.match(hero, /"data-wrist-pulse": "0"/);
   assert.match(hero, /wristLiftHeight: 0\.72/);
   assert.match(hero, /wristLiftHeight: 0\.67/);
   assert.match(hero, /yPercent: -wristLiftHeight/);
