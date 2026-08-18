@@ -201,7 +201,7 @@ const taglineCharacters = [
 ] as const;
 
 const houseActorCadence = [-1.05, 0.9, -2.3, 2.48, 1.75, -1.48, 1.6, -1.15, 0.85, 0.6, -1.38, 1.1, -0.9];
-const goldActorCadence = [1.05, -2, -1.35, 2.3, 1.55, -0.9, -1.55];
+const goldActorCadence = [2.5, -2.6, 2.3, -2.5, 2.2, -2.35, 2.05];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -1120,27 +1120,27 @@ export default function HobanHero() {
         bodyLean: 0,
         bodyLeanLimit: 0,
         bodyPress: 0,
-        detailLimit: 0.8,
-        detailStrength: 0.22,
+        detailLimit: 0.3,
+        detailStrength: 0.07,
         liftPeakLimit: 0.02,
-        liftRotation: 0.48,
+        liftRotation: 0.55,
         liftDurationScale: 2.1,
         liftSpeedLimit: 20,
-        maximumRotation: 2.55,
+        maximumRotation: 2.9,
         overshootLimit: 0.12,
-        pressureRotation: 0.22,
+        pressureRotation: 0.26,
         preparationBlend: 0.34,
         preparationSpeedLimit: 24,
-        strokeBlend: 0.72,
+        strokeBlend: 0.62,
         transformOrigin: "80% 95.3%",
-        wristContactPress: 0.24,
+        wristContactPress: 0.1,
         wristHorizontalBias: 0.25,
         wristHorizontalPulse: 0.75,
         wristHorizontalPulseHold: 3,
-        wristHorizontalSweep: 1.3,
-        wristLiftHeight: 0.67,
-        wristMaximumRotation: 0.68,
-        wristPreparationBlend: 0.28,
+        wristHorizontalSweep: 0.2,
+        wristLiftHeight: 0.32,
+        wristMaximumRotation: 0.25,
+        wristPreparationBlend: 0.2,
         wristTangent: [0.817, -0.577],
         wristTransformOrigin: "73.3% 72.1%",
       });
