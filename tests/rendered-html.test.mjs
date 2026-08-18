@@ -133,7 +133,7 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /wristMaximumRotation: 0\.68/);
   assert.match(hero, /wristContactPress: 0\.24/);
   assert.match(hero, /wristHorizontalSweep: 1\.1/);
-  assert.match(hero, /wristHorizontalSweep: 1\.7/);
+  assert.match(hero, /wristHorizontalSweep: 1\.3/);
   assert.match(hero, /wristHorizontalBias: 0\.25/);
   assert.match(hero, /wristHorizontalPulse: 0\.75/);
   assert.match(hero, /wristHorizontalPulseHold: 3/);
@@ -150,7 +150,9 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(hero, /rabbit-drawing-sleeve\.svg/);
   assert.match(hero, /maximumRotation: 2\.6/);
   assert.match(hero, /maximumRotation: 2\.55/);
-  assert.match(hero, /strokeBlend: 0\.6/);
+  assert.match(hero, /strokeBlend: 0\.72/);
+  assert.match(hero, /detailLimit: 0\.8/);
+  assert.match(hero, /detailStrength: 0\.22/);
   assert.match(hero, /liftRotation: -0\.53/);
   assert.match(hero, /liftRotation: 0\.48/);
   assert.match(hero, /liftDurationScale: 1\.1/);
