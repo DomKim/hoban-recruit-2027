@@ -200,8 +200,8 @@ const taglineCharacters = [
   { name: "tagline-blue-char-3", file: "tagline-blue-char-3.png", x: 374, y: 231, width: 38, height: 33 },
 ] as const;
 
-const houseActorCadence = [-0.95, 0.8, -2.1, 2.25, 1.6, -1.35, 1.45, -1.05, 0.75, 0.52, -1.25, 1, -0.8];
-const goldActorCadence = [0.82, -1.7, -1.1, 2, 1.25, -0.68, -1.32];
+const houseActorCadence = [-1.05, 0.9, -2.3, 2.48, 1.75, -1.48, 1.6, -1.15, 0.85, 0.6, -1.38, 1.1, -0.9];
+const goldActorCadence = [1.05, -2, -1.35, 2.3, 1.55, -0.9, -1.55];
 
 const houseStrokes: readonly DrawingStroke[] = houseStrokePlan.strokes.map((stroke, index) => ({
   d: stroke.d,
@@ -596,6 +596,7 @@ export default function HobanHero() {
         detailStrength,
         liftPeakLimit,
         liftRotation,
+        liftDurationScale,
         liftSpeedLimit,
         maximumRotation,
         overshootLimit,
@@ -605,6 +606,7 @@ export default function HobanHero() {
         strokeBlend,
         transformOrigin,
         wristContactPress,
+        wristHorizontalSweep,
         wristLiftHeight,
         wristMaximumRotation,
         wristPreparationBlend,
@@ -624,6 +626,7 @@ export default function HobanHero() {
         detailStrength: number;
         liftPeakLimit: number;
         liftRotation: number;
+        liftDurationScale: number;
         liftSpeedLimit: number;
         maximumRotation: number;
         overshootLimit: number;
@@ -633,6 +636,7 @@ export default function HobanHero() {
         strokeBlend: number;
         transformOrigin: string;
         wristContactPress: number;
+        wristHorizontalSweep: number;
         wristLiftHeight: number;
         wristMaximumRotation: number;
         wristPreparationBlend: number;
@@ -682,6 +686,7 @@ export default function HobanHero() {
         timeline.set(wrist, {
           attr: {
             "data-wrist-direction": "0",
+            "data-wrist-horizontal": "0",
             "data-wrist-phase": "preposition",
             "data-wrist-segment": "0",
             "data-wrist-stroke": "0",
@@ -695,6 +700,8 @@ export default function HobanHero() {
           Math.max(-detailLimit, Math.min(detailLimit, detail));
         const clampWristRotation = (rotation: number) =>
           Math.max(-wristMaximumRotation, Math.min(wristMaximumRotation, rotation));
+        const clampWristX = (xPercent: number) =>
+          Math.max(-wristHorizontalSweep, Math.min(wristHorizontalSweep, xPercent));
         let gestureGroupIndex = 0;
         let previousRotation = 0;
 
@@ -726,19 +733,23 @@ export default function HobanHero() {
             const deltaX = end.x - start.x;
             const deltaY = end.y - start.y;
             const distance = Math.hypot(deltaX, deltaY);
-            if (distance < 0.001) return 0;
+            if (distance < 0.001) return { horizontal: 0, rotation: 0 };
 
-            return (deltaX / distance) * wristTangent[0] +
-              (deltaY / distance) * wristTangent[1];
+            return {
+              horizontal: deltaX / distance,
+              rotation: (deltaX / distance) * wristTangent[0] +
+                (deltaY / distance) * wristTangent[1],
+            };
           });
         });
 
         let actorRotation = 0;
         let wristRotation = 0;
+        let wristXPercent = 0;
 
         strokes.forEach((stroke, index) => {
           const duration = Number(stroke.dataset.strokeDuration ?? 0.2);
-          const lift = Number(stroke.dataset.strokeLift ?? 0.045);
+          const lift = Number(stroke.dataset.strokeLift ?? 0.045) * liftDurationScale;
           const targetRotation = strokeRotations[index];
           const wristDirections = wristStrokeDirections[index];
           const rotationDelta = targetRotation - actorRotation;
@@ -769,20 +780,26 @@ export default function HobanHero() {
           const wristRotationPerSegment =
             (wristMaximumRotation * 1.18) / wristDirections.length;
           let strokeWristRotation = wristRotation;
+          let strokeWristXPercent = wristXPercent;
           wristDirections.forEach((strokeDirection, segmentIndex) => {
             strokeWristRotation = clampWristRotation(
-              strokeWristRotation + strokeDirection * wristRotationPerSegment,
+              strokeWristRotation + strokeDirection.rotation * wristRotationPerSegment,
+            );
+            strokeWristXPercent = clampWristX(
+              strokeDirection.horizontal * wristHorizontalSweep,
             );
             const wristSegmentStartAt =
               strokeStartAt + wristSegmentDuration * segmentIndex;
             timeline.set(wrist, {
               attr: {
-                "data-wrist-direction": strokeDirection.toFixed(4),
+                "data-wrist-direction": strokeDirection.rotation.toFixed(4),
+                "data-wrist-horizontal": strokeDirection.horizontal.toFixed(4),
                 "data-wrist-segment": String(segmentIndex + 1),
               },
             }, wristSegmentStartAt);
             timeline.to(wrist, {
               rotation: strokeWristRotation,
+              xPercent: strokeWristXPercent,
               duration: wristSegmentDuration,
               ease: "sine.inOut",
               transformOrigin: wristTransformOrigin,
@@ -903,11 +920,19 @@ export default function HobanHero() {
               ),
             );
             const readyRotation = clampRotation(liftPeakRotation + preparationTravel);
-            const nextWristDirection = wristStrokeDirections[index + 1]?.[0] ?? 0;
+            const nextWristDirection = wristStrokeDirections[index + 1]?.[0] ?? {
+              horizontal: 0,
+              rotation: 0,
+            };
             const wristLiftRotation = clampWristRotation(strokeWristRotation * 0.55);
             const readyWristRotation = clampWristRotation(
               wristLiftRotation +
-                nextWristDirection * wristMaximumRotation * wristPreparationBlend,
+                nextWristDirection.rotation * wristMaximumRotation * wristPreparationBlend,
+            );
+            const wristLiftXPercent = clampWristX(strokeWristXPercent * 0.35);
+            const readyWristXPercent = clampWristX(
+              wristLiftXPercent +
+                nextWristDirection.horizontal * wristHorizontalSweep * wristPreparationBlend,
             );
             timeline.to(actor, {
               rotation: liftPeakRotation,
@@ -923,6 +948,7 @@ export default function HobanHero() {
             }, strokeEndAt + liftPeakDuration);
             timeline.to(wrist, {
               rotation: wristLiftRotation,
+              xPercent: wristLiftXPercent,
               yPercent: -wristLiftHeight,
               duration: liftPeakDuration,
               ease: "sine.inOut",
@@ -930,6 +956,7 @@ export default function HobanHero() {
             }, strokeEndAt);
             timeline.to(wrist, {
               rotation: readyWristRotation,
+              xPercent: readyWristXPercent,
               yPercent: 0,
               duration: lift - liftPeakDuration,
               ease: "sine.inOut",
@@ -945,9 +972,11 @@ export default function HobanHero() {
             }
             actorRotation = readyRotation;
             wristRotation = readyWristRotation;
+            wristXPercent = readyWristXPercent;
           } else {
             actorRotation = targetRotation;
             wristRotation = strokeWristRotation;
+            wristXPercent = strokeWristXPercent;
           }
         });
 
@@ -962,17 +991,20 @@ export default function HobanHero() {
         timeline.set(wrist, {
           attr: {
             "data-wrist-direction": "0",
+            "data-wrist-horizontal": "0",
             "data-wrist-phase": "complete",
             "data-wrist-segment": "0",
           },
         });
         timeline.to(actor, {
           rotation: 0,
+          xPercent: 0,
           duration: 0.16,
           ease: "back.out(1.25)",
         }, settleStartAt);
         timeline.to(wrist, {
           rotation: 0,
+          xPercent: 0,
           yPercent: 0,
           duration: 0.14,
           ease: "back.out(1.15)",
@@ -1012,6 +1044,7 @@ export default function HobanHero() {
         timeline.set(wrist, {
           attr: {
             "data-wrist-direction": "0",
+            "data-wrist-horizontal": "0",
             "data-wrist-phase": "reset",
             "data-wrist-segment": "0",
             "data-wrist-stroke": "0",
@@ -1026,25 +1059,27 @@ export default function HobanHero() {
         characterTarget: '[data-motion="tiger-character"]',
         delay: 0.25,
         actorCadence: houseActorCadence,
-        bodyLean: 0.05,
-        bodyLeanLimit: 0.12,
-        bodyPress: 0.16,
+        bodyLean: 0.06,
+        bodyLeanLimit: 0.14,
+        bodyPress: 0.17,
         detailLimit: 0,
         detailStrength: 0,
-        liftPeakLimit: 0.024,
-        liftRotation: -0.46,
-        liftSpeedLimit: 18,
-        maximumRotation: 2.3,
-        overshootLimit: 0.14,
-        pressureRotation: 0.18,
-        preparationBlend: 0.28,
+        liftPeakLimit: 0.025,
+        liftRotation: -0.53,
+        liftDurationScale: 1.1,
+        liftSpeedLimit: 19,
+        maximumRotation: 2.6,
+        overshootLimit: 0.16,
+        pressureRotation: 0.21,
+        preparationBlend: 0.32,
         preparationSpeedLimit: 22,
         strokeBlend: 1,
         transformOrigin: "16.4% 97.3%",
-        wristContactPress: 0.22,
-        wristLiftHeight: 0.65,
-        wristMaximumRotation: 0.65,
-        wristPreparationBlend: 0.22,
+        wristContactPress: 0.24,
+        wristHorizontalSweep: 1.1,
+        wristLiftHeight: 0.72,
+        wristMaximumRotation: 0.72,
+        wristPreparationBlend: 0.26,
         wristTangent: [0.892, 0.452],
         wristTransformOrigin: "48.1% 78.4%",
       });
@@ -1059,22 +1094,24 @@ export default function HobanHero() {
         bodyLean: 0,
         bodyLeanLimit: 0,
         bodyPress: 0,
-        detailLimit: 0.3,
-        detailStrength: 0.075,
-        liftPeakLimit: 0.018,
-        liftRotation: 0.38,
-        liftSpeedLimit: 18,
-        maximumRotation: 2.2,
+        detailLimit: 0.44,
+        detailStrength: 0.11,
+        liftPeakLimit: 0.02,
+        liftRotation: 0.48,
+        liftDurationScale: 2.1,
+        liftSpeedLimit: 20,
+        maximumRotation: 2.55,
         overshootLimit: 0.12,
-        pressureRotation: 0.16,
-        preparationBlend: 0.28,
-        preparationSpeedLimit: 22,
-        strokeBlend: 0.45,
+        pressureRotation: 0.22,
+        preparationBlend: 0.34,
+        preparationSpeedLimit: 24,
+        strokeBlend: 0.6,
         transformOrigin: "80% 95.3%",
-        wristContactPress: 0.18,
-        wristLiftHeight: 0.55,
-        wristMaximumRotation: 0.55,
-        wristPreparationBlend: 0.22,
+        wristContactPress: 0.24,
+        wristHorizontalSweep: 1,
+        wristLiftHeight: 0.67,
+        wristMaximumRotation: 0.68,
+        wristPreparationBlend: 0.28,
         wristTangent: [0.817, -0.577],
         wristTransformOrigin: "73.3% 72.1%",
       });
