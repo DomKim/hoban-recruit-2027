@@ -173,6 +173,10 @@ test("uses independently isolated assets at the original 1920x1068 coordinates",
   assert.match(css, /prefers-reduced-motion[\s\S]*\[data-mask-complete\][\s\S]*opacity: 1/);
   assert.match(css, /prefers-reduced-motion[\s\S]*visibility: visible !important/);
   assert.match(css, /prefers-reduced-motion[\s\S]*\[data-mask-complete\][\s\S]*opacity: 1 !important/);
+  assert.match(css, /\.hero-scene \{[\s\S]*?flex: 0 0 auto;[\s\S]*?width: 100%;/);
+  assert.match(css, /\.hero-copy \{[\s\S]*?flex: 0 0 auto;/);
+  assert.match(css, /\.hero-copy \{[\s\S]*?width: 88%;[\s\S]*?max-width: 88%;/);
+  assert.match(css, /\.hero-copy \{[\s\S]*?min-width: 0;[\s\S]*?margin-inline: auto;/);
 
   for (const layer of protectedStaticLayers) {
     assert.match(hero, new RegExp(`staticCopyLayers[\\s\\S]*${layer}`));
